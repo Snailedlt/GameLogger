@@ -1,6 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/width_container"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/marginTop_container"
+    tools:context=".ui.dashboard.ProfileStatsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/text_game_stats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Statistics"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/v_spacer"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/text_game_stats"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/iV_stacked_bar_chart"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/v_spacer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/stacked_bar_chart" />
+
+    <!-- Playing -->
+    <ImageView
+        android:id="@+id/iV_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_green"
+        android:layout_below="@+id/iV_stacked_bar_chart"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_stacked_bar_chart"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_toRightOf="@+id/iV_playing"
+        android:text="Playing"
+        android:textColor="#26448F" />
+
+    <TextView
+        android:id="@+id/tV_num_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_stacked_bar_chart"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="4"
+        android:textColor="#26448F" />
+
+    <!-- Completed -->
+    <ImageView
+        android:id="@+id/iV_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_blue"
+        android:layout_below="@+id/iV_playing"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_playing"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_toRightOf="@+id/iV_playing"
+        android:text="Completed"
+        android:textColor="#26448F" />
+
+    <TextView
+        android:id="@+id/tV_num_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_playing"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="60"
+        android:textColor="#26448F" />
+
+    <!-- On Hold -->
+    <ImageView
+        android:id="@+id/iV_on_hold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_yellow"
+        android:layout_below="@+id/iV_completed"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_on_hold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_completed"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="On Hold"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_on_hold"/>
+
+    <TextView
+        android:id="@+id/tV_num_on_hold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_completed"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="5"
+        android:textColor="#26448F" />
+
+    <!-- Dropped -->
+    <ImageView
+        android:id="@+id/iV_dropped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_red"
+        android:layout_below="@+id/iV_on_hold"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_dropped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_on_hold"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="Dropped"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_dropped"/>
+
+    <TextView
+        android:id="@+id/tV_num_dropped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_on_hold"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="4"
+        android:textColor="#26448F" />
+
+    <!-- Plan To Watch -->
+    <ImageView
+        android:id="@+id/iV_plan_to_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_gray"
+        android:layout_below="@+id/iV_dropped"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_plan_to_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_dropped"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="Plan To Watch"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_plan_to_watch"/>
+
+    <TextView
+        android:id="@+id/tV_num_plan_to_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_dropped"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="49"
+        android:textColor="#26448F" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

@@ -1,4 +1,5 @@
 <resources>
+    <!-- Profile -->
     <string name="app_name">ProfilSide</string>
     <string name="title_my_list">My List</string>
     <string name="title_profile">Profile</string>
@@ -11,8 +12,8 @@
     <string name="on_hold">On Hold</string>
     <string name="dropped">Dropped</string>
     <string name="plan_to_watch">Plan To Watch</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- R.menu.top_action_bar -->
     <string name="settings">Settings</string>
     <string name="about">About</string>
 </resources>

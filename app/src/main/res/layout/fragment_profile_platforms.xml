@@ -1,6 +1,197 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rL"
+    android:layout_marginTop="@dimen/marginTop_container"
+    tools:context=".ui.dashboard.ProfilePlatformsFragment">
+
+    <TextView
+        android:id="@+id/text_game_platforms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Platforms"
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/v_spacer_platforms"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/text_game_platforms"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/iV_stacked_bar_chart2"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/v_spacer_platforms"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/stacked_bar_chart" />
+
+    <!-- Android -->
+    <ImageView
+        android:id="@+id/iV_android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_green"
+        android:layout_below="@+id/iV_stacked_bar_chart2"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_stacked_bar_chart2"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_toRightOf="@+id/iV_android"
+        android:text="Android"
+        android:textColor="#26448F" />
+
+    <TextView
+        android:id="@+id/tV_num_android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_stacked_bar_chart2"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="4"
+        android:textColor="#26448F" />
+
+    <!-- Playstation 4 -->
+    <ImageView
+        android:id="@+id/iV_playstation_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_blue"
+        android:layout_below="@+id/iV_android"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_playstation_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_android"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_toRightOf="@+id/iV_playstation_4"
+        android:text="Playstation 4"
+        android:textColor="#26448F" />
+
+    <TextView
+        android:id="@+id/tV_num_playstation_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_android"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="60"
+        android:textColor="#26448F" />
+
+    <!-- Xbox One -->
+    <ImageView
+        android:id="@+id/iV_xbox_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_yellow"
+        android:layout_below="@+id/iV_playstation_4"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_xbox_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_playstation_4"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="Xbox One"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_xbox_one"/>
+
+    <TextView
+        android:id="@+id/tV_num_on_hold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_playstation_4"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="5"
+        android:textColor="#26448F" />
+
+    <!-- Nintendo Switch -->
+    <ImageView
+        android:id="@+id/iV_nintendo_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_red"
+        android:layout_below="@+id/iV_xbox_one"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_nintendo_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_xbox_one"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="Nintendo Switch"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_nintendo_switch"/>
+
+    <TextView
+        android:id="@+id/tV_num_nintendo_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_xbox_one"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="4"
+        android:textColor="#26448F" />
+
+    <!-- PC -->
+    <ImageView
+        android:id="@+id/iV_pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_gray"
+        android:layout_below="@+id/iV_nintendo_switch"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/tV_pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_nintendo_switch"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:text="PC"
+        android:textColor="#26448F"
+        android:layout_toRightOf="@+id/iV_pc"/>
+
+    <TextView
+        android:id="@+id/tV_num_pc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iV_nintendo_switch"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:text="49"
+        android:textColor="#26448F" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
