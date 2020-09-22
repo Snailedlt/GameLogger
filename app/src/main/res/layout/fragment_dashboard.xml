@@ -82,7 +82,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_toRightOf="@+id/iV_playing"
             android:text="@string/playing"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <TextView
             android:id="@+id/tV_num_playing"
@@ -93,7 +93,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_marginRight="15dp"
             android:text="4"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!-- Completed -->
         <ImageView
@@ -113,7 +113,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_toRightOf="@+id/iV_playing"
             android:text="@string/completed"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <TextView
             android:id="@+id/tV_num_completed"
@@ -124,7 +124,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_marginRight="15dp"
             android:text="60"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!-- On Hold -->
         <ImageView
@@ -144,7 +144,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_toRightOf="@+id/iV_on_hold"
             android:text="@string/on_hold"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <TextView
             android:id="@+id/tV_num_on_hold"
@@ -155,7 +155,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_marginRight="15dp"
             android:text="5"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!-- Dropped -->
         <ImageView
@@ -175,7 +175,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_toRightOf="@+id/iV_dropped"
             android:text="@string/dropped"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <TextView
             android:id="@+id/tV_num_dropped"
@@ -186,7 +186,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_marginRight="15dp"
             android:text="4"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!-- Plan To Watch -->
         <ImageView
@@ -206,7 +206,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_toRightOf="@+id/iV_plan_to_watch"
             android:text="@string/plan_to_watch"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <TextView
             android:id="@+id/tV_num_plan_to_watch"
@@ -217,7 +217,7 @@
             android:layout_marginTop="@dimen/stats_text_spacing"
             android:layout_marginRight="15dp"
             android:text="49"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!-- Total Games -->
 
@@ -237,7 +237,7 @@
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/iV_plan_to_watch"
             android:text="Total Games"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorBlack" />
 
         <TextView
             android:id="@+id/tV_num_total_games"
@@ -248,7 +248,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginRight="15dp"
             android:text="122"
-            android:textColor="#26448F" />
+            android:textColor="@color/colorMyAnimeListDarkBlue" />
 
         <!--ViewPager2 - Sliding interface -->
         <me.relex.circleindicator.CircleIndicator
