@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ProfilSide</string>
+    <string name="title_my_list">My List</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_add_game">Add Game</string>
+    <string name="username_profile">Username</string>
+    <string name="profile_picture_profile">Profile picture</string>
+    <string name="game_stats">Game Stats</string>
+    <string name="playing">Playing</string>
+    <string name="completed">Completed</string>
+    <string name="on_hold">On Hold</string>
+    <string name="dropped">Dropped</string>
+    <string name="plan_to_watch">Plan To Watch</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="?attr/actionBarSize"
+    tools:context=".ui.dashboard.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/picture_profile_picture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/profile_picture_profile"
+            android:src="@drawable/ic_baseline_account_circle_150" />
+
+        <TextView
+            android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/username_profile"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rL"
+        android:layout_width="@dimen/width_container"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/marginTop_container">
+
+        <TextView
+            android:id="@+id/text_game_stats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/game_stats"
+            android:textSize="20sp" />
+
+        <View
+            android:id="@+id/v_spacer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_game_stats"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/darker_gray" />
+
+        <ImageView
+            android:id="@+id/iV_stacked_bar_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/v_spacer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/stacked_bar_chart" />
+
+        <!-- Playing -->
+        <ImageView
+            android:id="@+id/iV_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iV_stacked_bar_chart"
+            android:layout_marginTop="@dimen/stats_circle_spacing"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_circle_green" />
+
+        <TextView
+            android:id="@+id/tV_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_stacked_bar_chart"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_toRightOf="@+id/iV_playing"
+            android:text="@string/playing"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_stacked_bar_chart"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_marginRight="15dp"
+            android:text="4"
+            android:textColor="#26448F" />
+
+        <!-- Completed -->
+        <ImageView
+            android:id="@+id/iV_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iV_playing"
+            android:layout_marginTop="@dimen/stats_circle_spacing"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_circle_blue" />
+
+        <TextView
+            android:id="@+id/tV_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_playing"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_toRightOf="@+id/iV_playing"
+            android:text="@string/completed"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_playing"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_marginRight="15dp"
+            android:text="60"
+            android:textColor="#26448F" />
+
+        <!-- On Hold -->
+        <ImageView
+            android:id="@+id/iV_on_hold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iV_completed"
+            android:layout_marginTop="@dimen/stats_circle_spacing"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_circle_yellow" />
+
+        <TextView
+            android:id="@+id/tV_on_hold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_completed"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_toRightOf="@+id/iV_on_hold"
+            android:text="@string/on_hold"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_on_hold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_completed"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_marginRight="15dp"
+            android:text="5"
+            android:textColor="#26448F" />
+
+        <!-- Dropped -->
+        <ImageView
+            android:id="@+id/iV_dropped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iV_on_hold"
+            android:layout_marginTop="@dimen/stats_circle_spacing"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_circle_red" />
+
+        <TextView
+            android:id="@+id/tV_dropped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_on_hold"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_toRightOf="@+id/iV_dropped"
+            android:text="@string/dropped"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_dropped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_on_hold"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_marginRight="15dp"
+            android:text="4"
+            android:textColor="#26448F" />
+
+        <!-- Plan To Watch -->
+        <ImageView
+            android:id="@+id/iV_plan_to_watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iV_dropped"
+            android:layout_marginTop="@dimen/stats_circle_spacing"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_circle_gray" />
+
+        <TextView
+            android:id="@+id/tV_plan_to_watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_dropped"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_toRightOf="@+id/iV_plan_to_watch"
+            android:text="@string/plan_to_watch"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_plan_to_watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_dropped"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/stats_text_spacing"
+            android:layout_marginRight="15dp"
+            android:text="49"
+            android:textColor="#26448F" />
+
+        <!-- Total Games -->
+
+        <View
+            android:id="@+id/v_spacer2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tV_plan_to_watch"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tV_total_games"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iV_plan_to_watch"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/iV_plan_to_watch"
+            android:text="Total Games"
+            android:textColor="#26448F" />
+
+        <TextView
+            android:id="@+id/tV_num_total_games"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tV_num_plan_to_watch"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="15dp"
+            android:text="122"
+            android:textColor="#26448F" />
+
+        <!--ViewPager2 - Sliding interface -->
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/indicator"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>
