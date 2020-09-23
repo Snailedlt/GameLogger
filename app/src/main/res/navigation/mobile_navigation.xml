@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/loginScreen">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -22,4 +22,13 @@
         android:name="com.example.profilside.ui.gamesearch.GamesearchFragment"
         android:label="@string/title_add_game"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/loginScreen"
+        android:name="com.example.profilside.LoginScreen"
+        android:label="fragment_login_screen"
+        tools:layout="@layout/fragment_login_screen" >
+        <action
+            android:id="@+id/action_loginScreen_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>
