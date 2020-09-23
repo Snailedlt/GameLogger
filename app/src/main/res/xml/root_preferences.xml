@@ -20,13 +20,18 @@
             app:key="notifications"
             app:title="Enable message notifications"/>
 
+        <SwitchPreferenceCompat
+            app:key="darkmode"
+            app:title="@string/Dark_mode"/>
+
         <ListPreference
-            app:key="reply"
+            app:key="language"
             app:title="@string/reply_title"
             app:entries="@array/reply_entries"
             app:entryValues="@array/reply_values"
-            app:defaultValue="reply"
-            app:useSimpleSummaryProvider="true"/>
+            app:defaultValue="English"
+            app:useSimpleSummaryProvider="true"
+            />
         </PreferenceCategory>
 
 </PreferenceScreen>
