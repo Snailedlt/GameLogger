@@ -30,17 +30,13 @@ class ProfileFragment : Fragment() {
         return root
     }
 
+    @Suppress("DEPRECATION")
     class MyAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getCount(): Int = 2
 
         override fun getItem(position: Int): Fragment {
-            if(position == 0){
-                return ProfileStatsFragment.newInstance()
-            }
-            else {
-                return ProfilePlatformsFragment.newInstance()
-            }
+            return if(position == 0) ProfileStatsFragment.newInstance() else ProfilePlatformsFragment.newInstance()
         }
 
         override fun getPageTitle(position: Int): CharSequence = "Tab $position"

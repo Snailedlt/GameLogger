@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Playlists"
+        android:text="@string/playlists"
         android:textSize="20sp" />
 
     <View
@@ -157,9 +157,9 @@
         android:text="4"
         android:textColor="#26448F" />
 
-    <!-- Plan To Watch -->
+    <!-- Plan To Play -->
     <ImageView
-        android:id="@+id/iV_plan_to_watch"
+        android:id="@+id/iV_plan_to_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_gray"
@@ -168,17 +168,17 @@
         android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
-        android:id="@+id/tV_plan_to_watch"
+        android:id="@+id/tV_plan_to_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iV_dropped"
         android:layout_marginTop="@dimen/stats_text_spacing"
-        android:text="Plan To Watch"
+        android:text="@string/plan_to_play"
         android:textColor="#26448F"
-        android:layout_toRightOf="@+id/iV_plan_to_watch"/>
+        android:layout_toRightOf="@+id/iV_plan_to_play"/>
 
     <TextView
-        android:id="@+id/tV_num_plan_to_watch"
+        android:id="@+id/tV_num_plan_to_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iV_dropped"
