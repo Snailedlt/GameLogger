@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Statistics"
+        android:text="Playlists"
         android:textSize="20sp" />
 
     <View
@@ -40,7 +40,7 @@
         android:src="@drawable/ic_circle_green"
         android:layout_below="@+id/iV_stacked_bar_chart"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_playing"
@@ -71,7 +71,7 @@
         android:src="@drawable/ic_circle_blue"
         android:layout_below="@+id/iV_playing"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_completed"
@@ -102,7 +102,7 @@
         android:src="@drawable/ic_circle_yellow"
         android:layout_below="@+id/iV_completed"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_on_hold"
@@ -133,7 +133,7 @@
         android:src="@drawable/ic_circle_red"
         android:layout_below="@+id/iV_on_hold"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_dropped"
@@ -164,7 +164,7 @@
         android:src="@drawable/ic_circle_gray"
         android:layout_below="@+id/iV_dropped"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_plan_to_watch"
@@ -186,11 +186,5 @@
         android:layout_alignParentRight="true"
         android:text="49"
         android:textColor="#26448F" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

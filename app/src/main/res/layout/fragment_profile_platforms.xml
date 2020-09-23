@@ -41,7 +41,7 @@
         android:src="@drawable/ic_circle_green"
         android:layout_below="@+id/iV_stacked_bar_chart2"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_android"
@@ -72,7 +72,7 @@
         android:src="@drawable/ic_circle_blue"
         android:layout_below="@+id/iV_android"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_playstation_4"
@@ -103,7 +103,7 @@
         android:src="@drawable/ic_circle_yellow"
         android:layout_below="@+id/iV_playstation_4"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_xbox_one"
@@ -134,7 +134,7 @@
         android:src="@drawable/ic_circle_red"
         android:layout_below="@+id/iV_xbox_one"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_nintendo_switch"
@@ -165,7 +165,7 @@
         android:src="@drawable/ic_circle_gray"
         android:layout_below="@+id/iV_nintendo_switch"
         android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
         android:id="@+id/tV_pc"
@@ -187,11 +187,5 @@
         android:layout_alignParentRight="true"
         android:text="49"
         android:textColor="#26448F" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

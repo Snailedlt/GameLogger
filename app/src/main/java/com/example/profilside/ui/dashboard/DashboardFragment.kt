@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.profilside.R
+import me.relex.circleindicator.CircleIndicator
 
 /**
  * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.
@@ -21,6 +22,10 @@ class DashboardFragment : Fragment() {
         val viewPager = root.findViewById(R.id.view_pager2) as ViewPager
         // Important: Must use the child FragmentManager or you will see side effects.
         viewPager.adapter = MyAdapter(childFragmentManager)
+
+        val indicator = root.findViewById<CircleIndicator>(R.id.indicator) as CircleIndicator
+        indicator.setViewPager(viewPager)
+
 
         return root
     }
