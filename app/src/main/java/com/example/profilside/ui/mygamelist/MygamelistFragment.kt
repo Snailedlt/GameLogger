@@ -22,7 +22,7 @@ class MygamelistFragment : Fragment() {
         mygamelistViewModel =
                 ViewModelProviders.of(this).get(MygamelistViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_gamelist, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        val textView: TextView = root.findViewById(R.id.text_gameslist)
         mygamelistViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })

@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_gameslist"
         android:icon="@drawable/ic_baseline_list_24"
         android:title="@string/title_my_list" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_baseline_account_box_24"
         android:title="@string/title_profile" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_gamesearch"
         android:icon="@drawable/ic_baseline_playlist_add_24"
         android:title="@string/title_add_game" />
 

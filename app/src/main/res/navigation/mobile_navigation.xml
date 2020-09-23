@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_gameslist">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_gameslist"
         android:name="com.example.profilside.ui.mygamelist.MygamelistFragment"
         android:label="@string/title_my_list"
         tools:layout="@layout/fragment_gamelist" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_profile"
         android:name="com.example.profilside.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_gamesearch"
         android:name="com.example.profilside.ui.gamesearch.GamesearchFragment"
         android:label="@string/title_add_game"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_gamesearch" />
 
     <!-- overflow_menu -->
     <fragment
