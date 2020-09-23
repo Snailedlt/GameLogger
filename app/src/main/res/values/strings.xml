@@ -22,4 +22,12 @@
     <string name="plan_to_play">Plan To Play</string>
 
     <string name="playlists">Playlists</string>
+
+    <!-- Settings Preferences -->
+    <string name="change_username">Change username</string>
+    <string name="reply_title">Default reply action</string>
+    <string name="Dark_mode">Dark mode</string>
+    <string name="change_password">Change password</string>
+    <string name="change_userinfo">User settings</string>
+    <string name="change_appinfo">App settings</string>
 </resources>

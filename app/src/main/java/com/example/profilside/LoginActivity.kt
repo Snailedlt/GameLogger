@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_login_screen)
+        supportActionBar?.hide()
 
         val button = findViewById<Button>(R.id.login_knapp)
         val signinButton = findViewById<Button>(R.id.signin_knapp)
