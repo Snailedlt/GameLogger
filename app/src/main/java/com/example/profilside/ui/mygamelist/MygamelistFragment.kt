@@ -1,4 +1,4 @@
-package com.example.profilside.ui.home
+package com.example.profilside.ui.mygamelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.profilside.R
 
-class HomeFragment : Fragment() {
+class MygamelistFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var mygamelistViewModel: MygamelistViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+        mygamelistViewModel =
+                ViewModelProviders.of(this).get(MygamelistViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_gamelist, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        mygamelistViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:id="@+id/rL"
     android:layout_marginTop="@dimen/marginTop_container"
-    tools:context=".ui.dashboard.ProfilePlatformsFragment">
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.profile.ProfilePlatformsFragment">
 
     <TextView
         android:id="@+id/text_game_platforms"

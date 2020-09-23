@@ -1,4 +1,4 @@
-package com.example.profilside.ui.dashboard
+package com.example.profilside.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +14,10 @@ import me.relex.circleindicator.CircleIndicator
 /**
  * This fragment hosts the viewpager that will use a FragmentPagerAdapter to display child fragments.
  */
-class DashboardFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val root = inflater.inflate(R.layout.fragment_profile, container, false)
 
         val viewPager = root.findViewById(R.id.view_pager2) as ViewPager
         // Important: Must use the child FragmentManager or you will see side effects.
@@ -47,7 +47,7 @@ class DashboardFragment : Fragment() {
     }
 
     companion object {
-        val TAG: String = DashboardFragment::class.java.name
+        val TAG: String = ProfileFragment::class.java.name
     }
 
 }

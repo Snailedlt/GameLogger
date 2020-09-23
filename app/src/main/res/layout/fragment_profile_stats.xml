@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/width_container"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/marginTop_container"
-    tools:context=".ui.dashboard.ProfileStatsFragment">
+    android:paddingHorizontal="20dp"
+    tools:context=".ui.profile.ProfileStatsFragment">
 
     <TextView
         android:id="@+id/text_game_stats"
