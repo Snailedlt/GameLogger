@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:scaleType="fitXY"
-        android:src="@drawable/stacked_bar_chart" />
+        android:src="@drawable/stacked_bar_chart2" />
 
     <!-- Android -->
     <ImageView
@@ -62,7 +62,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="4"
+        android:text="2"
         android:textColor="#26448F" />
 
     <!-- Playstation 4 -->
@@ -93,7 +93,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="60"
+        android:text="119"
         android:textColor="#26448F" />
 
     <!-- Xbox One -->
@@ -124,7 +124,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="5"
+        android:text="13"
         android:textColor="#26448F" />
 
     <!-- Nintendo Switch -->
@@ -155,7 +155,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="4"
+        android:text="26"
         android:textColor="#26448F" />
 
     <!-- PC -->
@@ -186,7 +186,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="49"
+        android:text="5"
         android:textColor="#26448F" />
 
 </RelativeLayout>
