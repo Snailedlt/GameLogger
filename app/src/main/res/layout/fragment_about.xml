@@ -1,22 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="20dp"
     tools:context=".ui.about.AboutFragment">
 
+    <ImageView
+        android:id="@+id/iV_about_questionmark"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/questionmark"
+        android:contentDescription="questionmark photo" />
+
     <TextView
-        android:id="@+id/tvFirstFragment"
+        android:id="@+id/tV_about_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/about_fragment"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Who are we?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tV_about_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="We are your saviours - you play and list,\nwe organize the rest."
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tV_about_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Made by: "
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tV_about_developers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="- Kristian Ødegård\n- Mikael Kviteberg Larssen\n- Tommy Tran\n- Jørgen Kalsnes Hagen"
+        android:textSize="18dp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/iV_about_checklist"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/checklist"
+        android:contentDescription="checklist photo" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
