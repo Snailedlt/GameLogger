@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Who are we?"
+        android:text="About"
         android:textColor="@color/colorPrimary"
         android:textSize="30dp"
         android:textStyle="bold"/>
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="We are your saviours - you play and list,\nwe organize the rest."
+        android:text="Game logger is an app where you can keep track of the games you play."
         android:textSize="20dp"/>
 
     <TextView
