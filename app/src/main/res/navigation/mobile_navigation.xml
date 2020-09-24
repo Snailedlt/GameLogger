@@ -6,7 +6,7 @@
     app:startDestination="@+id/navigation_gameslist">
 
 
-    <activity
+    <fragment
         android:id="@+id/navigation_gameslist"
         android:name="com.example.profilside.ui.mygamelist.MygamelistFragment"
         android:label="@string/title_my_list"

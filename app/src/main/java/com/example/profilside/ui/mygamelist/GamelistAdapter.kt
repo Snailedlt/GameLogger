@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profilside.R
 import kotlinx.android.synthetic.main.gamelist_item_card.view.*
 
-class GamelistAdapter(private val myContext: Context, private var gamelist: ArrayList<Game>)
+class GamelistAdapter(private var gamelist: ArrayList<Game>)
     : RecyclerView.Adapter<GamelistAdapter.ListViewHolder>() {
-    private val mInflater: LayoutInflater = LayoutInflater.from(myContext)
     private val gameList: ArrayList<Game> = gamelist
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val gameView = mInflater.inflate(
+        val gameView = LayoutInflater.from(parent.context).inflate(
             R.layout.gamelist_item_card, parent, false
         )
         return ListViewHolder(gameView, this)
