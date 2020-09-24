@@ -30,4 +30,5 @@
     <string name="change_password">Change password</string>
     <string name="change_userinfo">User settings</string>
     <string name="change_appinfo">App settings</string>
+    <string name="submit">søk</string>
 </resources>
