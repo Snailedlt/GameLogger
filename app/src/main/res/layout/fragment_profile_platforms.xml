@@ -24,7 +24,22 @@
         android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dp"/>
 
-    <ImageView
+
+    <RelativeLayout
+        android:id="@+id/stacked_HorizontalBarChartParent_platforms"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/v_spacer_platforms"
+        android:layout_centerHorizontal="true">
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/stacked_HorizontalBarChart_platforms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+
+    <!--<ImageView
         android:id="@+id/iV_stacked_bar_chart2"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
@@ -32,7 +47,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:scaleType="fitXY"
-        android:src="@drawable/stacked_bar_chart2" />
+        android:src="@drawable/stacked_bar_chart2" />-->
 
     <!-- Android -->
     <ImageView
@@ -40,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_green"
-        android:layout_below="@+id/iV_stacked_bar_chart2"
+        android:layout_below="@+id/stacked_HorizontalBarChartParent_platforms"
         android:layout_marginTop="@dimen/stats_circle_spacing"
         android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
@@ -48,7 +63,7 @@
         android:id="@+id/tV_android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_stacked_bar_chart2"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_platforms"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_toRightOf="@+id/iV_android"
         android:text="Android"
@@ -58,7 +73,7 @@
         android:id="@+id/tV_num_android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_stacked_bar_chart2"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_platforms"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"

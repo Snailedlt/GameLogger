@@ -16,22 +16,26 @@
         android:textSize="20sp" />
 
     <View
-        android:id="@+id/v_spacer"
+        android:id="@+id/v_spacer_stats"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/text_game_stats"
         android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dp"/>
 
-    <ImageView
-        android:id="@+id/iV_stacked_bar_chart"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_below="@+id/v_spacer"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/stacked_bar_chart" />
+    <RelativeLayout
+        android:id="@+id/stacked_HorizontalBarChartParent_stats"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/v_spacer_stats"
+        android:layout_centerHorizontal="true">
+
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/stacked_HorizontalBarChart_stats"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
 
     <!-- Playing -->
     <ImageView
@@ -39,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_green"
-        android:layout_below="@+id/iV_stacked_bar_chart"
+        android:layout_below="@+id/stacked_HorizontalBarChartParent_stats"
         android:layout_marginTop="@dimen/stats_circle_spacing"
         android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
@@ -47,7 +51,7 @@
         android:id="@+id/tV_playing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_stacked_bar_chart"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_toRightOf="@+id/iV_playing"
         android:text="Playing"
@@ -57,7 +61,7 @@
         android:id="@+id/tV_num_playing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_stacked_bar_chart"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
