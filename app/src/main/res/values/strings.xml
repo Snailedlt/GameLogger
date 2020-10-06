@@ -31,4 +31,6 @@
     <string name="change_userinfo">User settings</string>
     <string name="change_appinfo">App settings</string>
     <string name="submit">søk</string>
+    <string name="default_num_platforms">0</string>
+    <string name="default_num_stats">0</string>
 </resources>

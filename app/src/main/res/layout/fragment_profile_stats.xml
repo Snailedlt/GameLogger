@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="4"
+        android:text="@string/default_num_stats"
         android:textColor="#26448F" />
 
     <!-- Completed -->
@@ -96,7 +96,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="60"
+        android:text="@string/default_num_stats"
         android:textColor="#26448F" />
 
     <!-- On Hold -->
@@ -127,7 +127,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="5"
+        android:text="@string/default_num_stats"
         android:textColor="#26448F" />
 
     <!-- Dropped -->
@@ -158,7 +158,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="4"
+        android:text="@string/default_num_stats"
         android:textColor="#26448F" />
 
     <!-- Plan To Play -->
@@ -189,7 +189,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="49"
+        android:text="@string/default_num_stats"
         android:textColor="#26448F" />
 
 </RelativeLayout>

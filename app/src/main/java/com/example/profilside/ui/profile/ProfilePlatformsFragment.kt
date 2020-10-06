@@ -11,12 +11,14 @@ import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import kotlinx.android.synthetic.main.fragment_profile_platforms.view.*
 import java.util.ArrayList
 
 class ProfilePlatformsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
     var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.LTGRAY)
+    var platformsArray = floatArrayOf(2f, 119f, 13f, 26f, 5f)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +26,8 @@ class ProfilePlatformsFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_profile_platforms, container, false)
         stackedChart = rootView.findViewById(R.id.stacked_HorizontalBarChart_platforms)
-        val barDataSet = BarDataSet(dataValuesPlatforms(), "Bar Set")
+
+        val barDataSet = BarDataSet(dataValuesPlatforms(platformsArray), "Bar Set")
         barDataSet.setColors(*colorClassArray)
         val barData = BarData(barDataSet)
         stackedChart?.setData(barData)!!
@@ -42,6 +45,15 @@ class ProfilePlatformsFragment : Fragment() {
         stackedChart?.isScaleYEnabled = false
         stackedChart?.setPinchZoom(false)
         barDataSet.setDrawValues(false)
+
+        //update numbers in textviews
+        rootView.tV_num_android!!.text= platformsArray.get(0).toInt().toString()
+        rootView.tV_num_playstation_4!!.text= platformsArray.get(1).toInt().toString()
+        rootView.tV_num_xbox_one!!.text= platformsArray.get(2).toInt().toString()
+        rootView.tV_num_nintendo_switch!!.text= platformsArray.get(3).toInt().toString()
+        rootView.tV_num_pc!!.text= platformsArray.get(4).toInt().toString()
+
+
         return rootView}
 
     companion object{
@@ -49,9 +61,9 @@ class ProfilePlatformsFragment : Fragment() {
     }
 
 
-    private fun dataValuesPlatforms(): ArrayList<BarEntry> {
+    private fun dataValuesPlatforms(floatArray: FloatArray): ArrayList<BarEntry> {
         val dataVals = ArrayList<BarEntry>()
-        dataVals.add(BarEntry(0f, floatArrayOf(2f, 119f, 13f, 26f, 5f)))
+        dataVals.add(BarEntry(0f, floatArray))
         return dataVals
     }
 }

@@ -77,7 +77,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="2"
+        android:text="@string/default_num_platforms"
         android:textColor="#26448F" />
 
     <!-- Playstation 4 -->
@@ -108,7 +108,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="119"
+        android:text="@string/default_num_platforms"
         android:textColor="#26448F" />
 
     <!-- Xbox One -->
@@ -132,14 +132,14 @@
         android:layout_toRightOf="@+id/iV_xbox_one"/>
 
     <TextView
-        android:id="@+id/tV_num_on_hold"
+        android:id="@+id/tV_num_xbox_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iV_playstation_4"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="13"
+        android:text="@string/default_num_platforms"
         android:textColor="#26448F" />
 
     <!-- Nintendo Switch -->
@@ -170,7 +170,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="26"
+        android:text="@string/default_num_platforms"
         android:textColor="#26448F" />
 
     <!-- PC -->
@@ -201,7 +201,7 @@
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginRight="15dp"
         android:layout_alignParentRight="true"
-        android:text="5"
+        android:text="@string/default_num_platforms"
         android:textColor="#26448F" />
 
 </RelativeLayout>
