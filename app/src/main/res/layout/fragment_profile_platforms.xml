@@ -39,16 +39,6 @@
 
     </RelativeLayout>
 
-    <!--<ImageView
-        android:id="@+id/iV_stacked_bar_chart2"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_below="@+id/v_spacer_platforms"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/stacked_bar_chart2" />-->
-
     <!-- Android -->
     <ImageView
         android:id="@+id/iV_android"
