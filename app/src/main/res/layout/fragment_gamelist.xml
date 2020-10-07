@@ -5,7 +5,8 @@
     android:id="@+id/mygamelistLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mygamelist.MygamelistFragment">
+    tools:context=".ui.mygamelist.MygamelistFragment"
+    android:paddingBottom="?attr/actionBarSize">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mygamelist"
