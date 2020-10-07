@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#263238</color>
+    <color name="colorPrimaryDark">#000a12</color>
+    <color name="colorPrimaryLight">#4f5b62</color>
+    <color name="colorPrimaryText">#ffffff</color>
+    <color name="colorSecondary">#d500f9</color>
+    <color name="colorSecondaryDark">#9e00c5</color>
+    <color name="colorSecondaryLight">#ff5bff</color>
+    <color name="colorSecondaryText">#000000</color>
+
     <color name="colorAccent">#03DAC5</color>
     <color name="colorMyAnimeListDarkBlue">#26448F</color>
     <color name="colorBlack">#000000</color>
     <color name="colorPurple">#7B43E3</color>
+    <color name="colorWhite">#ffffff</color>
+
+
+    <!--GREEN
+    <color name="colorSecondary">#00c853</color>
+    <color name="colorSecondaryDark">#009423</color>
+    <color name="colorSecondaryLight">#5efa81</color>-->
+
+    <!--RED
+    <color name="colorSecondary">#d32f2f</color>
+    <color name="colorSecondaryDark">#9a0007</color>
+    <color name="colorSecondaryLight">#ff6659</color>-->
+
+
+    <!--CYAN
+    <color name="colorSecondary">#18ffff</color>
+    <color name="colorSecondaryDark">#00cbcc</color>
+    <color name="colorSecondaryLight">#76ffff</color>-->
 </resources>
