@@ -6,4 +6,5 @@
     <dimen name="stats_text_spacing">12dp</dimen>
     <dimen name="width_container">320dp</dimen>
     <dimen name="marginTop_container">50dp</dimen>
+    <dimen name="stats_circle_spacing_diff">3dp</dimen>
 </resources>

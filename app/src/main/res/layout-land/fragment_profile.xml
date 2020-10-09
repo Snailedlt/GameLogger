@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="?attr/actionBarSize"
+    android:paddingTop="5dp"
+    tools:context=".ui.profile.ProfileFragment">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/picture_profile_picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/profile_picture_profile"
+            android:src="@drawable/ic_baseline_account_circle_150"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/text_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/username_profile"
+            android:textAlignment="center"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+        <!--ViewPager2 - Sliding interface -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            app:ci_drawable="@drawable/ic_circle_blue"
+            app:ci_drawable_unselected="@drawable/ic_circle_blue"
+            />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/indicator"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="15dp" />
+    </RelativeLayout>
+
+</LinearLayout>
