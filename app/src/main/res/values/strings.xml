@@ -11,6 +11,7 @@
     <!-- R.menu.overflow_menu -->
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="sign_out">Sign out</string>
 
     <!-- R.layout -->
     <string name="about_fragment">About Fragment</string>
