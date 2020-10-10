@@ -26,8 +26,6 @@
         android:background="@android:color/darker_gray"
         android:layout_marginBottom="10dp"/>
 
-
-    <!-- Android -->
     <RelativeLayout
         android:id="@+id/stacked_HorizontalBarChartParent_platforms"
         android:layout_width="match_parent"
@@ -38,11 +36,11 @@
         <com.github.mikephil.charting.charts.HorizontalBarChart
             android:id="@+id/stacked_HorizontalBarChart_platforms"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:tooltipText="@string/tooltip_platforms"/>
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
+    <!-- Android -->
     <ImageView
         android:id="@+id/iV_android"
         android:layout_width="wrap_content"
