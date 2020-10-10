@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +18,7 @@ class GamesearchFragment : Fragment() {
 
     private lateinit var gamesearchViewModel: GamesearchViewModel
     private lateinit var linLayoutManager: RecyclerView.LayoutManager
+    private lateinit var searchView: SearchView
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -36,6 +38,10 @@ class GamesearchFragment : Fragment() {
         linLayoutManager = LinearLayoutManager(context)
         rvGamesearchList.adapter = SearchListAdapter(Game.makeGameList())
         rvGamesearchList.layoutManager = linLayoutManager
+
+
+        searchView = rootView.findViewById(R.id.searchBar)
+        searchView.setOnClickListener { searchView.isIconified = false }
         return rootView
     }
 }
