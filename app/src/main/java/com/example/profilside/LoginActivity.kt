@@ -55,10 +55,10 @@ class LoginActivity : AppCompatActivity() {
             usernameTextField.isVisible=true
             usernameText.isVisible=true
 
-            if ( passwordTextField.editText?.text.toString().isNotEmpty() && emailTextField.editText?.text.toString().isNotEmpty()) {
+            if ( passwordTextField.editText?.text.toString().isNotEmpty() && emailTextField.editText?.text.toString().isNotEmpty() && usernameText.editText?.text.toString().isNotEmpty()) {
 
                 // Firebase Authentication
-                createUser(emailTextField.editText?.text.toString(), passwordTextField.editText?.text.toString())
+                createUser(emailTextField.editText?.text.toString(), passwordTextField.editText?.text.toString(), usernameText.editText?.text.toString())
                 form = true
             } else if (!form) {
 
@@ -73,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun createUser(email:String, password:String) {
+    private fun createUser(email:String, password:String, username:String) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -86,7 +86,8 @@ class LoginActivity : AppCompatActivity() {
                     val bruker = hashMapOf(
 
                         "email" to emailTextField.editText?.text.toString(),
-                        "password" to passwordTextField.editText?.text.toString()
+                        "password" to passwordTextField.editText?.text.toString(),
+                        "username" to usernameText.editText?.text.toString()
                     )
                     db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).set(bruker as Map<String, Any>)
 
