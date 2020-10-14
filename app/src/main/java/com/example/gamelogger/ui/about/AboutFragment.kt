@@ -1,7 +1,7 @@
-package com.example.profilside.ui.about
+package com.example.gamelogger.ui.about
 
 import androidx.fragment.app.Fragment
-import com.example.profilside.R
+import com.example.gamelogger.R
 
 class AboutFragment : Fragment(R.layout.fragment_about) {
 }

@@ -1,4 +1,4 @@
-package com.example.profilside
+package com.example.gamelogger
 
 import android.content.Intent
 import android.graphics.Color

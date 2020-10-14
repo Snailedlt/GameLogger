@@ -1,8 +1,8 @@
-package com.example.profilside.ui.settings
+package com.example.gamelogger.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
-import com.example.profilside.R
+import com.example.gamelogger.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
 

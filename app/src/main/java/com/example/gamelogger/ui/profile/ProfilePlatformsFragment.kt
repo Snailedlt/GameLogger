@@ -1,4 +1,4 @@
-package com.example.profilside.ui.profile
+package com.example.gamelogger.ui.profile
 
 import android.graphics.Color
 import android.os.Bundle
@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.profilside.R
+import com.example.gamelogger.R
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet

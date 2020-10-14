@@ -1,4 +1,4 @@
-package com.example.profilside.ui.profile
+package com.example.gamelogger.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.profilside.R
+import com.example.gamelogger.R
 import me.relex.circleindicator.CircleIndicator
 
 /**

@@ -1,4 +1,4 @@
-package com.example.profilside
+package com.example.gamelogger
 
 import org.junit.Test
 

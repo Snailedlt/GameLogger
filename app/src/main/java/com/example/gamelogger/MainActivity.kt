@@ -1,4 +1,4 @@
-package com.example.profilside
+package com.example.gamelogger
 
 import android.os.Bundle
 import android.view.Menu
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_gameslist, R.id.navigation_profile, R.id.navigation_gamesearch))
+                R.id.navigation_gameslist, R.id.navigation_profile, R.id.navigation_gameslist))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

@@ -8,32 +8,32 @@
 
     <fragment
         android:id="@+id/navigation_gameslist"
-        android:name="com.example.profilside.ui.mygamelist.MygamelistFragment"
+        android:name="com.example.gamelogger.ui.mygamelist.MygamelistFragment"
         android:label="@string/title_my_list"
         tools:layout="@layout/fragment_gamelist" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.profilside.ui.profile.ProfileFragment"
+        android:name="com.example.gamelogger.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_gamesearch"
-        android:name="com.example.profilside.ui.gamesearch.GamesearchFragment"
+        android:name="com.example.gamelogger.ui.gamesearch.GamesearchFragment"
         android:label="@string/title_add_game"
         tools:layout="@layout/fragment_gamesearch" />
 
     <!-- overflow_menu -->
     <fragment
         android:id="@+id/settings"
-        android:name="com.example.profilside.ui.settings.SettingsFragment"
+        android:name="com.example.gamelogger.ui.settings.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/about"
-        android:name="com.example.profilside.ui.about.AboutFragment"
+        android:name="com.example.gamelogger.ui.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
 </navigation>

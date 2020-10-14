@@ -1,4 +1,4 @@
-package com.example.profilside.ui.profile
+package com.example.gamelogger.ui.profile
 
 import androidx.lifecycle.ViewModel
 

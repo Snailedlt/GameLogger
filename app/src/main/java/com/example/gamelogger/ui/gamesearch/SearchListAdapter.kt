@@ -1,21 +1,21 @@
-package com.example.profilside.ui.mygamelist
+package com.example.profilside.ui.gamesearch
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.profilside.R
+import com.example.gamelogger.R
+import com.example.gamelogger.models.Game
 import kotlinx.android.synthetic.main.gamelist_item_card.view.*
 
-class GamelistAdapter(private var gamelist: ArrayList<Game>)
-    : RecyclerView.Adapter<GamelistAdapter.ListViewHolder>() {
+class SearchListAdapter(private var gamelist: ArrayList<Game>)
+    : RecyclerView.Adapter<SearchListAdapter.ListViewHolder>() {
     private val gameList: ArrayList<Game> = gamelist
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val gameView = LayoutInflater.from(parent.context).inflate(
-            R.layout.gamelist_item_card, parent, false
+            R.layout.searchgamelist_item_card, parent, false
         )
         return ListViewHolder(gameView, this)
     }
@@ -24,7 +24,7 @@ class GamelistAdapter(private var gamelist: ArrayList<Game>)
         holder.itemView.apply {
             game_title.text = gameList[position].title
             game_platform.text = gameList[position].platform
-            game_releasedate.text = gameList[position].releaseYear.toString()
+            game_releasedate.text = gameList[position].released.toString()
         }
     }
 
@@ -32,12 +32,12 @@ class GamelistAdapter(private var gamelist: ArrayList<Game>)
         return gamelist.size
     }
 
-    inner class ListViewHolder(itemView: View, adapter: GamelistAdapter)
+    inner class ListViewHolder(itemView: View, adapter: SearchListAdapter)
         : RecyclerView.ViewHolder(itemView) {
         val titleView: TextView
         val platformView: TextView
         val releaseyearView: TextView
-        val gameAdapter: GamelistAdapter
+        val gameAdapter: SearchListAdapter
 
         init {
             titleView = itemView.findViewById(R.id.game_title)

@@ -1,6 +1,6 @@
 <resources>
     <!-- Profile -->
-    <string name="app_name">ProfilSide</string>
+    <string name="app_name">Gamelogger</string>
     <string name="title_my_list">My List</string>
     <string name="title_profile">Profile</string>
     <string name="title_add_game">Add Game</string>
