@@ -6,10 +6,12 @@
     <string name="title_add_game">Add Game</string>
     <string name="default_num_platforms">0</string>
     <string name="default_num_stats">0</string>
+    <string name="tooltip_platforms">Top 5 platforms with the most games</string>
 
     <!-- R.menu.overflow_menu -->
     <string name="settings">Settings</string>
     <string name="about">About</string>
+    <string name="sign_out">Sign out</string>
 
     <!-- R.layout -->
     <string name="about_fragment">About Fragment</string>

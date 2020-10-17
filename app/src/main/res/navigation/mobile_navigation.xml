@@ -10,7 +10,14 @@
         android:id="@+id/navigation_gameslist"
         android:name="com.example.gamelogger.ui.mygamelist.MygamelistFragment"
         android:label="@string/title_my_list"
-        tools:layout="@layout/fragment_gamelist" />
+        tools:layout="@layout/fragment_gamelist" >
+        <action
+            android:id="@+id/action_navigation_gameslist_to_about2"
+            app:destination="@id/about" />
+        <action
+            android:id="@+id/action_navigation_gameslist_to_settings2"
+            app:destination="@id/settings" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
