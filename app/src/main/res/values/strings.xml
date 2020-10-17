@@ -33,4 +33,8 @@
     <string name="change_userinfo">User settings</string>
     <string name="change_appinfo">App settings</string>
     <string name="submit">søk</string>
+    <string name="gamepicture">gamepicture</string>
+    <string name="btndone">DONE</string>
+    <string name="btnplaying">PLAYING</string>
+    <string name="btnbacklog">BACKLOG</string>
 </resources>

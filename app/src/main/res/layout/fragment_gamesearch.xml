@@ -4,11 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-<!--
         <variable
             name="viewModel"
             type="com.example.gamelogger.ui.gamesearch.GamesearchViewModel" />
--->
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/gamesearchlistLayout"
@@ -23,6 +21,8 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:searchListData="@{viewModel.gamesearchresults}"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

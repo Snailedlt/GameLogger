@@ -1,8 +1,7 @@
 package com.example.gamelogger.services
 
-import com.example.gamelogger.models.Game
-import com.example.gamelogger.models.GameResults
-import com.example.gamelogger.models.ResponseData
+import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameSearchResults
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -33,8 +32,8 @@ private val retrofit = Retrofit.Builder()
 // Query to the game API
 interface GameApiService {
     @GET("games")
-    suspend fun getGameList(@Query("developers=fromsoftware") type: String):
-            List<Game>
+    suspend fun getGameList(@Query("developers") type: String):
+            GameSearchResults
 }
 
 object GameApi {

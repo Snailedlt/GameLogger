@@ -1,6 +1,5 @@
 package com.example.gamelogger.services
 
-import com.example.gamelogger.models.Game
 import com.squareup.moshi.Json
 
 data class GameData<T>(

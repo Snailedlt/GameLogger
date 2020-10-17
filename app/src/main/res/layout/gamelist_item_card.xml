@@ -4,132 +4,104 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable
-            name="game"
-            type="com.example.gamelogger.models.Game" />
+        <variable name="game" type="com.example.gamelogger.classes.Game" />
         <import type="android.view.View"/>
     </data>
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/game_card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_height="265dp"
         android:layout_margin="5dp"
-        card_view:cardCornerRadius="3dp"
-        card_view:cardElevation="5dp"
-        card_view:cardBackgroundColor="#FFFFFF"
-        >
-        <LinearLayout
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="5dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/gameCard"
-            android:paddingVertical="0dp"
-            android:orientation="horizontal"
-            >
+            android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/gamePicture"
-                android:layout_width="125dp"
-                android:layout_height="match_parent"
-                android:maxWidth="125dp"
-                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/gamepicture"
                 android:cropToPadding="true"
-                android:paddingHorizontal="0dp"
-                android:src="@drawable/game_hades"
-                android:background="@color/colorMyAnimeListDarkBlue"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{game.img}"
+                app:layout_constraintBottom_toTopOf="@+id/gametitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+            <TextView
+                android:id="@+id/gametitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/gamePicture"
+                app:layout_constraintStart_toStartOf="parent"
+                android:paddingTop="2dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textSize="20sp"
+                android:text="@{game.title}"
+                tools:text="Very Long Game Title 10: The Reckoning"
                 />
-
-            <!-- Game information and buttons -->
+            <TextView
+                android:id="@+id/gameplatform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/gametitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textSize="18sp"
+                android:text="@{game.plattform}"
+                tools:text="PS4"
+                tools:textColor="@color/colorAccent"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/gametitle"
+                app:layout_constraintStart_toEndOf="@+id/gameplatform"
+                android:textSize="18sp"
+                android:text="@{game.released}"
+                tools:text="2020"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                app:layout_constraintBottom_toBottomOf="parent"
                 >
-
-                <!-- Game information -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/marginTop_container"
+                <Button
+                    android:id="@+id/button_done"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <TextView
-                        android:id="@+id/game_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.title}"
-                        tools:text="Hades"
-                        android:textSize="20sp"
-                        card_view:layout_constraintStart_toStartOf="parent"
-                        card_view:layout_constraintTop_toTopOf="parent"
-                        />
-                    <TextView
-                        android:id="@+id/game_platform"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        card_view:layout_constraintTop_toBottomOf="@+id/game_title"
-                        card_view:layout_constraintStart_toStartOf="parent"
-                        android:textSize="15sp"
-                        android:text="@{game.platform}"
-                        tools:text="Switch"
-                        />
-                    <TextView
-                        android:id="@+id/game_releasedate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{game.released}"
-                        tools:text="2020"
-                        android:textSize="20sp"
-                        card_view:layout_constraintStart_toEndOf="@+id/game_title"
-                        card_view:layout_constraintBottom_toBottomOf="@+id/game_title"
-                        android:layout_marginStart="15dp"
-                        />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <!-- Buttons to alter game state -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:orientation="horizontal"
+                    android:drawableTop="@drawable/gamestate_done"
+                    android:text="@string/btndone"
+                    android:textSize="12sp" />
+                <Button
+                    android:id="@+id/button_playing"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:weightSum="3"
-                    >
-                    <Button
-                        android:id="@+id/button_done"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:drawableTop="@drawable/gamestate_done"
-                        android:text="DONE"
-                        android:textSize="12sp"
-                        android:layout_weight="1"
-                        style="?android:buttonBarButtonStyle"
-                        />
-                    <Button
-                        android:id="@+id/button_playing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:drawableTop="@drawable/gamestate_playing"
-                        android:text="PLAYING"
-                        android:textSize="12sp"
-                        android:layout_weight="1"
-                        style="?android:buttonBarButtonStyle"
-                        />
-
-                    <Button
-                        android:id="@+id/button_planning"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:drawableTop="@drawable/gamestate_backlog"
-                        android:text="PLANNING"
-                        style="?android:buttonBarButtonStyle"
-                        />
-
-                </LinearLayout>
+                    android:drawableTop="@drawable/gamestate_playing"
+                    android:text="@string/btnplaying"
+                    android:textSize="12sp" />
+                <Button
+                    android:id="@+id/button_planning"
+                    style="?android:buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/gamestate_backlog"
+                    android:text="@string/btnbacklog"
+                    android:textSize="12sp" />
             </LinearLayout>
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
