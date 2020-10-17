@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "65089715383",
+    "firebase_url": "https://gamelogger-60bc1.firebaseio.com",
+    "project_id": "gamelogger-60bc1",
+    "storage_bucket": "gamelogger-60bc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65089715383:android:395b08edb55ddf2b0b2132",
+        "android_client_info": {
+          "package_name": "com.example.profilside"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65089715383-48o5rfkaj3a0k1q3041rb540coqpi6eb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.profilside",
+            "certificate_hash": "0156e5b886fd92533d2be4faae7ed413d40d79fd"
+          }
+        },
+        {
+          "client_id": "65089715383-1e4cknc6h5j1fidqqmb91ceto3t9aia2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-FcTg3CKS5hjRG5qRv1xegOhYWumT_gU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65089715383-1e4cknc6h5j1fidqqmb91ceto3t9aia2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
