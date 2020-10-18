@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
+import com.example.gamelogger.ui.mygamelist.GamelistAdapter
 
 class GamesearchFragment : Fragment() {
 
@@ -29,8 +33,12 @@ class GamesearchFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.gamesearchlist.adapter = SearchListAdapter()
+        binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
+            viewModel.saveGame(it)
+        })
 
         return binding.root
     }
+
+
 }

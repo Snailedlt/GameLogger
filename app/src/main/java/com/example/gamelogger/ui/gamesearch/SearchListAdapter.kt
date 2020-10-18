@@ -2,13 +2,17 @@ package com.example.gamelogger.ui.gamesearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentSearchItemCardBinding
+import kotlinx.android.synthetic.main.fragment_search_item_card.view.*
 
-class SearchListAdapter()
+class SearchListAdapter(private val onClickListener: OnClickListener)
     : ListAdapter<Game, SearchListAdapter.GamesearchViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GamesearchViewHolder {
@@ -21,6 +25,10 @@ class SearchListAdapter()
 
     override fun onBindViewHolder(holder: GamesearchViewHolder, position: Int) {
         val game = getItem(position)
+        val addButton = holder.itemView.findViewById<ImageButton>(R.id.add_button)
+        addButton.setOnClickListener {
+            onClickListener.onClick(game)
+        }
         holder.bind(game)
     }
 
@@ -40,5 +48,9 @@ class SearchListAdapter()
             binding.game = game
             binding.executePendingBindings()
         }
+    }
+
+    class OnClickListener(val clickListener: (game: Game) -> Unit) {
+        fun onClick(game: Game) = clickListener(game)
     }
 }
