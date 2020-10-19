@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.fragment_search_item_card.view.*
 class SearchListAdapter(private val onClickListener: OnClickListener)
     : ListAdapter<Game, SearchListAdapter.GamesearchViewHolder>(DiffCallback) {
 
+    /**
+     * Sørger for at fragmentet sitt view blir opprettet (inflated)
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GamesearchViewHolder {
         return GamesearchViewHolder(FragmentSearchItemCardBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -42,6 +45,9 @@ class SearchListAdapter(private val onClickListener: OnClickListener)
         }
     }
 
+    /**
+     *
+     */
     class GamesearchViewHolder(private var binding: FragmentSearchItemCardBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(game: Game) {
@@ -50,6 +56,9 @@ class SearchListAdapter(private val onClickListener: OnClickListener)
         }
     }
 
+    /**
+     * onclick-objekt for add game-knapp
+     */
     class OnClickListener(val clickListener: (game: Game) -> Unit) {
         fun onClick(game: Game) = clickListener(game)
     }
