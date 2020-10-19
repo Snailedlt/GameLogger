@@ -32,7 +32,7 @@ private val retrofit = Retrofit.Builder()
 // Query to the game API
 interface GameApiService {
     @GET("games")
-    suspend fun getGameList(@Query("developers") type: String):
+    suspend fun getGameList(@Query("games") type: String):
             GameSearchResults
 }
 
