@@ -9,4 +9,12 @@
         <item>English</item>
         <item>Norwegian</item>
     </string-array>
+
+
+    <!-- Sorting options for "My List"-->
+    <string-array name="sorting_options">
+        <item>Name</item>
+        <item>Release date</item>
+        <item>Date added</item>
+    </string-array>
 </resources>

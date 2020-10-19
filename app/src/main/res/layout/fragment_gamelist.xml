@@ -25,6 +25,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:gameListData="@{viewModel.games}"
             />
+    <Spinner
+        android:id="@+id/sortSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:entries="@array/sorting_options"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mygamelist"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sortSpinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
