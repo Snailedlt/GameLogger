@@ -1,8 +1,6 @@
 package com.example.gamelogger.ui.gamesearch
 
 import android.util.Log
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -54,8 +52,9 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         savedgames.value?.add(game)
+        game.gameadded = true
         Log.i("Saved game: ", "${game.title} with id ${game.id}")
-        getGamesList("resident-evil")
+        //searchGame("demon's souls")
     }
 
     fun searchGame(searchstring: String) {

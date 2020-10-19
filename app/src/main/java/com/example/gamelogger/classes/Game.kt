@@ -9,16 +9,17 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 class Game(
     @Json(name = "id")
-    val id: Int,
+    val id: Int?,
     @Json(name = "name")
-    val title: String,
+    val title: String?,
     //val platform: String,
-    val plattform: String = "PS4",
+    val plattform: String? = "PS4",
     @Json(name = "released")
     var released: String?,
     @Json(name = "background_image")
-    val img: String,
-    val state: GameState?
+    val img: String?,
+    val state: GameState?,
+    var gameadded: Boolean = false
 ) : Parcelable {
 
     init {

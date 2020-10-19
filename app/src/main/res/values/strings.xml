@@ -39,4 +39,6 @@
     <string name="btndone">DONE</string>
     <string name="btnplaying">PLAYING</string>
     <string name="btnbacklog">BACKLOG</string>
+    <string name="addedbutton">addedbutton</string>
+    <string name="addbutton">addbutton</string>
 </resources>
