@@ -16,7 +16,6 @@
         tools:context=".ui.mygamelist.MygamelistFragment"
         android:paddingBottom="?attr/actionBarSize">
 
-
         <SearchView
             android:id="@+id/searchBar"
             android:layout_width="match_parent"

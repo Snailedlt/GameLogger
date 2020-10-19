@@ -57,4 +57,10 @@ class GamesearchViewModel : ViewModel() {
         Log.i("Saved game: ", "${game.title} with id ${game.id}")
         getGamesList("resident-evil")
     }
+
+    fun searchGame(searchstring: String) {
+        val string = searchstring
+        string.replace(" ", "-")
+        getGamesList(string)
+    }
 }

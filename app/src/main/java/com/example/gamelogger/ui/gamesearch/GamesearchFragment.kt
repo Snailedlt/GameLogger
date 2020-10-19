@@ -39,7 +39,6 @@ class GamesearchFragment : Fragment() {
 
         binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
             viewModel.saveGame(it)
-
         })
 
         searchView = binding.root.findViewById(R.id.searchBar)
