@@ -30,13 +30,13 @@ fun addSavedGame(spillid: String, spillstate: String) {
 
     docRef.get()
         .addOnSuccessListener { document ->
-            if (document != null) {
+            if (document != null && document.exists()) {
                 db.collection("savedGames").document(uid)
                     .update(nestedData as Map<String, Any>)
                 Log.d(TAG, "Added game to firebase?")
             } else {
                 db.collection("savedGames").document(uid)
-                    .set(nestedData)
+                    .set(nestedData as Map<String, Any>)
                 Log.d(TAG, "Added more game to firebase?")
             }
         }
