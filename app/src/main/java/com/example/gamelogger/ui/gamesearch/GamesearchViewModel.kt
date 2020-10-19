@@ -40,7 +40,7 @@ class GamesearchViewModel : ViewModel() {
             _gamesearchresults.value = GameApi.retrofitService.getGameList(searchstring).results
             if (_gamesearchresults.value != null) {
                 Log.d("ok", gamesearchresults.value.toString())
-                Log.d("game0: ", gamesearchresults.value!![0].title)
+                gamesearchresults.value!![0].title?.let { Log.d("game0: ", it) }
             }
         }
     }

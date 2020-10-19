@@ -24,7 +24,7 @@ class MygamelistViewModel : ViewModel() {
             _games.value = GameApi.retrofitService.getGameList("Souls").results
             if (_games.value != null) {
                 Log.d("ok", games.value.toString())
-                Log.d("game0: ", games.value!![0].title)
+                games.value!![0].title?.let { Log.d("game0: ", it) }
             }
         }
     }
