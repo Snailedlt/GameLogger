@@ -1,18 +1,15 @@
 package com.example.gamelogger.ui.gamesearch
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.R
-import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
-import com.example.gamelogger.ui.mygamelist.GamelistAdapter
 
 class GamesearchFragment : Fragment() {
 
@@ -43,6 +40,19 @@ class GamesearchFragment : Fragment() {
 
         searchView = binding.root.findViewById(R.id.searchBar)
         searchView.setOnClickListener { searchView.isIconified = false }
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(arg0: String?): Boolean {
+                // filter listview
+                Log.i("test1", "text submitted")
+                return true
+            }
+
+            override fun onQueryTextChange(arg0: String?): Boolean {
+                val query = searchView.query.toString()
+                viewModel.searchGame(query)
+                return false
+            }
+        })
 
         return binding.root
     }
