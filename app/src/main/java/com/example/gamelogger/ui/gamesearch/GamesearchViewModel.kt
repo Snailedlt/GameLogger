@@ -40,8 +40,10 @@ class GamesearchViewModel : ViewModel() {
     private fun getGamesList(searchstring: String) {
         viewModelScope.launch {
             _gamesearchresults.value = GameApi.retrofitService.getGameList(searchstring).results
-            Log.d("ok", gamesearchresults.value.toString())
-            Log.d("game0: ", gamesearchresults.value!![0].title)
+            if (_gamesearchresults.value != null) {
+                Log.d("ok", gamesearchresults.value.toString())
+                Log.d("game0: ", gamesearchresults.value!![0].title)
+            }
         }
     }
 
@@ -52,7 +54,6 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         savedgames.value?.add(game)
-        getGamesList("pokemon")
         Log.i("Saved game: ", "${game.title} with id ${game.id}" )
     }
 }
