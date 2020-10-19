@@ -54,6 +54,7 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         savedgames.value?.add(game)
-        Log.i("Saved game: ", "${game.title} with id ${game.id}" )
+        Log.i("Saved game: ", "${game.title} with id ${game.id}")
+        getGamesList("resident-evil")
     }
 }

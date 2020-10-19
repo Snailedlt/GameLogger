@@ -21,9 +21,11 @@ class MygamelistViewModel : ViewModel() {
 
     private fun getGamesList() {
         viewModelScope.launch {
-            _games.value = GameApi.retrofitService.getGameList("fromsoftware").results
-            Log.d("ok", games.value.toString())
-            Log.d("game0: ", games.value!![0].title)
+            _games.value = GameApi.retrofitService.getGameList("Souls").results
+            if (_games.value != null) {
+                Log.d("ok", games.value.toString())
+                Log.d("game0: ", games.value!![0].title)
+            }
         }
     }
 }
