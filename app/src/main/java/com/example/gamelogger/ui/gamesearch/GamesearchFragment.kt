@@ -39,6 +39,4 @@ class GamesearchFragment : Fragment() {
 
         return binding.root
     }
-
-
 }
