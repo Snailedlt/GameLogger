@@ -36,9 +36,11 @@ class LoginActivity : AppCompatActivity() {
 
 
         loginbutton.setOnClickListener {
-            usernameTextField.isVisible=false
-            usernameText.isVisible=false
-
+            usernameTextField.isVisible = false
+            usernameText.isVisible = false
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            /*
             if (emailTextField.editText?.text.toString().isNotEmpty() && passwordTextField.editText?.text.toString().isNotEmpty() ) {
                 // Firebase Authentication
                 logIn(emailTextField.editText?.text.toString(), passwordTextField.editText?.text.toString())
@@ -48,13 +50,15 @@ class LoginActivity : AppCompatActivity() {
                 form = false
             }  else {
                 Toast.makeText(this, "Please fill in all textboxes", Toast.LENGTH_LONG).show()
-            }
+            }*/
         }
 
         signupButton.setOnClickListener {
-            usernameTextField.isVisible=true
-            usernameText.isVisible=true
-
+            usernameTextField.isVisible = true
+            usernameText.isVisible = true
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+/*
             if ( passwordTextField.editText?.text.toString().isNotEmpty() && emailTextField.editText?.text.toString().isNotEmpty() && usernameText.editText?.text.toString().isNotEmpty()) {
 
                 // Firebase Authentication
@@ -67,12 +71,13 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all textboxes", Toast.LENGTH_LONG).show()
             }
 
+        }*/
+
+
         }
 
 
-    }
-
-
+/*
     private fun createUser(email:String, password:String, username:String) {
 
         auth.createUserWithEmailAndPassword(email, password)
@@ -109,6 +114,8 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+
+
     override fun onStart() {
         super.onStart()
         val bruker = auth.currentUser
@@ -120,5 +127,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
+*/
+    }
 }
