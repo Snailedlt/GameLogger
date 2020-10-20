@@ -56,7 +56,6 @@ class GamesearchViewModel : ViewModel() {
         game.gameadded = true
         Log.i("Saved game: ", "${game.title} with id ${game.id}")
         //searchGame("demon's souls")
-        addSavedGame(game.id.toString(), "Playing")
     }
 
     fun searchGame(searchstring: String) {

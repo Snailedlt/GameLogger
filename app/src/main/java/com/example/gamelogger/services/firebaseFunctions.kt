@@ -1,16 +1,10 @@
 package com.example.gamelogger.services
 
-import android.content.Intent
 import android.util.Log
-import android.widget.Button
-import androidx.core.content.ContextCompat.startActivity
-import com.example.gamelogger.LoginActivity
-import com.example.gamelogger.MainActivity
-import com.example.gamelogger.R
 import com.example.gamelogger.ui.profile.ProfileFragment.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_login_screen.*
+
 
 fun addSavedGame(spillid: String, spillstate: String) {
 
@@ -44,3 +38,6 @@ fun addSavedGame(spillid: String, spillstate: String) {
             Log.d(TAG, "get failed with ", exception)
         }
 }
+
+
+
