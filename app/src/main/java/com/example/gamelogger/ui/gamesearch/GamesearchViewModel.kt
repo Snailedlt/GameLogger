@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.services.GameApi
-import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
 
 class GamesearchViewModel : ViewModel() {

@@ -5,7 +5,7 @@ import com.example.gamelogger.ui.profile.ProfileFragment.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-
+/*
 fun addSavedGame(spillid: String, spillstate: String) {
 
     val db = FirebaseFirestore.getInstance()
@@ -38,6 +38,6 @@ fun addSavedGame(spillid: String, spillstate: String) {
             Log.d(TAG, "get failed with ", exception)
         }
 }
-
+*/
 
 
