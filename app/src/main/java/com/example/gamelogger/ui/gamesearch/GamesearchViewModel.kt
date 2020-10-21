@@ -26,21 +26,37 @@ class GamesearchViewModel : ViewModel() {
     val savedgames: LiveData<ArrayList<Game>>
         get() = _savedgames
 
-    private val searchstring : String = "final-fantasy"
+    private val _status = MutableLiveData<SearchStatus>()
+    val status: LiveData<SearchStatus>
+        get() = _status
+
+    private val _searchString = MutableLiveData<String>()
+    val searchString: LiveData<String>
+        get() = _searchString
 
     init {
-        getGamesList(searchstring)
+        _status.value = SearchStatus.EMPTY
+        //getGamesList(searchstring)
     }
 
     /**
-     * Metode som kobler opp mot spilldatabasen og henter data
+     * Function that makes a connection to the API and populates the [_gamesearchresults]
+     * mutable live data
      */
-    private fun getGamesList(searchstring: String) {
+    private fun getGamesList() {
         viewModelScope.launch {
-            _gamesearchresults.value = GameApi.retrofitService.getGameList(searchstring).results
-            if (_gamesearchresults.value != null) {
-                Log.d("ok", gamesearchresults.value.toString())
-                gamesearchresults.value!![0].title?.let { Log.d("game0: ", it) }
+            _status.value = SearchStatus.LOADING
+            try {
+                _gamesearchresults.value = GameApi.retrofitService
+                    .getGameList(searchString.value.toString()).results
+                if (searchString.value.toString().equals("")) {
+                    _status.value = SearchStatus.EMPTY
+                    _gamesearchresults.value = ArrayList()
+                } else _status.value = SearchStatus.DONE
+            } catch (e: Exception) {
+                Log.i("Exception: ", e.toString())
+                _status.value = SearchStatus.ERROR
+                _gamesearchresults.value = ArrayList()
             }
         }
     }
@@ -51,15 +67,22 @@ class GamesearchViewModel : ViewModel() {
      * to a server instead of this method.
      */
     fun saveGame(game: Game) {
-        savedgames.value?.add(game)
         game.gameadded = true
+        savedgames.value?.add(game)
         Log.i("Saved game: ", "${game.title} with id ${game.id}")
-        //searchGame("demon's souls")
+        // addSavedGame(game.id.toString(), "Playing")
     }
 
+    /**
+     * Makes
+     */
     fun searchGame(searchstring: String) {
+        Log.i("Searched: ", searchstring)
         val string = searchstring
         string.replace(" ", "-")
-        getGamesList(string)
+        _searchString.value = string
+        getGamesList()
     }
 }
+
+enum class SearchStatus { LOADING, ERROR, EMPTY, DONE }

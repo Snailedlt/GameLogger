@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.services.GameApi
 import kotlinx.coroutines.launch
+import kotlin.reflect.jvm.internal.impl.util.ModuleVisibilityHelper
 
 class MygamelistViewModel : ViewModel() {
     // The game list
@@ -15,17 +16,24 @@ class MygamelistViewModel : ViewModel() {
     val games: LiveData<List<Game>>
         get() = _games
 
+    private val _status = MutableLiveData<ListStatus>()
+    val status: LiveData<ListStatus>
+        get() = _status
+
     init {
         getGamesList()
     }
 
     private fun getGamesList() {
         viewModelScope.launch {
-            _games.value = GameApi.retrofitService.getGameList("Souls").results
+            //_games.value = GameApi.retrofitService.getGameList("Souls").results
             if (_games.value != null) {
+                _status.value = ListStatus.DONE
                 Log.d("ok", games.value.toString())
                 games.value!![0].title?.let { Log.d("game0: ", it) }
-            }
+            } else _status.value = ListStatus.EMPTY
         }
     }
 }
+
+enum class ListStatus { LOADING, ERROR, EMPTY, DONE }

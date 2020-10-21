@@ -19,9 +19,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    dataBinding {
-        enabled = true
-    }
     buildTypes {
         release {
             minifyEnabled false
@@ -30,6 +27,7 @@ android {
     }
     buildFeatures {
         dataBinding true
+        viewBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

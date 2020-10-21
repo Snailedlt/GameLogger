@@ -38,6 +38,9 @@ class GamesearchFragment : Fragment() {
             viewModel.saveGame(it)
         })
 
+        /**
+         * Search bar listener
+         */
         searchView = binding.root.findViewById(R.id.searchBar)
         searchView.setOnClickListener { searchView.isIconified = false }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

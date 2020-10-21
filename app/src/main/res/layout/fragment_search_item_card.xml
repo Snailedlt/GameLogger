@@ -7,6 +7,9 @@
         <variable
             name="game"
             type="com.example.gamelogger.classes.Game" />
+        <variable
+            name="viewModel"
+            type="com.example.gamelogger.ui.gamesearch.GamesearchViewModel" />
         <import type="android.view.View"/>
     </data>
     <androidx.cardview.widget.CardView
@@ -101,7 +104,6 @@
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:scaleType="fitCenter"
-                android:visibility="@{game.gameadded ? View.GONE : View.VISIBLE}"
                 android:padding="15dp"
                 android:src="@drawable/searchgame_add"
                 style="?android:buttonBarButtonStyle"
