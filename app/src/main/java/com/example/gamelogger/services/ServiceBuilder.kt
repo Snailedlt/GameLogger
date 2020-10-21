@@ -36,6 +36,12 @@ interface GameApiService {
     suspend fun getGameList(@Query("search") type: String):
             GameSearchResults
 
+    @GET("games?{page}")
+    suspend fun getNextPage(
+        @Path("page") page: String,
+        @Query("search") type: String
+    )
+
     @GET("games/{id}")
     suspend fun getMyGames(@Path("id") type: String):
             Game

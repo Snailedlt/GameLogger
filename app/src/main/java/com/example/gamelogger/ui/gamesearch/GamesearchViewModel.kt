@@ -6,12 +6,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameSearchResults
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.services.GameApi
 import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
 
 class GamesearchViewModel : ViewModel() {
+
+    private val _gamesearchresult = MutableLiveData<GameSearchResults>()
+    val gamesearchresult: LiveData<GameSearchResults>
+        get() = _gamesearchresult
 
     /**
      * The search results
@@ -36,6 +41,7 @@ class GamesearchViewModel : ViewModel() {
     val searchString: LiveData<String>
         get() = _searchString
 
+
     init {
         _status.value = SearchStatus.EMPTY
         //getGamesList(searchstring)
@@ -49,9 +55,10 @@ class GamesearchViewModel : ViewModel() {
         viewModelScope.launch {
             _status.value = SearchStatus.LOADING
             try {
-                _gamesearchresults.value = GameApi.retrofitService
-                    .getGameList(searchString.value.toString()).results
-                if (searchString.value.toString().equals("")) {
+                _gamesearchresult.value = GameApi.retrofitService
+                    .getGameList(searchString.value.toString())
+                _gamesearchresults.value = gamesearchresult.value?.results
+                if (searchString.value.toString() == "") {
                     _status.value = SearchStatus.EMPTY
                     _gamesearchresults.value = ArrayList()
                 } else _status.value = SearchStatus.DONE
@@ -105,12 +112,11 @@ class GamesearchViewModel : ViewModel() {
 
     fun searchNextGame(searchstring: String) {
         Log.i("Searched: ", searchstring)
-        val string = searchstring
-        string.replace(" ", "-")
-        _searchString.value = string
+        //val string = searchstring
+        //string.replace(" ", "-")
+        _searchString.value = searchstring
         getGamesList()
     }
-
 
     private fun getNextPageURL(url: String): String {
         return url.substring(29)
