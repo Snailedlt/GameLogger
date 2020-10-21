@@ -34,20 +34,22 @@ class MygamelistViewModel : ViewModel() {
             try {
                 getUserGames { savedGames ->
                     CoroutineScope(viewModelScope.coroutineContext).launch {
-                        Log.i("savedgameslength", "${savedGames.size}")
                         val gamelist = ArrayList<Game>()
                         for (id in savedGames) {
-                            Log.i("idLog", id)
                             gamelist.add(GameApi.retrofitService.getMyGames(id))
-                            Log.i("Gamesvalue", gamelist.toString())
                         }
                         _games.value = gamelist
+                        _status.value = ListStatus.DONE
+                        Log.i("Liststatus:", status.value.toString())
                     }
                 }
             } catch (e: Exception) { Log.i("h", "h")}
             if (_games.value != null) {
                 _status.value = ListStatus.DONE
-            } else _status.value = ListStatus.EMPTY
+                Log.i("Liststatus:", status.value.toString())
+            } else {
+                _status.value = ListStatus.EMPTY
+            }
         }
     }
 }

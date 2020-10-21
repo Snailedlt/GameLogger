@@ -80,19 +80,6 @@
                 android:text="@{game.released}"
                 tools:text="2020"
                 />
-            <ImageButton
-                android:id="@+id/added_button"
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:scaleType="fitCenter"
-                android:padding="15dp"
-                android:src="@drawable/gamestate_done"
-                style="?android:buttonBarButtonStyle"
-                android:contentDescription="@string/addedbutton" />
 
             <ImageButton
                 android:id="@+id/add_button"
