@@ -1,18 +1,18 @@
 package com.example.gamelogger
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import com.google.api.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_login_screen.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -38,31 +38,36 @@ class LoginActivity : AppCompatActivity() {
         loginbutton.setOnClickListener {
             usernameTextField.isVisible = false
             usernameText.isVisible = false
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            /*
+
+
             if (emailTextField.editText?.text.toString().isNotEmpty() && passwordTextField.editText?.text.toString().isNotEmpty() ) {
                 // Firebase Authentication
-                logIn(emailTextField.editText?.text.toString(), passwordTextField.editText?.text.toString())
+                logIn(
+                    emailTextField.editText?.text.toString(),
+                    passwordTextField.editText?.text.toString()
+                )
                 form = false
             }else if (form) {
 
                 form = false
             }  else {
                 Toast.makeText(this, "Please fill in all textboxes", Toast.LENGTH_LONG).show()
-            }*/
+            }
         }
 
         signupButton.setOnClickListener {
             usernameTextField.isVisible = true
             usernameText.isVisible = true
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-/*
+
+
             if ( passwordTextField.editText?.text.toString().isNotEmpty() && emailTextField.editText?.text.toString().isNotEmpty() && usernameText.editText?.text.toString().isNotEmpty()) {
 
                 // Firebase Authentication
-                createUser(emailTextField.editText?.text.toString(), passwordTextField.editText?.text.toString(), usernameText.editText?.text.toString())
+                createUser(
+                    emailTextField.editText?.text.toString(),
+                    passwordTextField.editText?.text.toString(),
+                    usernameText.editText?.text.toString()
+                )
                 form = true
             } else if (!form) {
 
@@ -71,14 +76,14 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all textboxes", Toast.LENGTH_LONG).show()
             }
 
-        }*/
+        }
 
 
         }
 
 
-/*
-    private fun createUser(email:String, password:String, username:String) {
+
+    private fun createUser(email: String, password: String, username: String) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -94,14 +99,16 @@ class LoginActivity : AppCompatActivity() {
                         "password" to passwordTextField.editText?.text.toString(),
                         "username" to usernameText.editText?.text.toString()
                     )
-                    db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).set(bruker as Map<String, Any>)
+                    db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).set(
+                        bruker
+                    )
 
                 } else {
                     Log.e("Opprettelse av bruker", "Feilet" + task.exception)
                 }
             }
     }
-    private fun logIn(email:String, password:String) {
+    private fun logIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -123,10 +130,11 @@ class LoginActivity : AppCompatActivity() {
         if (bruker != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+
         }
     }
 
 
-*/
+
     }
-}
