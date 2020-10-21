@@ -86,7 +86,6 @@ class GamesearchViewModel : ViewModel() {
      * to a server instead of this method.
      */
     fun saveGame(game: Game) {
-        game.gameadded = true
         game.state = GameState.BACKLOG
         savedgames.value?.add(game)
         Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}")

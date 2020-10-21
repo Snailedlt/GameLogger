@@ -7,6 +7,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 // API URL
@@ -34,6 +35,10 @@ interface GameApiService {
     @GET("games")
     suspend fun getGameList(@Query("search") type: String):
             GameSearchResults
+
+    @GET("games/{id}")
+    suspend fun getMyGames(@Path("id") type: String):
+            Game
 }
 
 object GameApi {

@@ -5,9 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.coroutineScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.services.GameApi
+import com.example.gamelogger.services.addSavedGame
 import com.example.gamelogger.services.getUserGames
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlin.reflect.jvm.internal.impl.util.ModuleVisibilityHelper
 
@@ -26,15 +30,23 @@ class MygamelistViewModel : ViewModel() {
     }
 
     private fun getGamesList() {
-        getUserGames() { savedGames ->
-           Log.d("yo", "Spill som brukeren har lagret i sin database PLOX: $savedGames") }
-
         viewModelScope.launch {
-            //_games.value = GameApi.retrofitService.getGameList("Souls").results
+            try {
+                getUserGames { savedGames ->
+                    CoroutineScope(viewModelScope.coroutineContext).launch {
+                        Log.i("savedgameslength", "${savedGames.size}")
+                        val gamelist = ArrayList<Game>()
+                        for (id in savedGames) {
+                            Log.i("idLog", id)
+                            gamelist.add(GameApi.retrofitService.getMyGames(id))
+                            Log.i("Gamesvalue", gamelist.toString())
+                        }
+                        _games.value = gamelist
+                    }
+                }
+            } catch (e: Exception) { Log.i("h", "h")}
             if (_games.value != null) {
                 _status.value = ListStatus.DONE
-                Log.d("ok", games.value.toString())
-                games.value!![0].title?.let { Log.d("game0: ", it) }
             } else _status.value = ListStatus.EMPTY
         }
     }

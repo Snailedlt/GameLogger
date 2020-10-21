@@ -89,7 +89,6 @@
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:scaleType="fitCenter"
-                android:visibility="@{game.gameadded ? View.VISIBLE : View.GONE}"
                 android:padding="15dp"
                 android:src="@drawable/gamestate_done"
                 style="?android:buttonBarButtonStyle"
