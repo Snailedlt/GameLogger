@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.services.GameApi
+import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
 
 class GamesearchViewModel : ViewModel() {
@@ -55,6 +56,8 @@ class GamesearchViewModel : ViewModel() {
         game.gameadded = true
         Log.i("Saved game: ", "${game.title} with id ${game.id}")
         //searchGame("demon's souls")
+        addSavedGame(game.id.toString(), "Playing")
+
     }
 
     fun searchGame(searchstring: String) {
