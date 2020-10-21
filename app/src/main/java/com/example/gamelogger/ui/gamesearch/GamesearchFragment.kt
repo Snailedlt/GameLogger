@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
+
 
 class GamesearchFragment : Fragment() {
 
@@ -21,6 +24,7 @@ class GamesearchFragment : Fragment() {
     }
 
     private lateinit var searchView: SearchView
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +58,19 @@ class GamesearchFragment : Fragment() {
                 val query = searchView.query.toString()
                 viewModel.searchGame(query)
                 return false
+            }
+        })
+
+
+        recyclerView = binding.root.findViewById(R.id.gamesearchlist) as RecyclerView
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                val query = searchView.query.toString()
+                if (!recyclerView.canScrollVertically(1)) {
+                    Toast.makeText(getActivity()?.getApplicationContext(), "Getting More Results", Toast.LENGTH_SHORT).show()
+                    viewModel.searchNextGame(query)
+                }
             }
         })
 
