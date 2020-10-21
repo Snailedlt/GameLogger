@@ -18,7 +18,7 @@ class Game(
     var released: String?,
     @Json(name = "background_image")
     val img: String?,
-    val state: GameState? = GameState.BACKLOG,
+    var state: GameState? = GameState.BACKLOG,
     var gameadded: Boolean = false
 ) : Parcelable {
 

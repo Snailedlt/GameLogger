@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.services.GameApi
+import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
 
 class GamesearchViewModel : ViewModel() {
@@ -68,9 +70,10 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         game.gameadded = true
+        game.state = GameState.BACKLOG
         savedgames.value?.add(game)
-        Log.i("Saved game: ", "${game.title} with id ${game.id}")
-        // addSavedGame(game.id.toString(), "Playing")
+        Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}")
+        addSavedGame(game.id.toString(), game.state.toString())
     }
 
     /**
