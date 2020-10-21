@@ -49,7 +49,8 @@ class GamesearchFragment : Fragment() {
         searchView.setOnClickListener { searchView.isIconified = false }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(arg0: String?): Boolean {
-                // filter listview
+                val query = searchView.query.toString()
+                viewModel.searchGame(query)
                 Log.i("test1", "text submitted")
                 return true
             }
@@ -69,7 +70,7 @@ class GamesearchFragment : Fragment() {
                 val query = searchView.query.toString()
                 if (!recyclerView.canScrollVertically(1)) {
                     Toast.makeText(getActivity()?.getApplicationContext(), "Getting More Results", Toast.LENGTH_SHORT).show()
-                    viewModel.searchNextGame(query)
+                    /*viewModel.searchNextGame(query)*/
                 }
             }
         })

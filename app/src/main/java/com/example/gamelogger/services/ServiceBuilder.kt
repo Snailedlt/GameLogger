@@ -9,6 +9,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 // API URL
 private const val URL = "https://api.rawg.io/api/"
@@ -36,15 +37,13 @@ interface GameApiService {
     suspend fun getGameList(@Query("search") type: String):
             GameSearchResults
 
-    @GET("games?{page}")
-    suspend fun getNextPage(
-        @Path("page") page: String,
-        @Query("search") type: String
-    )
-
     @GET("games/{id}")
     suspend fun getMyGames(@Path("id") type: String):
             Game
+
+    @GET
+    suspend fun getNextPage(@Url type: String):
+            GameSearchResults
 }
 
 object GameApi {

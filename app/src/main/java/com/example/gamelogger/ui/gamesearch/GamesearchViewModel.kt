@@ -69,7 +69,7 @@ class GamesearchViewModel : ViewModel() {
             }
         }
     }
-    private fun getNextGamesList() {
+    /*private fun getNextGamesList() {
         viewModelScope.launch {
             _status.value = SearchStatus.LOADING
             try {
@@ -85,7 +85,7 @@ class GamesearchViewModel : ViewModel() {
                 _gamesearchresults.value = ArrayList()
             }
         }
-    }
+    }*/
 
     /**
      * Adds the selected game to the [_savedgames] arraylist.
@@ -110,13 +110,9 @@ class GamesearchViewModel : ViewModel() {
         getGamesList()
     }
 
-    fun searchNextGame(searchstring: String) {
-        Log.i("Searched: ", searchstring)
-        //val string = searchstring
-        //string.replace(" ", "-")
-        _searchString.value = searchstring
-        getGamesList()
-    }
+    /*fun searchNextGame() {
+        _gamesearchresult.value = GameApi.retrofitService.getNextPage(gamesearchresult.value?.next.toString())
+    }*/
 
     private fun getNextPageURL(url: String): String {
         return url.substring(29)
