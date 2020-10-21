@@ -1,7 +1,6 @@
 package com.example.gamelogger.services
 
 import android.util.Log
-import com.example.gamelogger.ui.profile.ProfileFragment.Companion.TAG
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -28,15 +27,15 @@ fun addSavedGame(spillid: String, spillstate: String) {
             if (document != null && document.exists()) {
                 db.collection("savedGames").document(uid).collection("Games").document(spillid)
                     .update(nestedData as Map<String, Any>)
-                Log.d(TAG, "Added game to firebase?")
+                Log.d("add", "Added game to firebase?")
             } else {
                 db.collection("savedGames").document(uid).collection("Games").document(spillid)
                     .set(nestedData)
-                Log.d(TAG, "Added more game to firebase?")
+                Log.d("add", "Added more game to firebase?")
             }
         }
         .addOnFailureListener { exception ->
-            Log.d(TAG, "get failed with ", exception)
+            Log.d("add", "get failed with ", exception)
         }
 }
 
@@ -59,13 +58,13 @@ fun getUser(myCallback: (String) -> Unit) {
     docRef.get()
         .addOnSuccessListener { document ->
             var brukernavn: String = document.get("username") as String
-            Log.d(TAG, "Palogget bruker: $brukernavn")
+            Log.d("get", "Palogget bruker: $brukernavn")
 
             myCallback(brukernavn)
 
         }
         .addOnFailureListener { exception ->
-            Log.d(TAG, "get failed with ", exception)
+            Log.d("get", "get failed with ", exception)
         }
 }
 
@@ -85,12 +84,12 @@ fun getUserGames(myCallback: (List<String>) -> Unit) {
             val spill = result!!.map { snapshot ->
                 snapshot["spill id"].toString()
             }
-            Log.d(TAG, "Spill som brukeren har lagret i sin database: $spill")
+            Log.d("get", "Spill som brukeren har lagret i sin database: $spill")
             myCallback(spill)
 
         }
         .addOnFailureListener { exception ->
-            Log.d(TAG, "get failed with ", exception)
+            Log.d("get", "get failed with ", exception)
         }
 }
 
