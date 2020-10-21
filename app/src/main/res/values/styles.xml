@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextHint" parent="Widget.Design.TextInputLayout">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="colorSecondaryVariant">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item> // Activated State
+        <item name="colorOnSurface">@color/colorPrimary</item> // Normal State
+    </style>
 </resources>
