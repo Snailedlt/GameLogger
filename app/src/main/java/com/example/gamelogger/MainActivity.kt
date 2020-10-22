@@ -1,9 +1,12 @@
 package com.example.gamelogger
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,9 +21,15 @@ class MainActivity : AppCompatActivity() {
     // Initialiserer Firebase autentisering
     private lateinit var auth: FirebaseAuth
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val aBar = supportActionBar
+        if (aBar != null) {
+            aBar.elevation = 0F
+        }
 
         // Lager autentiseringsvariabel til Firebase
         auth = FirebaseAuth.getInstance()

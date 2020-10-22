@@ -5,15 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.coroutineScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.services.GameApi
-import com.example.gamelogger.services.addSavedGame
 import com.example.gamelogger.services.getUserGames
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlin.reflect.jvm.internal.impl.util.ModuleVisibilityHelper
 
 class MygamelistViewModel : ViewModel() {
     // The game list
@@ -44,7 +40,7 @@ class MygamelistViewModel : ViewModel() {
                     }
                 }
             } catch (e: Exception) { Log.i("h", "h")}
-            if (_games.value != null) {
+            if (games.value != null) {
                 _status.value = ListStatus.DONE
                 Log.i("Liststatus:", status.value.toString())
             } else {

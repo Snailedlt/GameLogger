@@ -3,17 +3,24 @@
     <color name="colorPrimary">#263238</color>
     <color name="colorPrimaryDark">#000a12</color>
     <color name="colorPrimaryLight">#4f5b62</color>
+    <color name="colorPrimaryLighter">#79878F</color>
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorSecondary">#d500f9</color>
     <color name="colorSecondaryDark">#9e00c5</color>
     <color name="colorSecondaryLight">#ff5bff</color>
     <color name="colorSecondaryText">#000000</color>
+    <color name="colorTextBoxes">#34444C</color>
+
 
     <color name="colorAccent">#03DAC5</color>
     <color name="colorMyAnimeListDarkBlue">#26448F</color>
     <color name="colorBlack">#000000</color>
     <color name="colorPurple">#7B43E3</color>
     <color name="colorWhite">#ffffff</color>
+
+    <color name="colorPlaystation">#587AF3</color>
+    <color name="colorXbox">#48D12F</color>
+    <color name="colorNintendo">#FF3737</color>
 
 
     <!--GREEN

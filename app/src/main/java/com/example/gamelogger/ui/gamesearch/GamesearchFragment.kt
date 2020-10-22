@@ -1,5 +1,6 @@
 package com.example.gamelogger.ui.gamesearch
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -26,12 +29,12 @@ class GamesearchFragment : Fragment() {
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = FragmentGamesearchBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
@@ -61,7 +64,6 @@ class GamesearchFragment : Fragment() {
                 return false
             }
         })
-
 
         recyclerView = binding.root.findViewById(R.id.gamesearchlist) as RecyclerView
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

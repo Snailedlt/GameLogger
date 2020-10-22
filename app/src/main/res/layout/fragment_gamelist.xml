@@ -17,6 +17,7 @@
         tools:context=".ui.mygamelist.MygamelistFragment">
 
         <Spinner
+            android:visibility="gone"
             android:id="@+id/sortSpinner"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -25,10 +26,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <SearchView
+            android:visibility="gone"
             android:id="@+id/searchBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/sortSpinner"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <ImageView

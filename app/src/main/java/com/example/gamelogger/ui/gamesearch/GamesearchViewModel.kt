@@ -41,7 +41,6 @@ class GamesearchViewModel : ViewModel() {
     val searchString: LiveData<String>
         get() = _searchString
 
-
     init {
         _status.value = SearchStatus.EMPTY
         //getGamesList(searchstring)
@@ -94,7 +93,6 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         game.state = GameState.BACKLOG
-        savedgames.value?.add(game)
         Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}")
         addSavedGame(game.id.toString(), game.state.toString())
     }

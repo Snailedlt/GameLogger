@@ -15,4 +15,20 @@
         <item name="colorPrimary">@color/colorPrimary</item> // Activated State
         <item name="colorOnSurface">@color/colorPrimary</item> // Normal State
     </style>
+
+    <style name="ExtendedToolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="elevation">15dp</item>
+    </style>
+
+    <style name="SearchViewTheme" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@drawable/rounded_corner_white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="elevation">16dp</item>
+        <item name="queryBackground">@android:color/transparent</item>
+    </style>
 </resources>
