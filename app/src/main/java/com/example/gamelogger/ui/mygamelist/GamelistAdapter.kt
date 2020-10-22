@@ -2,13 +2,15 @@ package com.example.gamelogger.ui.mygamelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamelogger.R
 import com.example.gamelogger.databinding.GamelistItemCardBinding
 import com.example.gamelogger.classes.Game
 
-class GamelistAdapter()
+class GamelistAdapter(private val onClickListener: OnClickListener)
     : ListAdapter<Game, GamelistAdapter.GameViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -21,6 +23,18 @@ class GamelistAdapter()
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = getItem(position)
+        val doneButton = holder.itemView.findViewById<Button>(R.id.button_done)
+        val playingButton = holder.itemView.findViewById<Button>(R.id.button_playing)
+        val backlogButton = holder.itemView.findViewById<Button>(R.id.button_planning)
+        doneButton.setOnClickListener {
+            onClickListener.onClick(game)
+        }
+        playingButton.setOnClickListener {
+            onClickListener.onClick(game)
+        }
+        backlogButton.setOnClickListener {
+            onClickListener.onClick(game)
+        }
         holder.bind(game)
     }
 
@@ -40,5 +54,12 @@ class GamelistAdapter()
             binding.game = game
             binding.executePendingBindings()
         }
+    }
+
+    /**
+     * onClick-objekt for change state-buttons
+     */
+    class OnClickListener(val clickListener: (game: Game) -> Unit) {
+        fun onClick(game: Game) = clickListener(game)
     }
 }

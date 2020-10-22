@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Sets the elevation attribute of the actionbar to 0F, removing the effect
         val aBar = supportActionBar
         if (aBar != null) {
             aBar.elevation = 0F

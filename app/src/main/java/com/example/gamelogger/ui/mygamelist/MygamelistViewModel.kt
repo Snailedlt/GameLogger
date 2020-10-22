@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.services.GameApi
 import com.example.gamelogger.services.getUserGames
 import kotlinx.coroutines.CoroutineScope
@@ -17,6 +18,10 @@ class MygamelistViewModel : ViewModel() {
     val games: LiveData<List<Game>>
         get() = _games
 
+    /**
+     * [_status] tells if the data in the fragment is loading, done loading
+     * or if there was an error
+     */
     private val _status = MutableLiveData<ListStatus>()
     val status: LiveData<ListStatus>
         get() = _status
@@ -25,6 +30,13 @@ class MygamelistViewModel : ViewModel() {
         getGamesList()
     }
 
+    /**
+     * Method that is called whenever the viewmodel is initialized.
+     * It calls on [getUserGames] to contact the app database (firebase)
+     * to get a list of the user's saved games as their id values.
+     * The list is iterated through to create [Game] objects for each id, that will be
+     * stored in [games] to display a list for the user.
+     */
     private fun getGamesList() {
         viewModelScope.launch {
             try {
@@ -46,6 +58,14 @@ class MygamelistViewModel : ViewModel() {
             } else {
                 _status.value = ListStatus.EMPTY
             }
+        }
+    }
+
+    fun changeGameState(game: Game) {
+        when (game.state) {
+            GameState.DONE -> game.state = GameState.BACKLOG
+            GameState.BACKLOG -> game.state = GameState.PLAYING
+            GameState.PLAYING -> game.state = GameState.DONE
         }
     }
 }

@@ -22,6 +22,7 @@ class Game(
 ) : Parcelable {
 
     init {
+        this.state = GameState.BACKLOG
         this.released = this.releasedYear()
     }
 
@@ -30,10 +31,6 @@ class Game(
             this.released?.split("-")?.get(0)
         else
             null
-    }
-
-    override fun toString(): String {
-        return super.toString()
     }
 
 }

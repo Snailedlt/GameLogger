@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.databinding.FragmentGamelistBinding
 
 class MygamelistFragment : Fragment() {
@@ -38,10 +40,14 @@ class MygamelistFragment : Fragment() {
         // Gives binding access to the MygamelistViewModel
         binding.viewModel = viewModel
 
+
+
         /**
          * mygameList corresponds to the id of the RecyclerView from the layout file
          */
-        binding.mygameList.adapter = GamelistAdapter()
+        binding.mygameList.adapter = GamelistAdapter(GamelistAdapter.OnClickListener {
+            viewModel.changeGameState(it)
+        })
         binding.mygameList.layoutManager = LinearLayoutManager(context)
 
         return binding.root

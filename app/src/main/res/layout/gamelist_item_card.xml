@@ -93,6 +93,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/gamestate_done"
                     android:text="@string/btndone"
+                    app:gameDone="@{game}"
                     android:textSize="12sp" />
                 <Button
                     android:id="@+id/button_playing"
@@ -102,6 +103,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/gamestate_playing"
                     android:text="@string/btnplaying"
+                    app:gamePlaying="@{game}"
                     android:textSize="12sp" />
                 <Button
                     android:id="@+id/button_planning"
@@ -111,6 +113,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/gamestate_backlog"
                     android:text="@string/btnbacklog"
+                    app:gameBacklog="@{game}"
                     android:textSize="12sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

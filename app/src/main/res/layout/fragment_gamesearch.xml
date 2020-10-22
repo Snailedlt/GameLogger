@@ -62,7 +62,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/extended_toolbar"
-            app:searchListData="@{viewModel.gamesearchresults}"
+            app:searchListData="@{viewModel.gameresultlist}"
             tools:itemCount="20"
             tools:listitem="@layout/fragment_search_item_card"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

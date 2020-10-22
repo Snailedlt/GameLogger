@@ -14,16 +14,19 @@ import kotlinx.coroutines.launch
 
 class GamesearchViewModel : ViewModel() {
 
+    /**
+     * The Mutable LiveData that contains the search result as an object [GameSearchResults]
+     */
     private val _gamesearchresult = MutableLiveData<GameSearchResults>()
     val gamesearchresult: LiveData<GameSearchResults>
         get() = _gamesearchresult
 
     /**
-     * The search results
+     * The Mutable LiveData that contains the list of [Game]s the search returns
      */
-    private val _gamesearchresults = MutableLiveData<List<Game>>()
-    val gamesearchresults: LiveData<List<Game>>
-        get() = _gamesearchresults
+    private val _gameresultlist = MutableLiveData<List<Game>>()
+    val gameresultlist: LiveData<List<Game>>
+        get() = _gameresultlist
 
     /**
      * An arraylist that is added to whenever the function [saveGame] is called.
@@ -33,10 +36,17 @@ class GamesearchViewModel : ViewModel() {
     val savedgames: LiveData<ArrayList<Game>>
         get() = _savedgames
 
+    /**
+     * [_status] tells if the data in the fragment is loading, done loading
+     * or if there was an error
+     */
     private val _status = MutableLiveData<SearchStatus>()
     val status: LiveData<SearchStatus>
         get() = _status
 
+    /**
+     * The SearchString that is used when searching for games in [getGamesList]
+     */
     private val _searchString = MutableLiveData<String>()
     val searchString: LiveData<String>
         get() = _searchString
@@ -47,27 +57,33 @@ class GamesearchViewModel : ViewModel() {
     }
 
     /**
-     * Function that makes a connection to the API and populates the [_gamesearchresults]
+     * Function that makes a connection to the API and populates the [_gameresultlist]
      * mutable live data
      */
     private fun getGamesList() {
         viewModelScope.launch {
             _status.value = SearchStatus.LOADING
             try {
+                // makes a call to the API service and creates a GameSearchResults object of the results
                 _gamesearchresult.value = GameApi.retrofitService
                     .getGameList(searchString.value.toString())
-                _gamesearchresults.value = gamesearchresult.value?.results
+                // fills the list of games with the array of Game objects stored in the GameSearchResults object
+                _gameresultlist.value = gamesearchresult.value?.results
+                // the rest of the code mostly just sets the search status based on if there's still
+                // text in the search field or if there was an error. It also makes sure to empty the
+                // gameresultlist so that there aren't any search results displayed
                 if (searchString.value.toString() == "") {
                     _status.value = SearchStatus.EMPTY
-                    _gamesearchresults.value = ArrayList()
+                    _gameresultlist.value = ArrayList()
                 } else _status.value = SearchStatus.DONE
             } catch (e: Exception) {
                 Log.i("Exception: ", e.toString())
                 _status.value = SearchStatus.ERROR
-                _gamesearchresults.value = ArrayList()
+                _gameresultlist.value = ArrayList()
             }
         }
     }
+
     /*private fun getNextGamesList() {
         viewModelScope.launch {
             _status.value = SearchStatus.LOADING
@@ -98,7 +114,8 @@ class GamesearchViewModel : ViewModel() {
     }
 
     /**
-     * Makes
+     * Function that gets the search string from a search bar, updates the [_searchString]
+     * value and then runs the [getGamesList] function
      */
     fun searchGame(searchstring: String) {
         Log.i("Searched: ", searchstring)
