@@ -16,24 +16,33 @@
         android:layout_height="match_parent"
         tools:context=".ui.mygamelist.MygamelistFragment">
 
-        <Spinner
-            android:visibility="gone"
-            android:id="@+id/sortSpinner"
+        <RelativeLayout
+            android:id="@+id/rL_sortSpinner"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:entries="@array/sorting_options"
+            android:background="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/mygame_list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner style="@style/SpinnerTheme"
+                android:id="@+id/sortSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorSecondary"
+                android:entries="@array/sorting_options" />
+        </RelativeLayout>
 
         <SearchView
-            android:visibility="gone"
             android:id="@+id/searchBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:searchIcon="@drawable/ic_search_white"
+            app:layout_constraintEnd_toStartOf="@+id/rL_sortSpinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/status_image"
             android:layout_width="70dp"

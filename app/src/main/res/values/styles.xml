@@ -31,4 +31,8 @@
         <item name="elevation">16dp</item>
         <item name="queryBackground">@android:color/transparent</item>
     </style>
+
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+    </style>
 </resources>

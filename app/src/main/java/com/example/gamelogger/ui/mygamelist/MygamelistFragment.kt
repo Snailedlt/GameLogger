@@ -1,18 +1,28 @@
 package com.example.gamelogger.ui.mygamelist
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.SearchView
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.databinding.FragmentGamelistBinding
 
+
 class MygamelistFragment : Fragment() {
 
+    private lateinit var searchView: SearchView
+    private lateinit var spinner: Spinner
     /**
      * Initializes the [MygamelistViewModel]
      */
@@ -49,6 +59,35 @@ class MygamelistFragment : Fragment() {
             viewModel.changeGameState(it)
         })
         binding.mygameList.layoutManager = LinearLayoutManager(context)
+
+        /**
+         * Make the whole searchview clickable, instead of just the icon
+         */
+        searchView = binding.root.findViewById(R.id.searchBar)
+        searchView.setOnClickListener { searchView.isIconified = false }
+
+        /**
+         * Creates an OnItemSelectedListener, which will later be used to change the color of spinner
+         */
+        val listener: OnItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        /**
+         * assigns listener to sortSpinner in fragment_gamelist.xml
+         */
+        spinner = binding.root.findViewById(R.id.sortSpinner)
+        spinner.onItemSelectedListener = listener;
+
 
         return binding.root
     }
