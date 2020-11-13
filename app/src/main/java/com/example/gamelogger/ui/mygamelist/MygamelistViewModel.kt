@@ -1,6 +1,7 @@
 package com.example.gamelogger.ui.mygamelist
 
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,9 +44,13 @@ class MygamelistViewModel : ViewModel() {
                 getUserGames { savedGames ->
                     CoroutineScope(viewModelScope.coroutineContext).launch {
                         val gamelist = ArrayList<Game>()
+
                         for (id in savedGames) {
-                            gamelist.add(GameApi.retrofitService.getMyGames(id))
+                            if (id.isDigitsOnly()){
+                                gamelist.add(GameApi.retrofitService.getMyGames(id))
+                            }
                         }
+
                         _games.value = gamelist
                         _status.value = ListStatus.DONE
                         Log.i("Liststatus:", status.value.toString())

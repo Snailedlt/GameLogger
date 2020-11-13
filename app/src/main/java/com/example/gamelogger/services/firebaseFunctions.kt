@@ -71,7 +71,7 @@ fun getUser(myCallback: (String) -> Unit) {
 /**
  * Henter Spill som er lagret på brukeren sin database
  * */
-fun getUserGames(myCallback: (List<String>) -> Unit) {
+fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
 
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
@@ -79,17 +79,19 @@ fun getUserGames(myCallback: (List<String>) -> Unit) {
     val uid = auth.currentUser!!.uid
 
     db.collection("savedGames").document(uid).collection("Games").get()
-        .addOnSuccessListener { result ->
-
-            val spill = result!!.map { snapshot ->
-                snapshot["spill id"].toString()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val list = ArrayList<String>()
+                for (document in task.result!!) {
+                    val id = document.data["spill id"].toString()
+                    val state = document.data["spill state"].toString()
+                    list.add(id)
+                    list.add(state)
+                }
+                myCallback(list)
+            } else {
+                Log.e("MError: ", "Error getting games from firebase")
             }
-            Log.d("get", "Spill som brukeren har lagret i sin database: $spill")
-            myCallback(spill)
-
-        }
-        .addOnFailureListener { exception ->
-            Log.d("get", "get failed with ", exception)
         }
 }
 

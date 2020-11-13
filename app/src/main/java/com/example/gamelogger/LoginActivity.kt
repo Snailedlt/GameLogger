@@ -3,6 +3,8 @@ package com.example.gamelogger
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.Color.DKGRAY
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -47,6 +49,11 @@ class LoginActivity : AppCompatActivity() {
             usernameTextField.isVisible = false
             usernameText.isVisible = false
 
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                loginbutton.background.setTint(Color.parseColor("#263238"))
+                signupButton.background.setTint(Color.parseColor("#79878F"))
+            }
+
             if (emailTextField.editText?.text.toString()
                     .isNotEmpty() && passwordTextField.editText?.text.toString().isNotEmpty()
             ) {
@@ -70,6 +77,11 @@ class LoginActivity : AppCompatActivity() {
         signupButton.setOnClickListener {
             usernameTextField.isVisible = true
             usernameText.isVisible = true
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                signupButton.background.setTint(Color.parseColor("#263238"))
+                loginbutton.background.setTint(Color.parseColor("#79878F"))
+            }
 
 
             if (passwordTextField.editText?.text.toString()
