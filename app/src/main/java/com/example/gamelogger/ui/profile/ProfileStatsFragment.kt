@@ -17,8 +17,8 @@ import java.util.ArrayList
 class ProfileStatsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
-    var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.LTGRAY)
-    var statsArray = floatArrayOf(4f, 60f, 5f, 4f, 49f)
+    var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW)
+    var statsArray = floatArrayOf(4f, 60f, 49f)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +47,10 @@ class ProfileStatsFragment : Fragment() {
 
         //update numbers in textviews
         rootView.tV_num_playing!!.text= statsArray.get(0).toInt().toString()
-        rootView.tV_num_completed!!.text= statsArray.get(1).toInt().toString()
-        rootView.tV_num_on_hold!!.text= statsArray.get(2).toInt().toString()
-        rootView.tV_num_dropped!!.text= statsArray.get(3).toInt().toString()
-        rootView.tV_num_plan_to_play!!.text= statsArray.get(4).toInt().toString()
+        rootView.tV_num_done!!.text= statsArray.get(1).toInt().toString()
+        rootView.tV_num_backlog!!.text= statsArray.get(2).toInt().toString()
+        //rootView.tV_num_dropped!!.text= statsArray.get(3).toInt().toString()
+        //rootView.tV_num_plan_to_play!!.text= statsArray.get(4).toInt().toString()
 
 
         return rootView

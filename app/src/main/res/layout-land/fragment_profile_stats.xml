@@ -47,13 +47,12 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <RelativeLayout
+<!-->            <RelativeLayout
                 android:id="@+id/firstView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/secondView">
+                android:layout_height="match_parent"> -->
 
                 <!-- Playing -->
                 <ImageView
@@ -68,22 +67,22 @@
                     android:id="@+id/tV_playing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iV_playing"
-                    android:text="Playing"
+                    android:layout_toEndOf="@+id/iV_playing"
+                    android:text="@string/playing"
                     android:textColor="#26448F" />
 
                 <TextView
                     android:id="@+id/tV_num_playing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignParentEnd="true"
                     android:text="@string/default_num_stats"
                     android:textColor="#26448F" />
 
-                <!-- Completed -->
+                <!-- Done -->
                 <ImageView
-                    android:id="@+id/iV_completed"
+                    android:id="@+id/iV_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_circle_blue"
@@ -92,57 +91,57 @@
                     android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
                 <TextView
-                    android:id="@+id/tV_completed"
+                    android:id="@+id/tV_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iV_playing"
                     android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_toRightOf="@+id/iV_playing"
-                    android:text="Completed"
+                    android:layout_toEndOf="@+id/iV_playing"
+                    android:text="@string/done"
                     android:textColor="#26448F" />
 
                 <TextView
-                    android:id="@+id/tV_num_completed"
+                    android:id="@+id/tV_num_done"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iV_playing"
                     android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignParentEnd="true"
                     android:text="@string/default_num_stats"
                     android:textColor="#26448F" />
 
-                <!-- On Hold -->
+                <!-- Backlog -->
                 <ImageView
-                    android:id="@+id/iV_on_hold"
+                    android:id="@+id/iV_backlog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_circle_yellow"
-                    android:layout_below="@+id/iV_completed"
+                    android:layout_below="@+id/iV_done"
                     android:layout_marginTop="@dimen/stats_circle_spacing"
                     android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
                 <TextView
-                    android:id="@+id/tV_on_hold"
+                    android:id="@+id/tV_backlog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_completed"
+                    android:layout_below="@id/iV_done"
                     android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:text="On Hold"
+                    android:text="@string/backlog"
                     android:textColor="#26448F"
-                    android:layout_toRightOf="@+id/iV_on_hold"/>
+                    android:layout_toEndOf="@+id/iV_backlog"/>
 
                 <TextView
-                    android:id="@+id/tV_num_on_hold"
+                    android:id="@+id/tV_num_backlog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_completed"
+                    android:layout_below="@id/iV_done"
                     android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_alignParentEnd="true"
                     android:text="@string/default_num_stats"
                     android:textColor="#26448F" />
-            </RelativeLayout>
+<!--            </RelativeLayout>
 
             <View
                 android:id="@+id/secondView"
@@ -156,8 +155,8 @@
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/secondView">
 
-                <!-- Dropped -->
-                <ImageView
+-->                <!-- Dropped -->
+<!--                <ImageView
                     android:id="@+id/iV_dropped"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,8 +181,8 @@
                     android:text="@string/default_num_stats"
                     android:textColor="#26448F" />
 
-                <!-- Plan To Play -->
-                <ImageView
+-->                <!-- Plan To Play -->
+<!--                <ImageView
                     android:id="@+id/iV_plan_to_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -213,7 +212,7 @@
                     android:text="@string/default_num_stats"
                     android:textColor="#26448F" />
             </RelativeLayout>
-        </RelativeLayout>
+-->        </RelativeLayout>
     </ScrollView>
 
 </RelativeLayout>
