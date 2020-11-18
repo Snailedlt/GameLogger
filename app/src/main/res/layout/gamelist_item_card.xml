@@ -115,8 +115,7 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/gamestate_playing"
                     android:text="@string/btnplaying"
-                    app:list="@{viewModel.games}"
-                    app:pos="@{viewModel.games.indexOf(game)}"
+                    app:gamePlaying="@{game}"
                     android:textSize="12sp"
                     android:enabled="@{game.state == gamestate.PLAYING ? false : true}"
                     android:onClick="@{() -> clickListener.myOnClick(game, gamestate.PLAYING)}"/>

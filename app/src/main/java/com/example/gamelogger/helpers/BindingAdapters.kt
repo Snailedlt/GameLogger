@@ -135,7 +135,7 @@ fun bindGameStateButtons1(button: Button, game: Game?) {
 }
 
 @BindingAdapter("gamePlaying")
-fun bindGameStateButtons2(button: Button, list: List<Game>, game: Game?) {
+fun bindGameStateButtons2(button: Button, game: Game?) {
     if (game != null) {
         if (game.state == GameState.PLAYING) {
             button.setCompoundDrawablesWithIntrinsicBounds(
