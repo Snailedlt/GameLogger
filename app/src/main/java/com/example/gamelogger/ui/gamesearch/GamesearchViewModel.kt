@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameSearchResults
 import com.example.gamelogger.classes.GameState
-import com.example.gamelogger.services.GameApi
+import com.example.gamelogger.Data.GameApi
 import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
 

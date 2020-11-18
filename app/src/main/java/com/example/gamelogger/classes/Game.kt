@@ -11,7 +11,7 @@ class Game(
     @Json(name = "id")
     val id: Int?,
     @Json(name = "name")
-    val title: String?,
+    val title: String,
     //val platform: String,
     val plattform: String? = "PS4",
     @Json(name = "released")
