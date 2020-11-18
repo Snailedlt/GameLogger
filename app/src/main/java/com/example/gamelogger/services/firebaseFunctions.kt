@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Legger til spill i Firestore databasen
  * addSavedGame(Spillid, spillstate)
  * */
-fun addSavedGame(spillid: String, spillstate: String) {
+fun addSavedGame(spillid: String, spillstate: String, spillPlat: String) {
 
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
@@ -19,7 +19,8 @@ fun addSavedGame(spillid: String, spillstate: String) {
 
     val nestedData = hashMapOf(
         "spill id" to spillid,
-        "spill state" to spillstate
+        "spill state" to spillstate,
+        "spill platform" to spillPlat
     )
 
     docRef.get()
@@ -135,6 +136,53 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
                 myCallback(stateArray)
             } else {
                 Log.e("MError: ", "Error getting game states from firebase")
+            }
+        }
+}
+
+fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+    val platArray = FloatArray(5)
+
+    db.collection("savedGames").document(uid).collection("Games").get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var ps4 = 0F
+                var xb1 = 0F
+                var pc = 0F
+                var switch = 0F
+                var android = 0F
+                for (document in task.result!!) {
+                    when (document.data["spill platform"].toString()) {
+                        "PS4" -> {
+                            ps4++
+                        }
+                        "XB1" -> {
+                            xb1++
+                        }
+                        "PC" -> {
+                            pc++
+                        }
+                        "Switch" -> {
+                            switch++
+                        }
+                        "Android" -> {
+                            android++
+                        }
+                    }
+                }
+                platArray[0] = ps4
+                platArray[1] = xb1
+                platArray[2] = pc
+                platArray[2] = switch
+                platArray[2] = android
+                myCallback(platArray)
+            } else {
+                Log.e("MError: ", "Error getting game platforms from firebase")
             }
         }
 }

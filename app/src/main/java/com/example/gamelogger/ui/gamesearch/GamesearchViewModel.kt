@@ -109,8 +109,8 @@ class GamesearchViewModel : ViewModel() {
      */
     fun saveGame(game: Game) {
         game.state = GameState.BACKLOG
-        Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}")
-        addSavedGame(game.id.toString(), game.state.toString())
+        Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}, platform is ${game.plattform.toString()}")
+        addSavedGame(game.id.toString(), game.state.toString(), game.plattform.toString())
     }
 
     /**
