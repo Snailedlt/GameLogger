@@ -45,9 +45,9 @@ class ProfileStatsFragment : Fragment() {
 
 
         getUserGameState {
-            var backlog: Float = it[1]
-            var playing: Float = it[0]
-            var done: Float = it[2]
+            val backlog: Float = it[1]
+            val playing: Float = it[0]
+            val done: Float = it[2]
             rootView.tV_num_playing!!.text= playing.toInt().toString()
             rootView.tV_num_done!!.text= done.toInt().toString()
             rootView.tV_num_backlog!!.text= backlog.toInt().toString()
