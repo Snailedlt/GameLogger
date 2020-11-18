@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
+import com.example.gamelogger.classes.GameSearchResults
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.ui.gamesearch.SearchListAdapter
 import com.example.gamelogger.ui.gamesearch.SearchStatus
@@ -22,9 +23,12 @@ import com.example.gamelogger.ui.mygamelist.GamelistAdapter
 import com.example.gamelogger.ui.mygamelist.ListStatus
 import kotlin.coroutines.coroutineContext
 
+// Various bindingadapters to change various aspects of the app based on the state of variables
+// and arguments
+
 @BindingAdapter("gameListData")
-fun bindGameListRecyclerView(recyclerView: RecyclerView, data: List<Game>?) {
-    val adapter = recyclerView.adapter as GamelistAdapter
+fun bindGameListRecyclerView(recyclerView: RecyclerView?, data: List<Game>?) {
+    val adapter = recyclerView?.adapter as GamelistAdapter
     adapter.submitList(data)
 }
 
@@ -131,7 +135,7 @@ fun bindGameStateButtons1(button: Button, game: Game?) {
 }
 
 @BindingAdapter("gamePlaying")
-fun bindGameStateButtons2(button: Button, game: Game?) {
+fun bindGameStateButtons2(button: Button, list: List<Game>, game: Game?) {
     if (game != null) {
         if (game.state == GameState.PLAYING) {
             button.setCompoundDrawablesWithIntrinsicBounds(

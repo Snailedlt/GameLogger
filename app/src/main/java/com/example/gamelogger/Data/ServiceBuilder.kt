@@ -1,4 +1,4 @@
-package com.example.gamelogger.services
+package com.example.gamelogger.Data
 
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameSearchResults
@@ -11,11 +11,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
-// API URL
+// API URL for rawg video game db
 private const val URL = "https://api.rawg.io/api/"
-
-// CREATE HTTP CLIENT
-//private val okHttp = OkHttpClient.Builder()
 
 // moshi builder
 private val moshi = Moshi.Builder()
@@ -23,15 +20,12 @@ private val moshi = Moshi.Builder()
     .build()
 
 // Retrofit builder
-//private val builder = Retrofit.Builder().baseUrl(URL)
-//    .addConverterFactory(MoshiConverterFactory.create())
-//    .client(okHttp.build())
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(URL)
     .build()
 
-// Query to the game API
+// Queries to the game API
 interface GameApiService {
     @GET("games")
     suspend fun getGameList(@Query("search") type: String):
