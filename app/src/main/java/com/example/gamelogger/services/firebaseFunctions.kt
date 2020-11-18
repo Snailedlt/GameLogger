@@ -95,5 +95,49 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
         }
 }
 
+/**
+ *   getUserGameState {
+ *       var backlog: Float = it[1]
+ *       var playing: Float = it[0]
+ *       var planning: Float = it[2]
+ *   }
+ */
+fun getUserGameState(myCallback: (FloatArray) -> Unit) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+    val stateArray = FloatArray(3)
+
+    db.collection("savedGames").document(uid).collection("Games").get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var backlog = 0F
+                var planning = 0F
+                var playing = 0F
+                for (document in task.result!!) {
+                    when (document.data["spill state"].toString()) {
+                        "BACKLOG" -> {
+                            backlog++
+                        }
+                        "Playing" -> {
+                            playing++
+                        }
+                        "Planning" -> {
+                            planning++
+                        }
+                    }
+                }
+                stateArray[1] = backlog
+                stateArray[2] = planning
+                stateArray[0] = playing
+                myCallback(stateArray)
+            } else {
+                Log.e("MError: ", "Error getting game states from firebase")
+            }
+        }
+}
+
 
 
