@@ -20,7 +20,7 @@ class ProfileStatsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
     var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW)
-    var statsArray = floatArrayOf(4f, 60f, 49f)
+    //var statsArray = floatArrayOf(4f, 60f, 49f)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +28,7 @@ class ProfileStatsFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_profile_stats, container, false)
         stackedChart = rootView.findViewById(R.id.stacked_HorizontalBarChart_stats)
-        val barDataSet = BarDataSet(dataValuesStats(statsArray), "Bar Set")
-        barDataSet.setColors(*colorClassArray)
-        val barData = BarData(barDataSet)
-        stackedChart?.setData(barData)!!
+
 
         //Remove gridlines and labels
         stackedChart?.xAxis!!.isEnabled = false
@@ -45,7 +42,7 @@ class ProfileStatsFragment : Fragment() {
         stackedChart?.isScaleXEnabled = false
         stackedChart?.isScaleYEnabled = false
         stackedChart?.setPinchZoom(false)
-        barDataSet.setDrawValues(false)
+
 
         getUserGameState {
             var backlog: Float = it[1]
@@ -54,6 +51,14 @@ class ProfileStatsFragment : Fragment() {
             rootView.tV_num_playing!!.text= playing.toInt().toString()
             rootView.tV_num_done!!.text= done.toInt().toString()
             rootView.tV_num_backlog!!.text= backlog.toInt().toString()
+
+            val statusArrayFirebase = floatArrayOf(playing, done, backlog)
+            val barDataSet = BarDataSet(dataValuesStats(statusArrayFirebase), "Bar Set")
+            barDataSet.setColors(*colorClassArray)
+            val barData = BarData(barDataSet)
+            barDataSet.setDrawValues(false)
+            stackedChart?.setData(barData)!!
+            stackedChart?.invalidate()
         }
 
         //update numbers in textviews
