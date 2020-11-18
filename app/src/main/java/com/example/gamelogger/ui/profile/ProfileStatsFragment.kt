@@ -2,11 +2,13 @@ package com.example.gamelogger.ui.profile
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.gamelogger.R
+import com.example.gamelogger.services.getUserGameState
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -45,10 +47,19 @@ class ProfileStatsFragment : Fragment() {
         stackedChart?.setPinchZoom(false)
         barDataSet.setDrawValues(false)
 
+        getUserGameState {
+            var backlog: Float = it[1]
+            var playing: Float = it[0]
+            var done: Float = it[2]
+            rootView.tV_num_playing!!.text= playing.toInt().toString()
+            rootView.tV_num_done!!.text= done.toInt().toString()
+            rootView.tV_num_backlog!!.text= backlog.toInt().toString()
+        }
+
         //update numbers in textviews
-        rootView.tV_num_playing!!.text= statsArray.get(0).toInt().toString()
-        rootView.tV_num_done!!.text= statsArray.get(1).toInt().toString()
-        rootView.tV_num_backlog!!.text= statsArray.get(2).toInt().toString()
+        //rootView.tV_num_playing!!.text= statsArray.get(0).toInt().toString()
+        //rootView.tV_num_done!!.text= statsArray.get(1).toInt().toString()
+        //rootView.tV_num_backlog!!.text= statsArray.get(2).toInt().toString()
         //rootView.tV_num_dropped!!.text= statsArray.get(3).toInt().toString()
         //rootView.tV_num_plan_to_play!!.text= statsArray.get(4).toInt().toString()
 

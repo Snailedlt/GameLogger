@@ -114,7 +114,7 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 var backlog = 0F
-                var planning = 0F
+                var done = 0F
                 var playing = 0F
                 for (document in task.result!!) {
                     when (document.data["spill state"].toString()) {
@@ -124,13 +124,13 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
                         "Playing" -> {
                             playing++
                         }
-                        "Planning" -> {
-                            planning++
+                        "Done" -> {
+                            done++
                         }
                     }
                 }
                 stateArray[1] = backlog
-                stateArray[2] = planning
+                stateArray[2] = done
                 stateArray[0] = playing
                 myCallback(stateArray)
             } else {
