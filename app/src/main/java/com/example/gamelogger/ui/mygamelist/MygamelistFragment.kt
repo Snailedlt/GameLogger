@@ -2,6 +2,7 @@ package com.example.gamelogger.ui.mygamelist
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SearchView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,17 +25,16 @@ class MygamelistFragment : Fragment() {
 
     private lateinit var searchView: SearchView
     private lateinit var spinner: Spinner
+
     /**
      * Initializes the [MygamelistViewModel]
      */
-    private val viewModel: MygamelistViewModel by lazy {
+    val viewModel: MygamelistViewModel by lazy {
         ViewModelProvider(this).get(MygamelistViewModel::class.java)
     }
 
-    /**
-     * Inflates the layout with databinding and sets its lifecycle owner to the Mygamelistfragment
-     * to enable data binding to observe LiveData, and sets up the RecyclerView with an adapter
-     */
+    // Inflates the layout with databinding and sets its lifecycle owner to the Mygamelistfragment
+    // to enable data binding to observe LiveData, and sets up the RecyclerView with an adapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,7 +43,10 @@ class MygamelistFragment : Fragment() {
 
         // FragmentGamelistBinding corresponds to the fragment_gamelist.xml layout file.
         // it is automatically generated when a Data field is defined in the layout file,
-        val binding = FragmentGamelistBinding.inflate(inflater)
+        //val binding = FragmentGamelistBinding.inflate(inflater)
+        val binding: FragmentGamelistBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_gamelist, container, false
+        )
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
@@ -50,25 +54,24 @@ class MygamelistFragment : Fragment() {
         // Gives binding access to the MygamelistViewModel
         binding.viewModel = viewModel
 
-
-
-        /**
-         * mygameList corresponds to the id of the RecyclerView from the layout file
-         */
-        binding.mygameList.adapter = GamelistAdapter(GamelistAdapter.OnClickListener {
-            viewModel.changeGameState(it)
+        val adapter = GamelistAdapter(GameButtonListener {
+                game, state ->
+            Log.i("buttonlistenertest:", game.title + ", " + state.toString())
+            viewModel.changeGameState(game, state)
         })
+
+        // mygameList corresponds to the id of the RecyclerView from the layout file
+        binding.mygameList.adapter = adapter
+
+        // Sets the layoutmanager for the fragment
         binding.mygameList.layoutManager = LinearLayoutManager(context)
 
-        /**
-         * Make the whole searchview clickable, instead of just the icon
-         */
+        // Make the whole searchview clickable, instead of just the icon
         searchView = binding.root.findViewById(R.id.searchBar)
         searchView.setOnClickListener { searchView.isIconified = false }
 
-        /**
-         * Creates an OnItemSelectedListener, which will later be used to change the color of spinner
-         */
+/*
+        // Creates an OnItemSelectedListener, which will later be used to change the color of spinner
         val listener: OnItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
@@ -82,12 +85,10 @@ class MygamelistFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        /**
-         * assigns listener to sortSpinner in fragment_gamelist.xml
-         */
+        // assigns listener to sortSpinner in fragment_gamelist.xml
         spinner = binding.root.findViewById(R.id.sortSpinner)
         spinner.onItemSelectedListener = listener;
-
+*/
 
         return binding.root
     }

@@ -8,16 +8,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
-import com.example.gamelogger.services.GameApi
+import com.example.gamelogger.Data.GameApi
 import com.example.gamelogger.services.getUserGames
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MygamelistViewModel : ViewModel() {
-    // The game list
+
+    // The LiveData list of games to be presented
     private val _games = MutableLiveData<List<Game>>()
     val games: LiveData<List<Game>>
         get() = _games
+
+    // The game being interacted with
+    private val _currentgame = MutableLiveData<Game>()
+    val currentgame: LiveData<Game>
+        get() = _currentgame
 
     /**
      * [_status] tells if the data in the fragment is loading, done loading
@@ -66,11 +72,17 @@ class MygamelistViewModel : ViewModel() {
         }
     }
 
-    fun changeGameState(game: Game) {
-        when (game.state) {
-            GameState.DONE -> game.state = GameState.BACKLOG
-            GameState.BACKLOG -> game.state = GameState.PLAYING
-            GameState.PLAYING -> game.state = GameState.DONE
+    /**
+     * Function to change
+     */
+    fun changeGameState(game: Game, state: GameState) {
+        Log.i("Currentgameb4: ", _currentgame.value?.title.toString())
+        _currentgame.value = game
+        Log.i("Currentgamenow: ", currentgame.value?.title.toString())
+        viewModelScope.launch {
+            Log.i("Gamestateb4:", game.state.toString())
+            game.state = state
+            Log.i("Gamestateafter:", game.state.toString())
         }
     }
 }

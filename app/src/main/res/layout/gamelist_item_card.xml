@@ -4,8 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="game" type="com.example.gamelogger.classes.Game" />
-        <import type="android.view.View"/>
+        <variable
+            name="game"
+            type="com.example.gamelogger.classes.Game" />
+        <variable
+            name="gamestate"
+            type="com.example.gamelogger.classes.GameState" />
+        <variable
+            name="clickListener"
+            type="com.example.gamelogger.ui.mygamelist.GameButtonListener" />
+        <variable
+            name="viewModel"
+            type="com.example.gamelogger.ui.mygamelist.MygamelistViewModel" />
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/game_card_view"
@@ -94,7 +104,9 @@
                     android:drawableTop="@drawable/gamestate_done"
                     android:text="@string/btndone"
                     app:gameDone="@{game}"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:enabled="@{game.state == gamestate.DONE ? false : true}"
+                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.DONE)}"/>
                 <Button
                     android:id="@+id/button_playing"
                     style="?android:buttonBarButtonStyle"
@@ -103,8 +115,11 @@
                     android:layout_weight="1"
                     android:drawableTop="@drawable/gamestate_playing"
                     android:text="@string/btnplaying"
-                    app:gamePlaying="@{game}"
-                    android:textSize="12sp" />
+                    app:list="@{viewModel.games}"
+                    app:pos="@{viewModel.games.indexOf(game)}"
+                    android:textSize="12sp"
+                    android:enabled="@{game.state == gamestate.PLAYING ? false : true}"
+                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.PLAYING)}"/>
                 <Button
                     android:id="@+id/button_planning"
                     style="?android:buttonBarButtonStyle"
@@ -114,7 +129,9 @@
                     android:drawableTop="@drawable/gamestate_backlog"
                     android:text="@string/btnbacklog"
                     app:gameBacklog="@{game}"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:enabled="@{game.state == gamestate.BACKLOG ? false : true}"
+                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.BACKLOG)}"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
