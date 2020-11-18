@@ -19,11 +19,10 @@
     <string name="username_profile">Username</string>
     <string name="profile_picture_profile">Profile picture</string>
     <string name="game_stats">Game Stats</string>
+    <string name="done">Done</string>
+    <string name="backlog">Backlog</string>
     <string name="playing">Playing</string>
-    <string name="completed">Completed</string>
-    <string name="on_hold">On Hold</string>
-    <string name="dropped">Dropped</string>
-    <string name="plan_to_play">Plan To Play</string>
+
 
     <string name="playlists">Playlists</string>
 
@@ -41,4 +40,5 @@
     <string name="btnbacklog">BACKLOG</string>
     <string name="addedbutton">addedbutton</string>
     <string name="addbutton">addbutton</string>
+
 </resources>

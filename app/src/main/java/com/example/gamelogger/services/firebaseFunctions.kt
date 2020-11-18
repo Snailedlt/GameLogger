@@ -8,7 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Legger til spill i Firestore databasen
  * addSavedGame(Spillid, spillstate)
  * */
-fun addSavedGame(spillid: String, spillstate: String) {
+fun addSavedGame(spillid: String, spillstate: String, spillPlat: String) {
 
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
@@ -19,7 +19,8 @@ fun addSavedGame(spillid: String, spillstate: String) {
 
     val nestedData = hashMapOf(
         "spill id" to spillid,
-        "spill state" to spillstate
+        "spill state" to spillstate,
+        "spill platform" to spillPlat
     )
 
     docRef.get()
@@ -71,7 +72,7 @@ fun getUser(myCallback: (String) -> Unit) {
 /**
  * Henter Spill som er lagret på brukeren sin database
  * */
-fun getUserGames(myCallback: (List<String>) -> Unit) {
+fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
 
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
@@ -79,17 +80,110 @@ fun getUserGames(myCallback: (List<String>) -> Unit) {
     val uid = auth.currentUser!!.uid
 
     db.collection("savedGames").document(uid).collection("Games").get()
-        .addOnSuccessListener { result ->
-
-            val spill = result!!.map { snapshot ->
-                snapshot["spill id"].toString()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val list = ArrayList<String>()
+                for (document in task.result!!) {
+                    val id = document.data["spill id"].toString()
+                    val state = document.data["spill state"].toString()
+                    list.add(id)
+                    list.add(state)
+                }
+                myCallback(list)
+            } else {
+                Log.e("MError: ", "Error getting games from firebase")
             }
-            Log.d("get", "Spill som brukeren har lagret i sin database: $spill")
-            myCallback(spill)
-
         }
-        .addOnFailureListener { exception ->
-            Log.d("get", "get failed with ", exception)
+}
+
+/**
+ *   getUserGameState {
+ *       var backlog: Float = it[1]
+ *       var playing: Float = it[0]
+ *       var planning: Float = it[2]
+ *   }
+ */
+fun getUserGameState(myCallback: (FloatArray) -> Unit) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+    val stateArray = FloatArray(3)
+
+    db.collection("savedGames").document(uid).collection("Games").get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var backlog = 0F
+                var done = 0F
+                var playing = 0F
+                for (document in task.result!!) {
+                    when (document.data["spill state"].toString()) {
+                        "BACKLOG" -> {
+                            backlog++
+                        }
+                        "Playing" -> {
+                            playing++
+                        }
+                        "Done" -> {
+                            done++
+                        }
+                    }
+                }
+                stateArray[1] = backlog
+                stateArray[2] = done
+                stateArray[0] = playing
+                myCallback(stateArray)
+            } else {
+                Log.e("MError: ", "Error getting game states from firebase")
+            }
+        }
+}
+
+fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+    val platArray = FloatArray(5)
+
+    db.collection("savedGames").document(uid).collection("Games").get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                var ps4 = 0F
+                var xb1 = 0F
+                var pc = 0F
+                var switch = 0F
+                var android = 0F
+                for (document in task.result!!) {
+                    when (document.data["spill platform"].toString()) {
+                        "PS4" -> {
+                            ps4++
+                        }
+                        "XB1" -> {
+                            xb1++
+                        }
+                        "PC" -> {
+                            pc++
+                        }
+                        "Switch" -> {
+                            switch++
+                        }
+                        "Android" -> {
+                            android++
+                        }
+                    }
+                }
+                platArray[0] = ps4
+                platArray[1] = xb1
+                platArray[2] = pc
+                platArray[2] = switch
+                platArray[2] = android
+                myCallback(platArray)
+            } else {
+                Log.e("MError: ", "Error getting game platforms from firebase")
+            }
         }
 }
 
