@@ -18,7 +18,6 @@ import java.util.ArrayList
 class ProfilePlatformsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
-    var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.LTGRAY)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,18 @@ class ProfilePlatformsFragment : Fragment() {
             val switch: Float = it[3]
             val android: Float = it[4]
 
-            val platformsArraytest = floatArrayOf(ps4, xb1, pc, switch, android)
+            var colorClassArray : IntArray
+            var platformsArraytest : FloatArray
+
+            if(ps4 == 0f && xb1 == 0f && pc == 0f && switch == 0f && android == 0f) { //If all platforms contain 0 games, show a gray graph
+                platformsArraytest = floatArrayOf(1f)
+                colorClassArray = intArrayOf(Color.GRAY)
+            }
+            else {
+                platformsArraytest = floatArrayOf(ps4, xb1, pc, switch, android)
+                colorClassArray = intArrayOf(Color.BLUE, Color.YELLOW , Color.MAGENTA, Color.RED, Color.GREEN)
+            }
+
             val barDataSet = BarDataSet(dataValuesPlatforms(platformsArraytest), "Bar Set")
             val barData = BarData(barDataSet)
 
@@ -45,6 +55,7 @@ class ProfilePlatformsFragment : Fragment() {
             stackedChart?.setData(barData)!!
             stackedChart?.invalidate()
 
+            //update numbers in textviews
             rootView.tV_num_android!!.text = android.toInt().toString()
             rootView.tV_num_playstation_4!!.text = ps4.toInt().toString()
             rootView.tV_num_xbox_one!!.text = xb1.toInt().toString()
@@ -65,17 +76,6 @@ class ProfilePlatformsFragment : Fragment() {
         stackedChart?.isScaleXEnabled = false
         stackedChart?.isScaleYEnabled = false
         stackedChart?.setPinchZoom(false)
-
-
-        /*update numbers in textviews
-        rootView.tV_num_android!!.text= platformsArray.get(0).toInt().toString()
-        rootView.tV_num_playstation_4!!.text= platformsArray.get(1).toInt().toString()
-        rootView.tV_num_xbox_one!!.text= platformsArray.get(2).toInt().toString()
-        rootView.tV_num_nintendo_switch!!.text= platformsArray.get(3).toInt().toString()
-        rootView.tV_num_pc!!.text= platformsArray.get(4).toInt().toString()
-        */
-
-
 
         return rootView
     }

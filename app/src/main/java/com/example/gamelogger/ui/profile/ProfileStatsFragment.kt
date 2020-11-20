@@ -19,8 +19,6 @@ import java.util.ArrayList
 class ProfileStatsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
-    var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW)
-    //var statsArray = floatArrayOf(4f, 60f, 49f)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +46,23 @@ class ProfileStatsFragment : Fragment() {
             val backlog: Float = it[1]
             val playing: Float = it[0]
             val done: Float = it[2]
+
+            //update numbers in textviews
             rootView.tV_num_playing!!.text= playing.toInt().toString()
             rootView.tV_num_done!!.text= done.toInt().toString()
             rootView.tV_num_backlog!!.text= backlog.toInt().toString()
 
-            val statusArrayFirebase = floatArrayOf(playing, done, backlog)
+            var colorClassArray : IntArray
+            var statusArrayFirebase : FloatArray
+
+            if(backlog == 0f && playing == 0f && done == 0f) { //If all playlists contain 0 games, show a gray graph
+                statusArrayFirebase = floatArrayOf(1f)
+                colorClassArray = intArrayOf(Color.GRAY)
+            }
+            else {
+                statusArrayFirebase = floatArrayOf(playing, done, backlog)
+                colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW)
+            }
             val barDataSet = BarDataSet(dataValuesStats(statusArrayFirebase), "Bar Set")
             barDataSet.setColors(*colorClassArray)
             val barData = BarData(barDataSet)
@@ -60,14 +70,6 @@ class ProfileStatsFragment : Fragment() {
             stackedChart?.setData(barData)!!
             stackedChart?.invalidate()
         }
-
-        //update numbers in textviews
-        //rootView.tV_num_playing!!.text= statsArray.get(0).toInt().toString()
-        //rootView.tV_num_done!!.text= statsArray.get(1).toInt().toString()
-        //rootView.tV_num_backlog!!.text= statsArray.get(2).toInt().toString()
-        //rootView.tV_num_dropped!!.text= statsArray.get(3).toInt().toString()
-        //rootView.tV_num_plan_to_play!!.text= statsArray.get(4).toInt().toString()
-
 
         return rootView
     }
