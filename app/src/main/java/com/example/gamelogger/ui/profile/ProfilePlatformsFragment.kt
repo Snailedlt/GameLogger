@@ -8,45 +8,61 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.gamelogger.R
 import com.example.gamelogger.services.getUserGamePlatform
-import com.example.gamelogger.services.getUserGameState
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import kotlinx.android.synthetic.main.fragment_profile_platforms.view.*
-import kotlinx.android.synthetic.main.fragment_profile_stats.view.*
 import java.util.ArrayList
 
 class ProfilePlatformsFragment : Fragment() {
 
     var stackedChart: HorizontalBarChart? = null
-    var colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.LTGRAY)
-    var platformsArray = floatArrayOf(2f, 119f, 13f, 26f, 5f)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_profile_platforms, container, false)
         stackedChart = rootView.findViewById(R.id.stacked_HorizontalBarChart_platforms)
 
         getUserGamePlatform {
+
             val ps4: Float = it[0]
             val xb1: Float = it[1]
             val pc: Float = it[2]
             val switch: Float = it[3]
             val android: Float = it[4]
-            rootView.tV_num_android!!.text= android.toInt().toString()
-            rootView.tV_num_playstation_4!!.text= ps4.toInt().toString()
-            rootView.tV_num_xbox_one!!.text= xb1.toInt().toString()
-            rootView.tV_num_nintendo_switch!!.text= switch.toInt().toString()
-            rootView.tV_num_pc!!.text= pc.toInt().toString()
+
+            var colorClassArray : IntArray
+            var platformsArraytest : FloatArray
+
+            if(ps4 == 0f && xb1 == 0f && pc == 0f && switch == 0f && android == 0f) { //If all platforms contain 0 games, show a gray graph
+                platformsArraytest = floatArrayOf(1f)
+                colorClassArray = intArrayOf(Color.GRAY)
+            }
+            else {
+                platformsArraytest = floatArrayOf(ps4, xb1, pc, switch, android)
+                colorClassArray = intArrayOf(Color.BLUE, Color.YELLOW , Color.MAGENTA, Color.RED, Color.GREEN)
+            }
+
+            val barDataSet = BarDataSet(dataValuesPlatforms(platformsArraytest), "Bar Set")
+            val barData = BarData(barDataSet)
+
+            barDataSet.setDrawValues(false)
+            barDataSet.setColors(*colorClassArray)
+            stackedChart?.setData(barData)!!
+            stackedChart?.invalidate()
+
+            //update numbers in textviews
+            rootView.tV_num_android!!.text = android.toInt().toString()
+            rootView.tV_num_playstation_4!!.text = ps4.toInt().toString()
+            rootView.tV_num_xbox_one!!.text = xb1.toInt().toString()
+            rootView.tV_num_nintendo_switch!!.text = switch.toInt().toString()
+            rootView.tV_num_pc!!.text = pc.toInt().toString()
         }
 
-        val barDataSet = BarDataSet(dataValuesPlatforms(platformsArray), "Bar Set")
-        barDataSet.setColors(*colorClassArray)
-        val barData = BarData(barDataSet)
-        stackedChart?.setData(barData)!!
 
         //Remove gridlines and labels
         stackedChart?.xAxis!!.isEnabled = false
@@ -60,19 +76,11 @@ class ProfilePlatformsFragment : Fragment() {
         stackedChart?.isScaleXEnabled = false
         stackedChart?.isScaleYEnabled = false
         stackedChart?.setPinchZoom(false)
-        barDataSet.setDrawValues(false)
 
-        /*update numbers in textviews
-        rootView.tV_num_android!!.text= platformsArray.get(0).toInt().toString()
-        rootView.tV_num_playstation_4!!.text= platformsArray.get(1).toInt().toString()
-        rootView.tV_num_xbox_one!!.text= platformsArray.get(2).toInt().toString()
-        rootView.tV_num_nintendo_switch!!.text= platformsArray.get(3).toInt().toString()
-        rootView.tV_num_pc!!.text= platformsArray.get(4).toInt().toString()
-        */
+        return rootView
+    }
 
-        return rootView}
-
-    companion object{
+    companion object {
         fun newInstance() = ProfilePlatformsFragment()
     }
 
@@ -82,4 +90,6 @@ class ProfilePlatformsFragment : Fragment() {
         dataVals.add(BarEntry(0f, floatArray))
         return dataVals
     }
+
+
 }
