@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -55,6 +56,9 @@ class MygamelistFragment : Fragment() {
                 game, state ->
             viewModel.changeGameState(game, state)
             binding.mygameList.adapter?.notifyDataSetChanged()
+        }, GameImageListener{
+            game ->
+            Toast.makeText(context, "${game}", Toast.LENGTH_LONG).show()
         })
 
         // mygameList corresponds to the id of the RecyclerView from the layout file

@@ -9,7 +9,7 @@ import com.example.gamelogger.databinding.GamelistItemCardBinding
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 
-class GamelistAdapter(val clickListener: GameButtonListener):
+class GamelistAdapter(val clickListener: GameButtonListener, val clickListenerImage: GameImageListener):
     ListAdapter<Game, GamelistAdapter.GameViewHolder>(DiffCallback) {
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
@@ -57,8 +57,24 @@ class GamelistAdapter(val clickListener: GameButtonListener):
             binding.executePendingBindings()
         }
     }
+    class GameInfoViewHolder constructor(val binding: GamelistItemCardBinding):
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Game, clickListenerImage: GameImageListener) {
+            binding.game = item
+            binding.clickListenerImage = clickListenerImage
+            binding.executePendingBindings()
+        }
+    }
 }
 
-class GameButtonListener(val clickListener: (game: Game, state: GameState) -> Unit) {
+class GameButtonListener(
+    val clickListener: (game: Game, state: GameState) -> Unit,
+    //val clickListenerCard: (game: Game) -> Unit
+) {
     fun myOnClick(game: Game, state: GameState) = clickListener(game, state)
+    //fun onClick(game: Game) = clickListenerCard(game)
+}
+
+class GameImageListener(val clickListenerImage: (game: Game) -> Unit) {
+    fun onClick(game: Game) = clickListenerImage(game)
 }

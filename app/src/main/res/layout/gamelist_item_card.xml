@@ -14,8 +14,12 @@
             name="clickListener"
             type="com.example.gamelogger.ui.mygamelist.GameButtonListener" />
         <variable
+            name="clickListenerImage"
+            type="com.example.gamelogger.ui.mygamelist.GameImageListener" />
+        <variable
             name="viewModel"
             type="com.example.gamelogger.ui.mygamelist.MygamelistViewModel" />
+
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/game_card_view"
@@ -35,6 +39,7 @@
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
                 android:scaleType="centerCrop"
+                android:onClick="@{() -> clickListener.onClick(game)}"
                 app:imageUrl="@{game.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
