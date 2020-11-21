@@ -57,7 +57,7 @@ class MygamelistFragment : Fragment() {
             viewModel.changeGameState(game, state)
             binding.mygameList.adapter?.notifyDataSetChanged()
         }, GameImageListener{
-            game ->
+                game ->
             Toast.makeText(context, "${game}", Toast.LENGTH_LONG).show()
         })
 
