@@ -39,7 +39,7 @@
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
                 android:scaleType="centerCrop"
-                android:onClick="@{() -> clickListener.onClick(game)}"
+                android:onClick="@{() -> clickListenerImage.onClick(game)}"
                 app:imageUrl="@{game.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
