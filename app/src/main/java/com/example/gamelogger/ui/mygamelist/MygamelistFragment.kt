@@ -1,16 +1,12 @@
 package com.example.gamelogger.ui.mygamelist
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.SearchView
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +15,7 @@ import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.databinding.FragmentGamelistBinding
+import kotlinx.coroutines.withTimeout
 
 
 class MygamelistFragment : Fragment() {
@@ -56,8 +53,8 @@ class MygamelistFragment : Fragment() {
 
         val adapter = GamelistAdapter(GameButtonListener {
                 game, state ->
-            Log.i("buttonlistenertest:", game.title + ", " + state.toString())
             viewModel.changeGameState(game, state)
+            binding.mygameList.adapter?.notifyDataSetChanged()
         })
 
         // mygameList corresponds to the id of the RecyclerView from the layout file

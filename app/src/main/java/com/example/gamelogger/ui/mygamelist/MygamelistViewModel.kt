@@ -76,13 +76,9 @@ class MygamelistViewModel : ViewModel() {
      * Function to change
      */
     fun changeGameState(game: Game, state: GameState) {
-        Log.i("Currentgameb4: ", _currentgame.value?.title.toString())
         _currentgame.value = game
-        Log.i("Currentgamenow: ", currentgame.value?.title.toString())
         viewModelScope.launch {
-            Log.i("Gamestateb4:", game.state.toString())
             game.state = state
-            Log.i("Gamestateafter:", game.state.toString())
         }
     }
 }

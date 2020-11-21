@@ -1,17 +1,14 @@
 package com.example.gamelogger.classes
 
-import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 @JsonClass(generateAdapter = true)
-class Game(
+data class Game(
     @Json(name = "id")
     val id: Int?,
     @Json(name = "name")
-    val title: String,
+    var title: String,
     //val platform: String,
     val plattform: String? = "PS4",
     @Json(name = "released")
@@ -19,7 +16,7 @@ class Game(
     @Json(name = "background_image")
     val img: String?,
     var state: GameState?
-) : Parcelable {
+) {
 
     init {
         this.state = GameState.BACKLOG

@@ -42,10 +42,10 @@ class GamelistAdapter(val clickListener: GameButtonListener):
 
     companion object DiffCallback : DiffUtil.ItemCallback<Game>() {
         override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
-            return oldItem.id === newItem.id
+            return oldItem === newItem
         }
         override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
-            return oldItem.equals(newItem)
+            return oldItem.state == newItem.state
         }
     }
 
