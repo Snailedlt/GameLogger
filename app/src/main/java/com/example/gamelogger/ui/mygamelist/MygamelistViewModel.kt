@@ -33,6 +33,11 @@ class MygamelistViewModel : ViewModel() {
     val status: LiveData<ListStatus>
         get() = _status
 
+
+    private val _navigateToGameListDetail = MutableLiveData<Game>()
+    val navigateToGameListDetail
+        get() = _navigateToGameListDetail
+
     init {
         getGamesList()
     }
@@ -80,6 +85,14 @@ class MygamelistViewModel : ViewModel() {
         viewModelScope.launch {
             game.state = state
         }
+    }
+
+    fun onGamelistDetailNavigated() {
+        _navigateToGameListDetail.value = null
+    }
+
+    fun onGamelistDetailClicked(game: Game) {
+        _navigateToGameListDetail.value = game
     }
 }
 

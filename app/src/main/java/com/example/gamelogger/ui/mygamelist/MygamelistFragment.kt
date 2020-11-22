@@ -9,13 +9,12 @@ import android.widget.SearchView
 import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamelogger.R
-import com.example.gamelogger.classes.Game
-import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.databinding.FragmentGamelistBinding
-import kotlinx.coroutines.withTimeout
 
 
 class MygamelistFragment : Fragment() {
@@ -59,12 +58,23 @@ class MygamelistFragment : Fragment() {
             },
             GameCardListener {
                 game ->
-                    Log.i("GameCardListener", game.title)
+                    Log.i("GameCardListener ", "" + game.id)
+                    viewModel.onGamelistDetailClicked(game)
             }
         )
 
         // mygameList corresponds to the id of the RecyclerView from the layout file
         binding.mygameList.adapter = adapter
+
+        // Add an Observer on the state variable for Navigating when the game image is pressed.
+        viewModel.navigateToGameListDetail.observe(viewLifecycleOwner, { game ->
+            game?.let {
+                this.findNavController().navigate(
+                    MygamelistFragmentDirections
+                        .actionNavigationGameslistToGamelistDetail())
+                viewModel.onGamelistDetailNavigated()
+            }
+        })
 
         // Sets the layoutmanager for the fragment
         binding.mygameList.layoutManager = LinearLayoutManager(context)

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_navigation_gameslist_to_settings2"
             app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_navigation_gameslist_to_gamelistDetail"
+            app:destination="@id/gamelistDetail" />
     </fragment>
 
     <fragment
@@ -43,4 +46,12 @@
         android:name="com.example.gamelogger.ui.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
+    <!-- overflow_menu end -->
+
+    <fragment
+        android:id="@+id/gamelistDetail"
+        android:name="com.example.gamelogger.ui.gamelistdetail.GamelistDetail"
+        android:label="fragment_gamelist_detail2"
+        tools:layout="@layout/fragment_gamelist_detail" />
+
 </navigation>
