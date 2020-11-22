@@ -11,11 +11,14 @@
             name="gamestate"
             type="com.example.gamelogger.classes.GameState" />
         <variable
-            name="clickListener"
+            name="buttonClickListener"
             type="com.example.gamelogger.ui.mygamelist.GameButtonListener" />
         <variable
             name="viewModel"
             type="com.example.gamelogger.ui.mygamelist.MygamelistViewModel" />
+        <variable
+            name="cardClickListener"
+            type="com.example.gamelogger.ui.mygamelist.GameCardListener" />
     </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/game_card_view"
@@ -39,7 +42,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                tools:src="@tools:sample/backgrounds/scenic"
+                android:onClick="@{() -> cardClickListener.cardOnClick(game)}"/>
             <TextView
                 android:id="@+id/gametitle"
                 android:layout_width="wrap_content"
@@ -106,7 +110,7 @@
                     app:gameDone="@{game}"
                     android:textSize="12sp"
                     android:enabled="@{game.state == gamestate.DONE ? false : true}"
-                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.DONE)}"/>
+                    android:onClick="@{() -> buttonClickListener.myOnClick(game, gamestate.DONE)}"/>
                 <Button
                     android:id="@+id/button_playing"
                     style="?android:buttonBarButtonStyle"
@@ -118,7 +122,7 @@
                     app:gamePlaying="@{game}"
                     android:textSize="12sp"
                     android:enabled="@{game.state == gamestate.PLAYING ? false : true}"
-                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.PLAYING)}"/>
+                    android:onClick="@{() -> buttonClickListener.myOnClick(game, gamestate.PLAYING)}"/>
                 <Button
                     android:id="@+id/button_planning"
                     style="?android:buttonBarButtonStyle"
@@ -130,7 +134,7 @@
                     app:gameBacklog="@{game}"
                     android:textSize="12sp"
                     android:enabled="@{game.state == gamestate.BACKLOG ? false : true}"
-                    android:onClick="@{() -> clickListener.myOnClick(game, gamestate.BACKLOG)}"/>
+                    android:onClick="@{() -> buttonClickListener.myOnClick(game, gamestate.BACKLOG)}"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

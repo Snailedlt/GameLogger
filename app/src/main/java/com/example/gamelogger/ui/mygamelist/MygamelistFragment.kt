@@ -51,11 +51,17 @@ class MygamelistFragment : Fragment() {
         // Gives binding access to the MygamelistViewModel
         binding.viewModel = viewModel
 
-        val adapter = GamelistAdapter(GameButtonListener {
+        val adapter = GamelistAdapter(
+            GameButtonListener {
                 game, state ->
-            viewModel.changeGameState(game, state)
-            binding.mygameList.adapter?.notifyDataSetChanged()
-        })
+                    viewModel.changeGameState(game, state)
+                    binding.mygameList.adapter?.notifyDataSetChanged()
+            },
+            GameCardListener {
+                game ->
+                    Log.i("GameCardListener", game.title)
+            }
+        )
 
         // mygameList corresponds to the id of the RecyclerView from the layout file
         binding.mygameList.adapter = adapter

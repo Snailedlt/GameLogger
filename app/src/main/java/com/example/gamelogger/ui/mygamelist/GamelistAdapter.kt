@@ -9,7 +9,10 @@ import com.example.gamelogger.databinding.GamelistItemCardBinding
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 
-class GamelistAdapter(val clickListener: GameButtonListener):
+class GamelistAdapter(
+    val buttonClickListener: GameButtonListener,
+    val cardClickListener: GameCardListener
+):
     ListAdapter<Game, GamelistAdapter.GameViewHolder>(DiffCallback) {
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
@@ -29,7 +32,7 @@ class GamelistAdapter(val clickListener: GameButtonListener):
 //        backlogButton.setOnClickListener {
 //            onClickListener.onClick(game)
 //        }
-        holder.bind(getItem(position)!!, clickListener)
+        holder.bind(getItem(position)!!, buttonClickListener, cardClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
@@ -51,9 +54,10 @@ class GamelistAdapter(val clickListener: GameButtonListener):
 
     class GameViewHolder constructor(val binding: GamelistItemCardBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Game, clickListener: GameButtonListener) {
+        fun bind(item: Game, buttonClickListener: GameButtonListener, cardClickListener: GameCardListener) {
             binding.game = item
-            binding.clickListener = clickListener
+            binding.buttonClickListener = buttonClickListener
+            binding.cardClickListener = cardClickListener
             binding.executePendingBindings()
         }
     }
@@ -61,4 +65,8 @@ class GamelistAdapter(val clickListener: GameButtonListener):
 
 class GameButtonListener(val clickListener: (game: Game, state: GameState) -> Unit) {
     fun myOnClick(game: Game, state: GameState) = clickListener(game, state)
+}
+
+class GameCardListener(val clickListener: (game: Game) -> Unit) {
+    fun cardOnClick(game: Game) = clickListener(game)
 }
