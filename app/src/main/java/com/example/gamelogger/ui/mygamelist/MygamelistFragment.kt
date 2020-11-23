@@ -58,7 +58,7 @@ class MygamelistFragment : Fragment() {
             },
             GameCardListener {
                 game ->
-                    Log.i("GameCardListener ", "" + game.id)
+                    Log.i("GameCardListener ", "Game clicked!: $game")
                     viewModel.onGamelistDetailClicked(game)
             }
         )

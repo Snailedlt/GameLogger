@@ -37,6 +37,12 @@ class ProfileFragment : Fragment() {
         return root
     }
 
+    /*
+     * Deprecation warnings is supressed, since the updated version does not support this niche use, where we have to access a fragment's grandchild.
+     * There is a guide on migrating from ViewPager to ViewPager2 (https://developer.android.com/training/animation/vp2-migration), but it does not
+     * address the migration from childFragmentManager to an updated alternative. I went down quite the rabbithole to try and fix the issue, but there
+     * seems to be no simple solution to fixing this issue. Therefore we chose to opt for this deprecated library, simply to get it working.
+     */
     @Suppress("DEPRECATION")
     class MyAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

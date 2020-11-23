@@ -5,6 +5,10 @@
     tools:context=".ui.gamelistdetail.GamelistDetail"
     android:paddingBottom="?attr/actionBarSize">
     <data>
+
+        <variable
+            name="gamelistDetailViewModel"
+            type="com.example.gamelogger.ui.gamelistdetail.GamelistDetailViewModel" />
         <variable
             name="game"
             type="com.example.gamelogger.classes.Game" />
@@ -30,7 +34,7 @@
                 android:fontFamily="serif"
                 android:maxWidth="275dp"
                 android:padding="5dp"
-                android:text="@{game.title}"
+                android:text="@{gamelistDetailViewModel.game.title}"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -49,7 +53,8 @@
                 android:scaleType="centerCrop"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                app:imageUrl="@{game.img}"
+                android:contentDescription="@{@string/game_picture_content_description_format(gamelistDetailViewModel.game.title)}"
+                app:imageUrl="@{gamelistDetailViewModel.game.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:fontFamily="sans-serif"
-                android:text="PS4"
+                android:text="@{gamelistDetailViewModel.game.plattform}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -89,7 +94,7 @@
                 android:id="@+id/about"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="@{game.plattform}"
+                android:text="@{String.valueOf(gamelistDetailViewModel.game.id)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
