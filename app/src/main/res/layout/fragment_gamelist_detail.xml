@@ -30,7 +30,7 @@
                 android:fontFamily="serif"
                 android:maxWidth="275dp"
                 android:padding="5dp"
-                android:text="Very Long Game Title 10: The Reckoning"
+                android:text="@{game.title}"
                 android:textColor="@color/colorSecondaryText"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -39,7 +39,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Very Long Game Title 10: The Reckoning" />
-            <!-- android:text="@{game.title}" -->
 
             <ImageView
                 android:id="@+id/gamePicture"
@@ -50,13 +49,13 @@
                 android:scaleType="centerCrop"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
+                app:imageUrl="@{game.img}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gametitle"
-                android:src="@drawable/cyberpunk_img"
                 tools:src="@tools:sample/backgrounds/scenic" />
-            <!--app:imageUrl="@{game.img}" -->
+
 
             <TextView
                 android:id="@+id/gameplatform"
@@ -90,12 +89,12 @@
                 android:id="@+id/about"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="@string/loremIpsumTwoParagraphs"
+                android:text="@{game.plattform}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/aboutTitle" />
-            <!--android:text="@{game.plattform}"-->
+                app:layout_constraintTop_toBottomOf="@id/aboutTitle"
+                tools:text="@string/loremIpsumTwoParagraphs" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

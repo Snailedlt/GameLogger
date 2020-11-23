@@ -71,7 +71,7 @@ class MygamelistFragment : Fragment() {
             game?.let {
                 this.findNavController().navigate(
                     MygamelistFragmentDirections
-                        .actionNavigationGameslistToGamelistDetail())
+                        .actionNavigationGameslistToGamelistDetail(game.id))
                 viewModel.onGamelistDetailNavigated()
             }
         })

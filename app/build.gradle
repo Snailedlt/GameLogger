@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'androidx.navigation.safeargs.kotlin' //safeargs
 apply plugin: 'com.google.gms.google-services'
 
 android {
@@ -79,8 +79,10 @@ dependencies {
 
     // ViewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
     // CircleIndicator
     implementation "me.relex:circleindicator:2.1.4"
+
     // Android Chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 

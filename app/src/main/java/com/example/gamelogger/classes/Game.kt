@@ -5,8 +5,9 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Game(
+    //id is now required, because Int? doesn't work for safeargs from MygamelistFragment.kt to GamelistDetailFragment.kt
     @Json(name = "id")
-    val id: Int?,
+    val id: Int,
     @Json(name = "name")
     var title: String,
     //val platform: String,
