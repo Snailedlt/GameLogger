@@ -47,18 +47,18 @@ class GamelistDetail : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         /** Setting up LiveData observation relationship **/
-        viewModel.game.observe(viewLifecycleOwner, Observer { newAbout ->
+        viewModel.game.observe(viewLifecycleOwner, { newAbout ->
             //Kode for å bruke HTML tekst i et textview, hentet fra: https://stackoverflow.com/questions/2116162/how-to-display-html-in-textview
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 binding.about.text= Html.fromHtml(newAbout.about, Html.FROM_HTML_MODE_COMPACT)
             } else {
-                binding.about.text= Html.fromHtml(newAbout.about);
+                binding.about.text= Html.fromHtml(newAbout.about)
             }
         })
 
 
         //Shows a toast of the gameId belonging to the game the user clicked
-        Toast.makeText(context, "Game Id: ${gameId}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Game Id: ${gameId}", Toast.LENGTH_LONG).show()
         //Logs the gamId to console
         Log.i("GamelistDetail","Game Id: ${gameId}")
 
