@@ -5,16 +5,9 @@
     tools:context=".ui.gamelistdetail.GamelistDetail"
     android:paddingBottom="?attr/actionBarSize">
     <data>
-
         <variable
             name="gamelistDetailViewModel"
             type="com.example.gamelogger.ui.gamelistdetail.GamelistDetailViewModel" />
-        <variable
-            name="game"
-            type="com.example.gamelogger.classes.Game" />
-        <variable
-            name="gamestate"
-            type="com.example.gamelogger.classes.GameState" />
     </data>
 
     <ScrollView
@@ -48,6 +41,7 @@
                 android:id="@+id/gameTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:fontFamily="serif"
                 android:maxWidth="275dp"
                 android:text="@{gamelistDetailViewModel.game.title}"
@@ -115,7 +109,7 @@
                     android:gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="sans-serif"
-                    android:text='@{gamelistDetailViewModel.game.plattform, default="Loading"}'
+                    android:text="@string/loading"
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +135,7 @@
                     android:gravity="center"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="Loading..."
+                    android:text="@string/loading"
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +162,7 @@
                     android:gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="sans-serif"
-                    android:text='@{gamelistDetailViewModel.game.genresFormatted, default="default"}'
+                    android:text="@string/loading"
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +189,7 @@
                     android:gravity="center"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="Loading..."
+                    android:text="@string/loading"
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +210,7 @@
 
                 <!--About-->
                 <TextView
-                    android:id="@+id/aboutTitle"
+                    android:id="@+id/gameAboutTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif"
@@ -229,15 +223,15 @@
                     app:layout_constraintTop_toBottomOf="@id/v_spacer_gamelist_detail" />
 
                 <TextView
-                    android:id="@+id/about"
+                    android:id="@+id/gameAbout"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:gravity="center"
-                    android:text="There is currently no description for this game"
+                    android:text="@string/loading"
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/aboutTitle"
+                    app:layout_constraintTop_toBottomOf="@id/gameAboutTitle"
                     tools:text="@string/loremIpsumTwoParagraphs" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

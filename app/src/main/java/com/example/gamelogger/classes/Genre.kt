@@ -10,7 +10,6 @@ data class Genre(
     var genreId: Int?,
     @Json(name = "name")
     var genreName: String?,
-    var genresFormatted: String?,
     @Json(name = "slug")
     var genreSlug: String?,
 )

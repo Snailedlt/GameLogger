@@ -8,7 +8,7 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/about"
+        android:id="@+id/gameAbout"
         android:title="@string/about"
         app:showAsAction="never"/>
     <item android:id="@+id/sign_out"

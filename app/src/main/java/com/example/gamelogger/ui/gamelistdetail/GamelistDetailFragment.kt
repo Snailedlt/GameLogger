@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -46,13 +47,17 @@ class GamelistDetail : Fragment() {
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
 
-        /** Setting up LiveData observation relationship **/
+        /** Setting up LiveData observation relationship between the clicked game object, and the views in fragment_gamelist_detail.xml**/
         viewModel.game.observe(viewLifecycleOwner, { newGame ->
-            //Kode for å bruke HTML tekst i et textview, hentet fra: https://stackoverflow.com/questions/2116162/how-to-display-html-in-textview
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                binding.about.text= Html.fromHtml(newGame.about, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                binding.about.text= Html.fromHtml(newGame.about)
+            //Kode for å bruke HTML tekst i et textview, hentet fra følgende stackoverflow svar: https://stackoverflow.com/a/2116191/12206312
+            when {
+                newGame.about == null -> binding.gameAbout.text = "N/A"
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> {
+                    binding.gameAbout.text= Html.fromHtml(newGame.about, Html.FROM_HTML_MODE_COMPACT)
+                }
+                else -> {
+                    binding.gameAbout.text= Html.fromHtml(newGame.about)
+                }
             }
 
             //Kode for å sette metascore i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en metascore
@@ -64,12 +69,23 @@ class GamelistDetail : Fragment() {
             //Kode for å sette release date i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en releasedate
             if(newGame.released != null) //setter release date i UI'et til newGame.released dersom newGame.released != null
                 binding.gameReleaseDate.text= newGame.released.toString()
-            else //setter metascore i UI'et til "N/A" ellers
+            else //setter release date i UI'et til "N/A" ellers
                 binding.gameReleaseDate.text = "N/A"
+
+            //Kode for å sette genre i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen sjangre
+            if(newGame.genresFormatted != null) //setter genre i UI'et til newGame.genresFormatted dersom newGame.genresFormatted != null
+                binding.gameGenre.text= newGame.genresFormatted.toString()
+            else //setter genre i UI'et til "N/A" ellers
+                binding.gameGenre.text = "N/A"
+
+            //Kode for å sette platform i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen plattform
+            if(newGame.plattform != null) //setter platform i UI'et til newGame.plattform dersom newGame.plattform != null
+                binding.gamePlatforms.text= newGame.plattform.toString()
+            else //setter platform i UI'et til "N/A" ellers
+                binding.gamePlatforms.text = "N/A"
 
             Log.i("Observer", "${binding.gameMetascore.text}")
         })
-
 
         //Shows a toast of the gameId belonging to the game the user clicked
         //Toast.makeText(context, "Game Id: ${gameId}", Toast.LENGTH_LONG).show()

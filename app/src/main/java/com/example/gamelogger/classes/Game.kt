@@ -25,13 +25,12 @@ data class Game(
     @Json(name = "genres")
     var genre: Array<Genre>?,
     var genresFormatted: String?,
-    var state: GameState?
+    var state: GameState?,
 ) {
 
     init {
         this.state = GameState.BACKLOG
         this.released = this.releasedYear()
-        Log.i("GenresFormatting", this.genreFormatting() + "")
         this.genresFormatted = this.genreFormatting()
     }
 
@@ -42,16 +41,15 @@ data class Game(
             null
     }
 
-    private fun genreFormatting(): String {
+    private fun genreFormatting(): String? {
         //Return formatted genre with comma between each genre
-        var str ="N/A"
-        if (!this.genre?.equals(null)!!){
-            str = ""
+        return if (!this.genre.isNullOrEmpty()){
+            var str =""
             for(genre in this.genre!!){
                 str += genre.genreName + ", "
             }
-        }
-        return str
+            str
+        } else null
     }
 
     /*private fun platforms(): String? {

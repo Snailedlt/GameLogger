@@ -5,7 +5,6 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_gameslist">
 
-
     <fragment
         android:id="@+id/navigation_gameslist"
         android:name="com.example.gamelogger.ui.mygamelist.MygamelistFragment"
@@ -13,7 +12,7 @@
         tools:layout="@layout/fragment_gamelist" >
         <action
             android:id="@+id/action_navigation_gameslist_to_about2"
-            app:destination="@id/about" />
+            app:destination="@id/gameAbout" />
         <action
             android:id="@+id/action_navigation_gameslist_to_settings2"
             app:destination="@id/settings" />
@@ -42,7 +41,7 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/about"
+        android:id="@+id/gameAbout"
         android:name="com.example.gamelogger.ui.about.AboutFragment"
         android:label="@string/about"
         tools:layout="@layout/fragment_about" />
@@ -51,7 +50,7 @@
     <fragment
         android:id="@+id/gamelistDetail"
         android:name="com.example.gamelogger.ui.gamelistdetail.GamelistDetail"
-        android:label="@string/title_my_list"
+        android:label=""
         tools:layout="@layout/fragment_gamelist_detail">
         <argument
             android:name="gameId"
