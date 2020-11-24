@@ -26,15 +26,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/transparent_black"
-            android:radius="0dp">
+            android:background="@drawable/transparent_black">
 
 
             <ImageView
+                android:id="@+id/image_view_background"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:id="@+id/image_view_background"
                 android:background="@color/colorPrimaryDark"
                 android:alpha="0.7"
                 android:scaleType="centerCrop"
@@ -44,7 +42,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:background="@tools:sample/backgrounds/scenic" />
 
             <TextView
@@ -118,7 +115,7 @@
                     android:gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="@{gamelistDetailViewModel.game.plattform}"
+                    android:text='@{gamelistDetailViewModel.game.plattform, default="Loading"}'
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -144,15 +141,14 @@
                     android:gravity="center"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="@{gamelistDetailViewModel.game.released}"
+                    android:text="Loading..."
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/gameReleaseDateTitle"
                     tools:text="2009" />
 
-                <!--Genre
-                    android:text="@{gamelistDetailViewModel.game.genre}"-->
+                <!--Genre"-->
                 <TextView
                     android:id="@+id/gameGenreTitle"
                     android:layout_width="@dimen/game_detail_width_titles"
@@ -172,15 +168,14 @@
                     android:gravity="center"
                     android:layout_marginStart="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="Action, RPG, Indie, Adventure"
+                    android:text='@{gamelistDetailViewModel.game.genresFormatted, default="default"}'
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/gameGenreTitle"
                     tools:text="Action, RPG, Indie, Adventure" />
 
-                <!--Metascore
-                    android:text="@{gamelistDetailViewModel.game.metascore}"-->
+                <!--Metascore-->
                 <TextView
                     android:id="@+id/gameMetascoreTitle"
                     android:layout_width="@dimen/game_detail_width_titles"
@@ -200,7 +195,7 @@
                     android:gravity="center"
                     android:layout_marginEnd="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="90"
+                    android:text="Loading..."
                     style="@style/TextWithShadow"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"

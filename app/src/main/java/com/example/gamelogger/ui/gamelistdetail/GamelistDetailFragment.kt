@@ -47,13 +47,27 @@ class GamelistDetail : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         /** Setting up LiveData observation relationship **/
-        viewModel.game.observe(viewLifecycleOwner, { newAbout ->
+        viewModel.game.observe(viewLifecycleOwner, { newGame ->
             //Kode for å bruke HTML tekst i et textview, hentet fra: https://stackoverflow.com/questions/2116162/how-to-display-html-in-textview
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                binding.about.text= Html.fromHtml(newAbout.about, Html.FROM_HTML_MODE_COMPACT)
+                binding.about.text= Html.fromHtml(newGame.about, Html.FROM_HTML_MODE_COMPACT)
             } else {
-                binding.about.text= Html.fromHtml(newAbout.about)
+                binding.about.text= Html.fromHtml(newGame.about)
             }
+
+            //Kode for å sette metascore i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en metascore
+            if(newGame.metascore != null) //setter metascore i UI'et til newGame.metascore dersom newGame.metascore != null
+                binding.gameMetascore.text= newGame.metascore.toString()
+            else //setter metascore i UI'et til "N/A" ellers
+                binding.gameMetascore.text = "N/A"
+
+            //Kode for å sette release date i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en releasedate
+            if(newGame.released != null) //setter release date i UI'et til newGame.released dersom newGame.released != null
+                binding.gameReleaseDate.text= newGame.released.toString()
+            else //setter metascore i UI'et til "N/A" ellers
+                binding.gameReleaseDate.text = "N/A"
+
+            Log.i("Observer", "${binding.gameMetascore.text}")
         })
 
 
