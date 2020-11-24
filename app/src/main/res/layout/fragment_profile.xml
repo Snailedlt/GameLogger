@@ -20,7 +20,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:contentDescription="@string/profile_picture_profile"
-            android:src="@drawable/ic_baseline_account_circle_150" />
+            android:src="@drawable/profile_picture"
+            android:scaleType="centerInside" />
 
         <TextView
             android:id="@+id/text_username"
