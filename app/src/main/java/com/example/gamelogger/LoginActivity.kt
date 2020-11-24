@@ -120,9 +120,7 @@ class LoginActivity : AppCompatActivity() {
 
                     // Firestore database
                     val bruker = hashMapOf(
-
                         "email" to emailTextField.editText?.text.toString(),
-                        "password" to passwordTextField.editText?.text.toString(),
                         "username" to usernameText.editText?.text.toString()
                     )
                     db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid)
