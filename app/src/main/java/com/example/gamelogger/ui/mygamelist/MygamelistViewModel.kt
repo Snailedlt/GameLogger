@@ -9,6 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
+import com.example.gamelogger.helpers.bindGameStateButtons1
+import com.example.gamelogger.services.changeDatabaseGameState
+import com.example.gamelogger.services.getUserGameState
 import com.example.gamelogger.services.getUserGames
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -17,8 +20,10 @@ class MygamelistViewModel : ViewModel() {
 
     // The LiveData list of games to be presented
     private val _games = MutableLiveData<List<Game>>()
+
     val games: LiveData<List<Game>>
         get() = _games
+
 
     // The game being interacted with
     private val _currentgame = MutableLiveData<Game>()
@@ -55,13 +60,29 @@ class MygamelistViewModel : ViewModel() {
                 getUserGames { savedGames ->
                     CoroutineScope(viewModelScope.coroutineContext).launch {
                         val gamelist = ArrayList<Game>()
+                        var count = 0
+                        var state = GameState.BACKLOG
 
                         for (id in savedGames) {
                             if (id.isDigitsOnly()){
+
                                 gamelist.add(GameApi.retrofitService.getMyGames(id))
+                                gamelist[count].state = state
+                                count++
+                            } else {
+                                when (id) {
+                                    "BACKLOG" -> {
+                                        state = GameState.BACKLOG
+                                    }
+                                    "PLAYING" -> {
+                                        state = GameState.PLAYING
+                                    }
+                                    "DONE" -> {
+                                        state = GameState.DONE
+                                    }
+                                }
                             }
                         }
-
                         _games.value = gamelist
                         _status.value = ListStatus.DONE
                         Log.i("Liststatus:", status.value.toString())
@@ -84,6 +105,7 @@ class MygamelistViewModel : ViewModel() {
         _currentgame.value = game
         viewModelScope.launch {
             game.state = state
+            changeDatabaseGameState(game.id.toString(), state.toString())
         }
     }
 

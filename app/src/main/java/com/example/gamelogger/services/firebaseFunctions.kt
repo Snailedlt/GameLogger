@@ -86,8 +86,8 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
                 for (document in task.result!!) {
                     val id = document.data["spill id"].toString()
                     val state = document.data["spill state"].toString()
-                    list.add(id)
                     list.add(state)
+                    list.add(id)
                 }
                 myCallback(list)
             } else {
@@ -122,10 +122,10 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
                         "BACKLOG" -> {
                             backlog++
                         }
-                        "Playing" -> {
+                        "PLAYING" -> {
                             playing++
                         }
-                        "Done" -> {
+                        "DONE" -> {
                             done++
                         }
                     }
@@ -184,6 +184,31 @@ fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
             } else {
                 Log.e("MError: ", "Error getting game platforms from firebase")
             }
+        }
+}
+fun changeDatabaseGameState(spillid: String, spillstate: String) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+
+    val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
+
+    docRef.get()
+        .addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                db.collection("savedGames").document(uid).collection("Games").document(spillid)
+                    .update("spill state", spillstate)
+                Log.d("add", "Added game to firebase?")
+            } else {
+                db.collection("savedGames").document(uid).collection("Games").document(spillid)
+                    .set("spill state")
+                Log.d("add", "Added more game to firebase?")
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d("add", "get failed with ", exception)
         }
 }
 
