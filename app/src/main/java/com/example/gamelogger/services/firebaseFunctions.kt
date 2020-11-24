@@ -1,6 +1,7 @@
 package com.example.gamelogger.services
 
 import android.util.Log
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -97,11 +98,7 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
 }
 
 /**
- *   getUserGameState {
- *       var backlog: Float = it[1]
- *       var playing: Float = it[0]
- *       var planning: Float = it[2]
- *   }
+ *   Henter hvilken statuser spillene brukeren har lagret i databasen
  */
 fun getUserGameState(myCallback: (FloatArray) -> Unit) {
 
@@ -139,7 +136,9 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
             }
         }
 }
-
+/**
+ *   Henter hvilken plattformer spillene brukeren har lagret i databasen
+ */
 fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
 
     val db = FirebaseFirestore.getInstance()
@@ -186,6 +185,9 @@ fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
             }
         }
 }
+/**
+ *   Endrer statusen til ett spill i databasen
+ */
 fun changeDatabaseGameState(spillid: String, spillstate: String) {
 
     val db = FirebaseFirestore.getInstance()
@@ -212,5 +214,46 @@ fun changeDatabaseGameState(spillid: String, spillstate: String) {
         }
 }
 
+/**
+ *   Bytter brukernavn i databasen
+ */
+fun changeUsername(username: String) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+
+    val docRef = db.collection("users").document(uid)
+
+    docRef.get()
+        .addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                db.collection("users").document(uid)
+                    .update("username", username)
+                Log.d("add", "Changed username")
+            } else {
+                db.collection("users").document(uid)
+                    .set("username")
+                Log.d("add", "Added username")
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d("add", "get failed with ", exception)
+        }
+}
+/**
+ *   Endrer passord i firebase authentication
+ */
+fun changePassword(newPassword: String) {
+
+    val user = FirebaseAuth.getInstance().currentUser
+    val credential = EmailAuthProvider
+        .getCredential(" ", " ")
+    user?.reauthenticate(credential)?.addOnCompleteListener {
+        user.updatePassword(newPassword)
+    }
+
+}
 
 

@@ -1,37 +1,19 @@
 <PreferenceScreen
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
         app:title="@string/change_userinfo">
 
         <EditTextPreference
-            app:key="Change username"
-            app:title="@string/change_username" />
+            app:key="Change_username"
+            app:title="@string/change_username"
+            />
 
         <EditTextPreference
-            app:key="Change password"
+            app:key="Change_password"
+            android:inputType="textPassword"
             app:title="@string/change_password" />
     </PreferenceCategory>
-
-    <PreferenceCategory
-        app:title="@string/change_appinfo">
-
-        <SwitchPreferenceCompat
-            app:key="notifications"
-            app:title="Enable message notifications"/>
-
-        <SwitchPreferenceCompat
-            app:key="darkmode"
-            app:title="@string/Dark_mode"/>
-
-        <ListPreference
-            app:key="language"
-            app:title="@string/reply_title"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:defaultValue="English"
-            app:useSimpleSummaryProvider="true"
-            />
-        </PreferenceCategory>
 
 </PreferenceScreen>
