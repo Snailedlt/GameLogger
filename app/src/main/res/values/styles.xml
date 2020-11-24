@@ -35,4 +35,28 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
     </style>
+
+    <style name="TextWithShadow">
+        <item name="android:paddingLeft">4px</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:shadowColor">@color/colorPrimary</item>
+        <item name ="android:shadowDx">-2</item>
+        <item name ="android:shadowDy">-2</item>
+        <item name ="android:shadowRadius">0.001</item>
+    </style>
+
+    <style name="GamelistDetailTitles">
+        <item name="android:paddingLeft">4px</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">@color/colorSecondaryLight</item>
+        <item name="android:alpha"> 0.7</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:shadowColor">@color/colorSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name ="android:shadowDx">-2</item>
+        <item name ="android:shadowDy">-2</item>
+        <item name ="android:shadowRadius">0.001</item>
+    </style>
 </resources>

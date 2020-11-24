@@ -16,6 +16,12 @@ data class Game(
     var released: String?,
     @Json(name = "background_image")
     val img: String?,
+    @Json(name = "description")
+    val about: String?,
+    @Json(name = "metacritic")
+    val metascore: Int?,
+    //@Json(name = "genres")
+    //val genre: String?,
     var state: GameState?
 ) {
 

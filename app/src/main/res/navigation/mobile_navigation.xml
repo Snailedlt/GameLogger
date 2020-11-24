@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/gamelistDetail"
         android:name="com.example.gamelogger.ui.gamelistdetail.GamelistDetail"
-        android:label="fragment_gamelist_detail2"
+        android:label="@string/title_my_list"
         tools:layout="@layout/fragment_gamelist_detail">
         <argument
             android:name="gameId"

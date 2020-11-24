@@ -8,4 +8,6 @@
     <dimen name="marginTop_container">50dp</dimen>
     <dimen name="stats_circle_spacing_diff">3dp</dimen>
     <dimen name="gameCard">130dp</dimen>
+    <dimen name="game_detail_width_titles">175dp</dimen>
+    <dimen name="game_detail_width_content">175dp</dimen>
 </resources>

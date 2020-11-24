@@ -1,6 +1,8 @@
 package com.example.gamelogger.ui.gamelistdetail
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,8 +42,19 @@ class GamelistDetail : Fragment() {
 
         binding.gamelistDetailViewModel = viewModel
 
-
+        // Specify the fragment view as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
+
+        /** Setting up LiveData observation relationship **/
+        viewModel.game.observe(viewLifecycleOwner, Observer { newAbout ->
+            //Kode for å bruke HTML tekst i et textview, hentet fra: https://stackoverflow.com/questions/2116162/how-to-display-html-in-textview
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                binding.about.text= Html.fromHtml(newAbout.about, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                binding.about.text= Html.fromHtml(newAbout.about);
+            }
+        })
 
 
         //Shows a toast of the gameId belonging to the game the user clicked
