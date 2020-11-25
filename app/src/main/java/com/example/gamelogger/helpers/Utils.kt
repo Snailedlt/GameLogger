@@ -1,6 +1,6 @@
 package com.example.gamelogger.helpers
 
-fun <T> listToPresentableString(list: List<T>) : String {
+fun <T> listToPresentableString(list: List<T>?) : String {
     var string = ""
     if (list.isNullOrEmpty())
         return ""

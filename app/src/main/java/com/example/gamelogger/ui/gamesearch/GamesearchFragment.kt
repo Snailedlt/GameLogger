@@ -92,7 +92,7 @@ class GamesearchFragment : Fragment() {
     }
 
     private fun platformChoiceDialogue(view: View, game: Game) {
-        val platforms = arrayOf("PS4", "XBOX", "Nintendo Switch")
+        val platforms = game.platformsList?.toTypedArray()
         Log.i("dialoguefunction", "clicked")
         Log.i("gameclicked: ", game.platforms.toString())
         // Log.i("gameclicked: ", game.platforms.platform)
@@ -101,9 +101,9 @@ class GamesearchFragment : Fragment() {
         with(builder)
         {
             Log.i("dialoguefunction", "inside with")
-            this?.setTitle("Pick a platform")
+            this?.setTitle("Pick a platform for ${game.title}")
             this?.setItems(platforms) { dialog, which ->
-                game.setPlatform(platforms[which])
+                platforms?.get(which)?.let { game.setPlatform(it) }
                 viewModel.saveGame(game)
                 showSnackBar(game)
             }
