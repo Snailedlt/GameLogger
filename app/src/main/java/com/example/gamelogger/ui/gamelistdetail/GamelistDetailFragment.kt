@@ -8,14 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamelistDetailBinding
-import com.example.gamelogger.ui.mygamelist.MygamelistViewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -61,8 +57,8 @@ class GamelistDetail : Fragment() {
             }
 
             //Kode for å sette metascore i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en metascore
-            if(newGame.metascore != null) //setter metascore i UI'et til newGame.metascore dersom newGame.metascore != null
-                binding.gameMetascore.text= newGame.metascore.toString()
+            if(newGame.metacritic != null) //setter metascore i UI'et til newGame.metascore dersom newGame.metascore != null
+                binding.gameMetascore.text= newGame.metacritic.toString()
             else //setter metascore i UI'et til "N/A" ellers
                 binding.gameMetascore.text = "N/A"
 
@@ -73,8 +69,8 @@ class GamelistDetail : Fragment() {
                 binding.gameReleaseDate.text = "N/A"
 
             //Kode for å sette genre i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen sjangre
-            if(newGame.genresFormatted != null) //setter genre i UI'et til newGame.genresFormatted dersom newGame.genresFormatted != null
-                binding.gameGenre.text= newGame.genresFormatted.toString()
+            if(newGame.genresString != null) //setter genre i UI'et til newGame.genresFormatted dersom newGame.genresFormatted != null
+                binding.gameGenre.text= newGame.genresString.toString()
             else //setter genre i UI'et til "N/A" ellers
                 binding.gameGenre.text = "N/A"
 
