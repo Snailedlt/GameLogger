@@ -1,7 +1,10 @@
 package com.example.gamelogger.ui.settings
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.gamelogger.R
@@ -31,16 +34,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
 
             }
-
+/*
         val clearSavedGamesButton: Preference = findPreference("clearSavedGames")!!
         clearSavedGamesButton.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                deleteAllSavedGames {
-                    Log.e("Delete", "All user games deleted")
-                }
+                AlertDialog.Builder(context)
+                    .setMessage("Do you really want to delete all your games?")
+                    .setPositiveButton(android.R.string.yes
+                    ) { _, _ ->
+                        deleteAllSavedGames {
+                            Log.e("Delete", "All user games deleted")
+                        }
+                    }
+                    .setNegativeButton(android.R.string.no, null).show()
+
                 true
             }
 
+ */
     }
 
 
