@@ -9,5 +9,5 @@ fun <T> listToPresentableString(list: List<T>?) : String {
         string += listIterator.next()
         string += ", "
     }
-    return string
+    return string.substring(0, string.length - 2)
 }

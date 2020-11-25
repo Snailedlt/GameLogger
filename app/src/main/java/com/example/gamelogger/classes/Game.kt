@@ -1,6 +1,7 @@
 package com.example.gamelogger.classes
 
 import android.util.Log
+import com.example.gamelogger.helpers.listToPresentableString
 import com.example.gamelogger.services.addSavedGame
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -29,7 +30,7 @@ data class Game(
     init {
         Log.i("GameInfoPlatformsArray", platforms.toString() + "")
         this.platformsList = this.platformsToStringArray()
-        Log.i("GameInfoPlatformsString", "After: " + platformsList.toString())
+        Log.i("GameInfoPlatformsList", "List: " + platformsList.toString())
         this.state = GameState.BACKLOG
         this.released = this.releasedYear()
         this.genresList = this.genresToPlatformArray()
