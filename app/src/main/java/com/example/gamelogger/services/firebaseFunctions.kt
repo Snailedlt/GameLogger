@@ -32,7 +32,7 @@ fun addSavedGame(spillid: String, spillstate: String, spillPlat: String) {
                 Log.d("add", "Added game to firebase?")
             } else {
                 db.collection("savedGames").document(uid).collection("Games").document(spillid)
-                    .set(nestedData)
+                    .set(nestedData as Map<String, Any>)
                 Log.d("add", "Added more game to firebase?")
             }
         }
@@ -87,8 +87,11 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
                 for (document in task.result!!) {
                     val id = document.data["spill id"].toString()
                     val state = document.data["spill state"].toString()
+                    val platform = document.data["spill platform"].toString()
                     list.add(state)
+                    list.add(platform)
                     list.add(id)
+
                 }
                 myCallback(list)
             } else {
@@ -246,7 +249,6 @@ fun changeUsername(username: String) {
  *   Endrer passord i firebase authentication
  */
 fun changePassword(newPassword: String) {
-
     val user = FirebaseAuth.getInstance().currentUser
     val credential = EmailAuthProvider
         .getCredential(" ", " ")
@@ -255,5 +257,65 @@ fun changePassword(newPassword: String) {
     }
 
 }
+/**
+ *   getOneGameSavedPlatforms(game.id.toString()){
+ *      Log.i("Spill lagret her: ", it.toString())
+ *   }
+ */
+fun getOneGameSavedPlatforms(spillid: String, myCallback: (String) -> Unit) {
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+
+    db.collection("savedGames").document(uid).collection("Games").document(spillid).get()
+        .addOnSuccessListener { document ->
+            val savedPlatforms: String = document.get("spill platform") as String
+            myCallback(savedPlatforms)
+        }
+}
+/*
+fun deleteAllSavedGames() {
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+
+    db.collection("savedGames").document(uid).collection("Games").get()
+        .addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                db.collection("savedGames").document(uid).collection("Games")
+                    .delete()
+
+            } else {
+                Log.e("MError: ", "Error getting games from firebase")
+            }
+        }
+
+}
+
+// Har ikke fått testet funker nok ikke enda
+fun deleteSavedGame(spillid: String) {
+
+    val db = FirebaseFirestore.getInstance()
+    val auth = FirebaseAuth.getInstance()
+
+    val uid = auth.currentUser!!.uid
+
+    val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
+
+    docRef.get()
+        .addOnSuccessListener { document ->
+            if (document != null && document.exists()) {
+                db.collection("savedGames").document(uid).collection("Games").document(spillid)
+                    .delete()
+                Log.d("add", "Added game to firebase?")
+            }
+        }
+        .addOnFailureListener { exception ->
+            Log.d("add", "get failed with ", exception)
+        }
+}
+*/
 
 
