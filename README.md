@@ -3,6 +3,8 @@ An app to log the games you've played, are playing and plan to play
 
 ## Screenshots
 
+![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
+
 #### See all your games in one place
 ![Screenshot_01](https://i.imgur.com/wbxWoNl.png "My List")
 
