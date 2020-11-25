@@ -60,7 +60,7 @@ class ProfileStatsFragment : Fragment() {
                 colorClassArray = intArrayOf(Color.GRAY)
             }
             else {
-                statusArrayFirebase = floatArrayOf(playing, done, backlog)
+                statusArrayFirebase = floatArrayOf(done, playing, backlog)
                 colorClassArray = intArrayOf(Color.GREEN, Color.BLUE, Color.YELLOW)
             }
             val barDataSet = BarDataSet(dataValuesStats(statusArrayFirebase), "Bar Set")

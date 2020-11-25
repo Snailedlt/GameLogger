@@ -37,9 +37,9 @@
 
     </RelativeLayout>
 
-    <!-- Playing -->
+    <!-- Done -->
     <ImageView
-        android:id="@+id/iV_playing"
+        android:id="@+id/iV_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_green"
@@ -48,41 +48,10 @@
         android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
     <TextView
-        android:id="@+id/tV_playing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
-        android:layout_marginTop="@dimen/stats_text_spacing"
-        android:layout_toEndOf="@+id/iV_playing"
-        android:text="@string/playing"
-        android:textColor="#26448F" />
-
-    <TextView
-        android:id="@+id/tV_num_playing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
-        android:layout_marginTop="@dimen/stats_text_spacing"
-        android:layout_marginEnd="15dp"
-        android:layout_alignParentEnd="true"
-        android:text="@string/default_num_stats"
-        android:textColor="#26448F" />
-
-    <!-- Done -->
-    <ImageView
-        android:id="@+id/iV_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_circle_blue"
-        android:layout_below="@+id/iV_playing"
-        android:layout_marginTop="@dimen/stats_circle_spacing"
-        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-    <TextView
         android:id="@+id/tV_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_playing"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_toEndOf="@+id/iV_playing"
         android:text="@string/done"
@@ -92,11 +61,44 @@
         android:id="@+id/tV_num_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_playing"
+        android:layout_below="@id/stacked_HorizontalBarChartParent_stats"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginEnd="15dp"
         android:layout_alignParentEnd="true"
         android:text="@string/default_num_stats"
+        tools:text="1"
+        android:textColor="#26448F" />
+
+    <!-- Playing -->
+    <ImageView
+        android:id="@+id/iV_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_circle_blue"
+        android:layout_below="@+id/iV_done"
+        android:layout_marginTop="@dimen/stats_circle_spacing"
+        android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
+
+    <TextView
+        android:id="@+id/tV_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tV_done"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_toEndOf="@+id/iV_playing"
+        android:text="@string/playing"
+        android:textColor="#26448F" />
+
+    <TextView
+        android:id="@+id/tV_num_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tV_num_done"
+        android:layout_marginTop="@dimen/stats_text_spacing"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/default_num_stats"
+        tools:text="2"
         android:textColor="#26448F" />
 
     <!-- Backlog -->
@@ -105,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_circle_yellow"
-        android:layout_below="@+id/iV_done"
+        android:layout_below="@+id/iV_playing"
         android:layout_marginTop="@dimen/stats_circle_spacing"
         android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
 
@@ -113,7 +115,7 @@
         android:id="@+id/tV_backlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_done"
+        android:layout_below="@id/iV_playing"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:text="@string/backlog"
         android:textColor="#26448F"
@@ -123,11 +125,12 @@
         android:id="@+id/tV_num_backlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iV_done"
+        android:layout_below="@id/tV_num_playing"
         android:layout_marginTop="@dimen/stats_text_spacing"
         android:layout_marginEnd="15dp"
         android:layout_alignParentEnd="true"
         android:text="@string/default_num_stats"
+        tools:text="3"
         android:textColor="#26448F" />
 
     <!-- Dropped -->
