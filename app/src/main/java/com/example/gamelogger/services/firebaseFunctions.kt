@@ -292,6 +292,8 @@ fun deleteAllSavedGames(myCallback: (String) -> Unit) {
             } else {
                 Log.e("MError: ", "Could not delete games from firestore")
             }
+        }.addOnFailureListener { exception ->
+            Log.d("delete", "delete failed with ", exception)
         }
 }
 
