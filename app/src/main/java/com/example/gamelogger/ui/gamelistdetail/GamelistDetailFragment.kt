@@ -75,12 +75,12 @@ class GamelistDetail : Fragment() {
                 binding.gameGenre.text = "N/A"
 
             //Kode for å sette platform i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen plattform
-            if(newGame.plattform != null) //setter platform i UI'et til newGame.plattform dersom newGame.plattform != null
-                binding.gamePlatforms.text= newGame.plattform.toString()
+            if(newGame.platformsString != null) //setter platform i UI'et til newGame.plattform dersom newGame.plattform != null
+                binding.gamePlatforms.text= newGame.platformsString.toString()
             else //setter platform i UI'et til "N/A" ellers
                 binding.gamePlatforms.text = "N/A"
 
-            Log.i("Observer", "${binding.gameMetascore.text}")
+            //Log.i("ObserverMetaScore", "${binding.gameMetascore.text}")
         })
 
         //Shows a toast of the gameId belonging to the game the user clicked

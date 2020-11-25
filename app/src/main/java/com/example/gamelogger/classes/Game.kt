@@ -26,7 +26,7 @@ data class Game(
 ) {
 
     init {
-        Log.i("GameInfoPlatformsArray", platforms.toString() + "")
+        //Log.i("GameInfoPlatformsArray", platforms?.joinToString()+ "")
         this.platformsString = this.platformArrayToString()
         Log.i("GameInfoPlatformsString", "After: " + platformsString)
         this.state = GameState.BACKLOG
@@ -48,10 +48,9 @@ data class Game(
             for(genre in this.genres!!){
                 str += genre.name + ", "
             }
-            str
+            str.substring(0, str.length - 2) //Removes the comma and space at the end of the string
         } else null
     }
-
 
     private fun platformArrayToString(): String? {
         //Return formatted genre with comma between each genre
@@ -60,8 +59,13 @@ data class Game(
             for(platformer in this.platforms!!){
                 str += platformer.platform?.name + ", "
             }
-            str
+            str.substring(0, str.length - 2) //Removes the comma and space at the end of the string
         } else null
+    }
+
+   private fun compareFirebasePlatformToAPIPlatform(): String? {
+        //return platforms that are in Firebase and the API call for a single game
+        return null
     }
 
     fun setPlatform(platform: String) {
