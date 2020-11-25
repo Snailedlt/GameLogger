@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamelistBinding
+import kotlinx.android.synthetic.main.fragment_gamelist.*
 
 
 class MygamelistFragment : Fragment() {
@@ -65,6 +66,8 @@ class MygamelistFragment : Fragment() {
             }
         )
 
+        val recyclerView = binding.mygameList;
+
         val helper = ItemTouchHelper(
             object: ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT){
                 override fun onMove(
@@ -76,12 +79,16 @@ class MygamelistFragment : Fragment() {
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    viewModel._games.value?.removeAt(viewHolder.adapterPosition)
-                    adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                    if(direction == ItemTouchHelper.RIGHT){
+                        viewModel._games.value?.removeAt(viewHolder.adapterPosition)
+                        adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                    }
                 }
 
             }
         )
+        helper.attachToRecyclerView(recyclerView)
+
         // mygameList corresponds to the id of the RecyclerView from the layout file
         binding.mygameList.adapter = adapter
 

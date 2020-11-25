@@ -19,8 +19,7 @@ import kotlinx.coroutines.launch
 class MygamelistViewModel : ViewModel() {
 
     // The LiveData list of games to be presented
-    internal val _games = MutableLiveData<MutableList<Game>>()
-
+    val _games = MutableLiveData<MutableList<Game>>()
     val games: LiveData<MutableList<Game>>
         get() = _games
 
