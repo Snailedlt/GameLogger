@@ -71,7 +71,7 @@
                 android:textStyle="bold"
                 android:background="@drawable/rounded_corner_primary"
                 android:textColor="@color/colorPlaystation"
-                android:text="@{game.plattform}"
+                android:text="@{game.chosenPlatform}"
                 tools:text="PS4"
                 />
             <TextView

@@ -94,6 +94,8 @@ class GamesearchFragment : Fragment() {
     private fun platformChoiceDialogue(view: View, game: Game) {
         val platforms = arrayOf("PS4", "XBOX", "Nintendo Switch")
         Log.i("dialoguefunction", "clicked")
+        Log.i("gameclicked: ", game.platforms.toString())
+        // Log.i("gameclicked: ", game.platforms.platform)
 
         val builder = this.context?.let { AlertDialog.Builder(it) }
         with(builder)

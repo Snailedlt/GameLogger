@@ -1,6 +1,7 @@
 package com.example.gamelogger.classes
 
 import android.util.Log
+import com.example.gamelogger.services.addSavedGame
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -12,8 +13,8 @@ data class Game(
     var title: String,
     //@Json(name = "platforms")
     var platforms: Array<Platforms>?,
-    var platformsString: String?,
-    var plattform: String? = "PS4",
+    var platformsList: List<String?>?,
+    var chosenPlatform: String?,
     var released: String?,
     @Json(name = "background_image")
     val img: String?,
@@ -21,45 +22,44 @@ data class Game(
     val about: String?,
     val metacritic: Int?,
     var genres: Array<Genre>?,
-    var genresString: String?,
+    var genresList: List<String?>?,
     var state: GameState?,
 ) {
 
     init {
-        //Log.i("GameInfoPlatformsArray", platforms?.joinToString()+ "")
-        this.platformsString = this.platformArrayToString()
-        Log.i("GameInfoPlatformsString", "After: " + platformsString)
+        Log.i("GameInfoPlatformsArray", platforms.toString() + "")
+        this.platformsList = this.platformsToStringArray()
+        Log.i("GameInfoPlatformsString", "After: " + platformsList.toString())
         this.state = GameState.BACKLOG
         this.released = this.releasedYear()
-        this.genresString = this.genreArrayToString()
+        this.genresList = this.genresToPlatformArray()
     }
 
-    private fun releasedYear() : String? {
+    private fun releasedYear(): String? {
         return if (!this.released.equals(null))
             this.released?.split("-")?.get(0)
         else
             null
     }
 
-    private fun genreArrayToString(): String? {
-        //Return formatted genre with comma between each genre
-        return if (!this.genres.isNullOrEmpty()){
-            var str =""
-            for(genre in this.genres!!){
-                str += genre.name + ", "
+    private fun genresToPlatformArray(): List<String?>? {
+        return if (!this.genres.isNullOrEmpty()) {
+            val list = mutableListOf<String?>()
+            for (i in this.genres!!.indices) {
+                list.add(this.genres!![i].name)
             }
-            str.substring(0, str.length - 2) //Removes the comma and space at the end of the string
+            list.toList()
         } else null
     }
 
-    private fun platformArrayToString(): String? {
-        //Return formatted genre with comma between each genre
+    private fun platformsToStringArray(): List<String?>? {
         return if (!this.platforms.isNullOrEmpty()){
-            var str =""
-            for(platformer in this.platforms!!){
-                str += platformer.platform?.name + ", "
+            val list = mutableListOf<String?>()
+            for (i in this.platforms!!.indices) {
+                this.platforms!![i].platform?.name?.let { Log.i("PlatformstoString${i}", it) }
+                list.add(this.platforms!![i].platform?.name)
             }
-            str.substring(0, str.length - 2) //Removes the comma and space at the end of the string
+            list.toList()
         } else null
     }
 
@@ -69,7 +69,7 @@ data class Game(
     }
 
     fun setPlatform(platform: String) {
-        this.plattform = platform
+        this.chosenPlatform = platform
     }
 }
 

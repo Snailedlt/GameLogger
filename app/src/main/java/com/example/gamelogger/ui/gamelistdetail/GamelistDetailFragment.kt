@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamelistDetailBinding
+import com.example.gamelogger.helpers.listToPresentableString
 
 /**
  * A simple [Fragment] subclass.
@@ -69,14 +70,14 @@ class GamelistDetail : Fragment() {
                 binding.gameReleaseDate.text = "N/A"
 
             //Kode for å sette genre i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen sjangre
-            if(newGame.genresString != null) //setter genre i UI'et til newGame.genresFormatted dersom newGame.genresFormatted != null
-                binding.gameGenre.text= newGame.genresString.toString()
+            if(newGame.genresList != null) //setter genre i UI'et til newGame.genresFormatted dersom newGame.genresFormatted != null
+                binding.gameGenre.text= listToPresentableString(newGame.genresList!!)
             else //setter genre i UI'et til "N/A" ellers
                 binding.gameGenre.text = "N/A"
 
             //Kode for å sette platform i UI'et, og sørger for å vise "N/A" dersom spillet ikke har en noen plattform
-            if(newGame.platformsString != null) //setter platform i UI'et til newGame.plattform dersom newGame.plattform != null
-                binding.gamePlatforms.text= newGame.platformsString.toString()
+            if(newGame.platformsList != null) //setter platform i UI'et til newGame.plattform dersom newGame.plattform != null
+                binding.gamePlatforms.text= listToPresentableString(newGame.platformsList!!)
             else //setter platform i UI'et til "N/A" ellers
                 binding.gamePlatforms.text = "N/A"
 
