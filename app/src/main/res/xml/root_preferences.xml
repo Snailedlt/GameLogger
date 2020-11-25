@@ -14,6 +14,16 @@
             app:key="Change_password"
             android:inputType="textPassword"
             app:title="@string/change_password" />
-    </PreferenceCategory>
 
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:title="@string/change_appinfo">
+
+        <Preference
+            android:title="Delete all saved games"
+            android:key="clearSavedGames"
+            />
+
+    </PreferenceCategory>
 </PreferenceScreen>

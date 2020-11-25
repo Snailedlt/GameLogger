@@ -1,11 +1,13 @@
 package com.example.gamelogger.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.gamelogger.R
 import com.example.gamelogger.services.changePassword
 import com.example.gamelogger.services.changeUsername
+import com.example.gamelogger.services.deleteAllSavedGames
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -28,6 +30,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 changePassword(newValue.toString())
                 true
 
+            }
+
+        val clearSavedGamesButton: Preference = findPreference("clearSavedGames")!!
+        clearSavedGamesButton.onPreferenceClickListener =
+            Preference.OnPreferenceClickListener {
+                deleteAllSavedGames {
+                    Log.e("Delete", "All user games deleted")
+                }
+                true
             }
 
     }

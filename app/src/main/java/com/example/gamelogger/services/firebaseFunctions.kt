@@ -274,8 +274,8 @@ fun getOneGameSavedPlatforms(spillid: String, myCallback: (String) -> Unit) {
             myCallback(savedPlatforms)
         }
 }
-/*
-fun deleteAllSavedGames() {
+
+fun deleteAllSavedGames(myCallback: (String) -> Unit) {
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
 
@@ -284,18 +284,18 @@ fun deleteAllSavedGames() {
     db.collection("savedGames").document(uid).collection("Games").get()
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                db.collection("savedGames").document(uid).collection("Games")
-                    .delete()
-
+                for (document in task.result!!) {
+                    val id = document.data["spill id"].toString()
+                    val docRef = db.collection("savedGames").document(uid).collection("Games").document(id)
+                    docRef.delete()
+                }
             } else {
-                Log.e("MError: ", "Error getting games from firebase")
+                Log.e("MError: ", "Could not delete games from firestore")
             }
         }
-
 }
 
-// Har ikke fått testet funker nok ikke enda
-fun deleteSavedGame(spillid: String) {
+fun deleteSavedGame(spillid: String, myCallback: (String) -> Unit) {
 
     val db = FirebaseFirestore.getInstance()
     val auth = FirebaseAuth.getInstance()
@@ -307,15 +307,14 @@ fun deleteSavedGame(spillid: String) {
     docRef.get()
         .addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                db.collection("savedGames").document(uid).collection("Games").document(spillid)
-                    .delete()
-                Log.d("add", "Added game to firebase?")
+                val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
+                docRef.delete()
             }
         }
         .addOnFailureListener { exception ->
-            Log.d("add", "get failed with ", exception)
+            Log.d("delete", "delete failed with ", exception)
         }
 }
-*/
+
 
 
