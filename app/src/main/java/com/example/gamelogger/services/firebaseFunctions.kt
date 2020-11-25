@@ -174,16 +174,16 @@ fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
                     var android = 0F
                     for (document in task.result!!) {
                         when (document.data["spill platform"].toString()) {
-                            "PS4" -> {
+                            "PlayStation 4" -> {
                                 ps4++
                             }
-                            "XB1" -> {
+                            "Xbox One" -> {
                                 xb1++
                             }
                             "PC" -> {
                                 pc++
                             }
-                            "Switch" -> {
+                            "Nintendo Switch" -> {
                                 switch++
                             }
                             "Android" -> {
@@ -194,8 +194,8 @@ fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
                     platArray[0] = ps4
                     platArray[1] = xb1
                     platArray[2] = pc
-                    platArray[2] = switch
-                    platArray[2] = android
+                    platArray[3] = switch
+                    platArray[4] = android
                     myCallback(platArray)
                 } else {
                     Log.e("MError: ", "Error getting game platforms from firebase")
