@@ -62,12 +62,14 @@ class MygamelistViewModel : ViewModel() {
                         val gamelist = ArrayList<Game>()
                         var count = 0
                         var state = GameState.BACKLOG
+                        var chosenPlatform = "HELPIMSTUCKINTHISPHONE"
 
                         for (id in savedGames) {
                             if (id.isDigitsOnly()){
 
                                 gamelist.add(GameApi.retrofitService.getMyGames(id))
                                 gamelist[count].state = state
+                                gamelist[count].chosenPlatform = chosenPlatform
                                 count++
                             } else {
                                 when (id) {
@@ -79,6 +81,9 @@ class MygamelistViewModel : ViewModel() {
                                     }
                                     "DONE" -> {
                                         state = GameState.DONE
+                                    }
+                                    else -> {
+                                        chosenPlatform = id
                                     }
                                 }
                             }
