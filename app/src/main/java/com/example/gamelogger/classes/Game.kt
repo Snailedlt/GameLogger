@@ -11,7 +11,8 @@ data class Game(
     @Json(name = "name")
     var title: String,
     //@Json(name = "platforms")
-    //var platforms: Array<Platforms>?,
+    var platforms: Array<Platforms>?,
+    var platformsString: String?,
     var plattform: String? = "PS4",
     var released: String?,
     @Json(name = "background_image")
@@ -25,10 +26,12 @@ data class Game(
 ) {
 
     init {
-        //Log.i("GameInfoPlatformsArray", platforms.toString() + "")
+        Log.i("GameInfoPlatformsArray", platforms.toString() + "")
+        this.platformsString = this.platformArrayToString()
+        Log.i("GameInfoPlatformsString", "After: " + platformsString)
         this.state = GameState.BACKLOG
         this.released = this.releasedYear()
-        this.genresString = this.arrayToString()
+        this.genresString = this.genreArrayToString()
     }
 
     private fun releasedYear() : String? {
@@ -38,12 +41,24 @@ data class Game(
             null
     }
 
-    private fun arrayToString(): String? {
+    private fun genreArrayToString(): String? {
         //Return formatted genre with comma between each genre
         return if (!this.genres.isNullOrEmpty()){
             var str =""
             for(genre in this.genres!!){
                 str += genre.name + ", "
+            }
+            str
+        } else null
+    }
+
+
+    private fun platformArrayToString(): String? {
+        //Return formatted genre with comma between each genre
+        return if (!this.platforms.isNullOrEmpty()){
+            var str =""
+            for(platformer in this.platforms!!){
+                str += platformer.platform?.name + ", "
             }
             str
         } else null
@@ -65,35 +80,16 @@ data class Genre(
     var name: String?,
 )
 
-/*data class Platforms(
+data class Platforms(
     @Json(name = "platform")
-    var platforms: Array<Platform>?,
-    var platformsFormatted: String?,
+    var platform: Platform?,
     @Json(name = "released_at")
     var released: String?,
-) {
-
-    init {
-        Log.i("GameInfoPlatformsString", platformsFormatted + "")
-        this.platformsFormatted = this.platformFormatting()
-    }
-
-
-    private fun platformFormatting(): String? {
-        //Return formatted genre with comma between each genre
-        return if (!this.platforms.isNullOrEmpty()){
-            var str =""
-            for(platform in this.platforms!!){
-                str += platform.name + ", "
-            }
-            str
-        } else null
-    }
-}
+)
 
 data class Platform(
     var name: String?,
-)*/
+)
 
 enum class GameState {
     DONE, PLAYING, BACKLOG
