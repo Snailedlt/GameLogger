@@ -1,5 +1,6 @@
 package com.example.gamelogger.classes
 
+import android.util.Log
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -24,6 +25,7 @@ data class Game(
 ) {
 
     init {
+        //Log.i("GameInfoPlatformsArray", platforms.toString() + "")
         this.state = GameState.BACKLOG
         this.released = this.releasedYear()
         this.genresString = this.arrayToString()
@@ -56,9 +58,7 @@ data class GameSearchResults(
 )
 
 data class Genre(
-    var id: Int?,
     var name: String?,
-    var slug: String?,
 )
 
 /*data class Platforms(
@@ -70,8 +70,8 @@ data class Genre(
 ) {
 
     init {
+        Log.i("GameInfoPlatformsString", platformsFormatted + "")
         this.platformsFormatted = this.platformFormatting()
-        Log.i("GameInfoPlatforms", platformsFormatted + "")
     }
 
 
@@ -88,9 +88,7 @@ data class Genre(
 }
 
 data class Platform(
-    var id: Int?,
     var name: String?,
-    var slug: String?,
 )*/
 
 enum class GameState {
