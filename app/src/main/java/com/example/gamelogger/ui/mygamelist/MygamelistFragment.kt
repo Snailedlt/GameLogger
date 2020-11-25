@@ -68,10 +68,10 @@ class MygamelistFragment : Fragment() {
             }
         )
 
-        val recyclerView = binding.mygameList;
+        val recyclerView = binding.mygameList
 
         val helper = ItemTouchHelper(
-            object: ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT){
+            object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT){
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
