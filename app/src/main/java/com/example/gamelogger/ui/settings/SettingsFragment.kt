@@ -1,10 +1,8 @@
 package com.example.gamelogger.ui.settings
 
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.example.gamelogger.R
 import com.example.gamelogger.services.changePassword
 import com.example.gamelogger.services.changeUsername
