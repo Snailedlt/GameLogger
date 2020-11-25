@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.mygamelist.MygamelistFragment"
-        android:paddingBottom="?attr/actionBarSize">
+        android:layout_marginBottom="?attr/actionBarSize">
 
         <androidx.appcompat.widget.Toolbar
             style="@style/ExtendedToolbar"

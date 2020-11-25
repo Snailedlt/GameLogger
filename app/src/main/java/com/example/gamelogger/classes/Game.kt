@@ -69,7 +69,7 @@ data class Game(
         return null
     }
 
-    fun setPlatform(platform: String) {
+    fun setPlatform(platform: String?) {
         this.chosenPlatform = platform
     }
 }

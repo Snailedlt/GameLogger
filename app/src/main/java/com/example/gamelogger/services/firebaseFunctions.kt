@@ -336,7 +336,7 @@ fun deleteAllSavedGames(myCallback: (String) -> Unit) {
     }
 }
 
-fun deleteSavedGame(spillid: String, myCallback: (String) -> Unit) {
+fun deleteSavedGame(spillid: String) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()

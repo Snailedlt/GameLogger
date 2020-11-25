@@ -6,19 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.SearchView
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.findFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
+import com.example.gamelogger.services.deleteSavedGame
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_gamelist_detail.*
 
 
 class GamesearchFragment : Fragment() {
@@ -46,14 +48,16 @@ class GamesearchFragment : Fragment() {
 
         binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
             //viewModel.saveGame(it)
-//            if (it.platforms.platform.size() > 1)
-//                platformChoiceDialogue(requireView(), it)
-//            else {
-//                it.setPlatform(it.platforms.platform.name)
-//                viewModel.saveGame(it)
-//                showSnackBar(it)
-//            }
-            platformChoiceDialogue(requireView(), it)
+            if (it.platformsList?.size!! > 1)
+                platformChoiceDialogue(requireView(), it)
+            else if (it.platformsList!![0].isNullOrEmpty())
+                viewModel.saveGame(it)
+            else {
+                it.setPlatform(it.platformsList!![0])
+                viewModel.saveGame(it)
+                showSnackBar(it)
+                it.setPlatform(null)
+            }
         })
 
         /**
@@ -116,16 +120,21 @@ class GamesearchFragment : Fragment() {
         val snackbar = view?.let {
             Snackbar
                 .make(
-                    it, "${game.title} added to your list", Snackbar.LENGTH_LONG)
+                    it.findViewById(R.id.gamesearchlistLayout),
+                    "${game.title} added to your list",
+                    Snackbar.LENGTH_LONG)
                 .setAction(
                     "UNDO",
                     View.OnClickListener {
-                        Log.i("snackbar undo", "clicked")
+                        deleteSavedGame(game.id.toString())
+                        Log.i(game.title, "deleted")
                         // viewModel.deleteGame(game.id)
                     }
                 )
         }
-        snackbar?.show()
+        val params: FrameLayout.LayoutParams = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
+        params.bottomMargin = 100
+        snackbar.show()
     }
 
 }
