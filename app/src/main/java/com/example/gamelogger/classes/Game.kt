@@ -12,7 +12,7 @@ data class Game(
     var title: String,
     //@Json(name = "platforms")
     //var platforms: Array<Platforms>?,
-    val plattform: String? = "PS4",
+    var plattform: String? = "PS4",
     var released: String?,
     @Json(name = "background_image")
     val img: String?,
@@ -47,6 +47,10 @@ data class Game(
             }
             str
         } else null
+    }
+
+    fun setPlatform(platform: String) {
+        this.plattform = platform
     }
 }
 
