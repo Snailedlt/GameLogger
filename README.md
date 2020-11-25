@@ -3,27 +3,26 @@ An app to log the games you've played, are playing and plan to play
 
 ## Screenshots
 
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
 
 #### See all your games in one place
-![Screenshot_01](https://i.imgur.com/wbxWoNl.png "My List")
+<img src="https://i.imgur.com/wbxWoNl.png" alt="Screenshot_01" width="200" height="356">
 
 #### Watch your profile stats to see how many games are in each playlist or in each platform
-![Screenshot_02](https://i.imgur.com/LxapdFG.png "Profile, Playlists")
-![Screenshot_03](https://i.imgur.com/ar2XUre.png "Profile, Platforms")
+<img src="https://i.imgur.com/LxapdFG.png" alt="Screenshot_02" width="200" height="356">
+<img src="https://i.imgur.com/ar2XUre.png" alt="Screenshot_03" width="200" height="356">
 
 #### Add new games to your list
-![Screenshot_04](https://i.imgur.com/D9AHJZH.png "Add Game")
+<img src="https://i.imgur.com/D9AHJZH.png" alt="Screenshot_04" width="200" height="356">
 
 #### Change the playlist your game is in
-![Screenshot_05](https://i.imgur.com/vxOMg7W.png "My List")
-![Screenshot_06](https://i.imgur.com/gE1tewT.png "My List")
+<img src="https://i.imgur.com/vxOMg7W.png" alt="Screenshot_05" width="200" height="356">
+<img src="https://i.imgur.com/gE1tewT.png" alt="Screenshot_06" width="200" height="356">
 
 #### See more details about your games
-![Screenshot_07](https://i.imgur.com/d0WyLYM.png "My List, Detail View")
+<img src="https://i.imgur.com/d0WyLYM.png" alt="Screenshot_07" width="200" height="356">
 
 #### Change your username or password
-![Screenshot_08](https://i.imgur.com/W4VSjE4.png "Settings")
+<img src="https://i.imgur.com/W4VSjE4.png" alt="Screenshot_08" width="200" height="356">
 
 #### About the app
-![Screenshot_09](https://i.imgur.com/WPNwcH6.png "About")
+<img src="https://i.imgur.com/WPNwcH6.png" alt="Screenshot_09" width="200" height="356">
