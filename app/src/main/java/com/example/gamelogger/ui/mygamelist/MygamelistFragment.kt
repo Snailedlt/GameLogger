@@ -3,20 +3,13 @@ package com.example.gamelogger.ui.mygamelist
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
-import androidx.core.view.marginLeft
-import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -155,6 +148,7 @@ class MygamelistFragment : Fragment() {
                 viewModel.games.observe(viewLifecycleOwner, { gamelost ->
                     viewModel.sortMyGamesList(spinner, gamelost)
                     viewModel.games.removeObservers(viewLifecycleOwner);
+                    adapter.notifyDataSetChanged();
                 })
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
