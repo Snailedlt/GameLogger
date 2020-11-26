@@ -64,7 +64,7 @@ fun getUser(myCallback: (String) -> Unit) {
 
         docRef.get()
             .addOnSuccessListener { document ->
-                var brukernavn: String = document.get("username") as String
+                val brukernavn: String = document.get("username") as String
                 Log.d("get", "Palogget bruker: $brukernavn")
 
                 myCallback(brukernavn)
@@ -159,47 +159,27 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
 /**
  *   Henter hvilken plattformer spillene brukeren har lagret i databasen
  */
-fun getUserGamePlatform(myCallback: (FloatArray) -> Unit) {
+fun getUserGamePlatform(myCallback: (HashMap<String, Float>) -> Unit) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
         val uid = auth.currentUser!!.uid
-        val platArray = FloatArray(5)
 
         db.collection("savedGames").document(uid).collection("Games").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var ps4 = 0F
-                    var xb1 = 0F
-                    var pc = 0F
-                    var switch = 0F
-                    var android = 0F
+                    var hMap: HashMap<String, Float> = hashMapOf<String, Float>()
                     for (document in task.result!!) {
-                        when (document.data["spill platform"].toString()) {
-                            "PlayStation 4" -> {
-                                ps4++
-                            }
-                            "Xbox One" -> {
-                                xb1++
-                            }
-                            "PC" -> {
-                                pc++
-                            }
-                            "Nintendo Switch" -> {
-                                switch++
-                            }
-                            "Android" -> {
-                                android++
-                            }
+                        var platformName = document.data["spill platform"].toString()
+                        if (!hMap.containsKey(platformName)) {
+                            hMap[platformName] = 1F
+                        } else {
+                            hMap.put(platformName, hMap.get(platformName)!! + 1)
                         }
+
                     }
-                    platArray[0] = ps4
-                    platArray[1] = xb1
-                    platArray[2] = pc
-                    platArray[3] = switch
-                    platArray[4] = android
-                    myCallback(platArray)
+                    myCallback(hMap)
                 } else {
                     Log.e("MError: ", "Error getting game platforms from firebase")
                 }
