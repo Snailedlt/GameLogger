@@ -25,6 +25,7 @@ data class Game(
     var genres: Array<Genre>?,
     var genresList: List<String?>?,
     var state: GameState?,
+    var dateAdded: String?
 ) {
 
     init {

@@ -65,6 +65,7 @@ class MygamelistViewModel : ViewModel() {
                         var count = 0
                         var state = GameState.BACKLOG
                         var chosenPlatform = "HELPIMSTUCKINTHISPHONE"
+                        var dateAdded = "SDdd"
                         _status.value = ListStatus.LOADING
                         for (id in savedGames) {
                             if (id.isDigitsOnly()){
@@ -72,8 +73,12 @@ class MygamelistViewModel : ViewModel() {
                                 gamelist.add(GameApi.retrofitService.getMyGames(id))
                                 gamelist[count].state = state
                                 gamelist[count].chosenPlatform = chosenPlatform
+                                gamelist[count].dateAdded = dateAdded
                                 count++
-                            } else {
+                            } else if (id.endsWith("*am$") || id.endsWith("*pm$")) {
+                                dateAdded = id
+                            }
+                                else {
                                 when (id) {
                                     "BACKLOG" -> {
                                         state = GameState.BACKLOG
