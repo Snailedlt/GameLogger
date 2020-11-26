@@ -15,6 +15,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.FieldPosition
 
+/**
+ * ViewModel class for the user's list of games
+ */
 class MygamelistViewModel : ViewModel() {
 
     // The LiveData list of games to be presented
@@ -22,26 +25,23 @@ class MygamelistViewModel : ViewModel() {
     val games: LiveData<MutableList<Game>>
         get() = _games
 
-
-    // The game being interacted with
+    // The game most recently being interacted with, primarily used to restore a deleted game
     private val _currentgame = MutableLiveData<Game>()
     val currentgame: LiveData<Game>
         get() = _currentgame
 
-    /**
-     * [_status] tells if the data in the fragment is loading, done loading
-     * or if there was an error
-     */
+    // status to keep track of if the app data is empty, loading or encountered an error
     private val _status = MutableLiveData<ListStatus>()
     val status: LiveData<ListStatus>
         get() = _status
 
-
+    //
     private val _navigateToGameListDetail = MutableLiveData<Game>()
     val navigateToGameListDetail
         get() = _navigateToGameListDetail
 
     init {
+        _status.value = ListStatus.LOADING
         getGamesList()
     }
 
@@ -61,7 +61,7 @@ class MygamelistViewModel : ViewModel() {
                         var count = 0
                         var state = GameState.BACKLOG
                         var chosenPlatform = "HELPIMSTUCKINTHISPHONE"
-
+                        _status.value = ListStatus.LOADING
                         for (id in savedGames) {
                             if (id.isDigitsOnly()){
 
@@ -89,20 +89,25 @@ class MygamelistViewModel : ViewModel() {
                         _games.value = gamelist
                         _status.value = ListStatus.DONE
                         Log.i("Liststatus:", status.value.toString())
+                        if (!games.value.isNullOrEmpty()) {
+                            Log.i("getgames value: ", games.value.toString())
+                            Log.i("getgames size: ", games.value!!.size.toString())
+                            _status.value = ListStatus.DONE
+                        } else {
+                            _status.value = ListStatus.EMPTY
+                        }
                     }
                 }
             } catch (e: Exception) { Log.i("h", "h")}
-            if (games.value != null) {
-                _status.value = ListStatus.DONE
-                Log.i("Liststatus:", status.value.toString())
-            } else {
-                _status.value = ListStatus.EMPTY
-            }
+            Log.i("status: ", status.value.toString())
         }
     }
 
     /**
-     * Function to change
+     * Function to change a game's state.
+     * Called when pressing one of the three buttons in the gamelist view
+     * to determine if you're done playing, currently playing or planning to play (backlog)
+     * a game.
      */
     fun changeGameState(game: Game, state: GameState) {
         _currentgame.value = game
@@ -112,20 +117,35 @@ class MygamelistViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Removes the game at the specified position, as well as from the database
+     * It also copies that game to [_currentgame] so it can easily be restored again
+     * when the user wants to undo deletion
+     */
     fun removeGame(position: Int) {
         val game = games.value?.get(position)
         _currentgame.value = game?.copy()
-        _currentgame.value?.state = game?.state
-        deleteSavedGame(game?.id.toString())
+        _currentgame.value?.state = game?.state // ensures that the correct state is restored if the user undos the deletion
+        viewModelScope.launch {
+            deleteSavedGame(game?.id.toString())
+        }
         _games.value?.removeAt(position)
+        if (games.value.isNullOrEmpty()) // checks if list is empty after deletion
+            _status.value = ListStatus.EMPTY
     }
 
+    /**
+     * Undos deletion of a game
+     */
     fun undoRemoveGame(position: Int) {
         val game = currentgame.value
-        game?.chosenPlatform?.let { it1 ->
-            addSavedGame(game.id.toString(), game.state.toString(), it1)
+        viewModelScope.launch {
+            game?.chosenPlatform?.let { it1 ->
+                addSavedGame(game.id.toString(), game.state.toString(), it1)
+            }
         }
         game?.let { _games.value?.add(position, it) }
+        _status.value = ListStatus.DONE
         _currentgame.value = null
     }
 
@@ -138,4 +158,5 @@ class MygamelistViewModel : ViewModel() {
     }
 }
 
+// enum class that defines the app data status
 enum class ListStatus { LOADING, ERROR, EMPTY, DONE }
