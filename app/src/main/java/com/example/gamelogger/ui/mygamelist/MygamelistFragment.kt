@@ -10,18 +10,13 @@ import android.widget.SearchView
 import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
-import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamelistBinding
-import com.example.gamelogger.services.addSavedGame
-import com.example.gamelogger.services.deleteSavedGame
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 
@@ -60,22 +55,21 @@ class MygamelistFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = GamelistAdapter(
-            GameButtonListener {
-                game, state ->
-                    viewModel.changeGameState(game, state)
-                    binding.mygameList.adapter?.notifyDataSetChanged()
+            GameButtonListener { game, state ->
+                viewModel.changeGameState(game, state)
+                binding.mygameList.adapter?.notifyDataSetChanged()
             },
-            GameCardListener {
-                game ->
-                    Log.i("GameCardListener ", "Game clicked!: $game")
-                    viewModel.onGamelistDetailClicked(game)
+            GameCardListener { game ->
+                Log.i("GameCardListener ", "Game clicked!: $game")
+                viewModel.onGamelistDetailClicked(game)
             }
         )
 
         val recyclerView = binding.mygameList
 
         val helper = ItemTouchHelper(
-            object: ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT){
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
                 override fun onMove(
                     recyclerView: RecyclerView,
                     viewHolder: RecyclerView.ViewHolder,
@@ -85,7 +79,7 @@ class MygamelistFragment : Fragment() {
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    if(direction == ItemTouchHelper.RIGHT || direction == ItemTouchHelper.LEFT){
+                    if (direction == ItemTouchHelper.RIGHT || direction == ItemTouchHelper.LEFT) {
                         val indexOfGame = viewHolder.adapterPosition
                         viewModel.removeGame(indexOfGame)
                         adapter.notifyItemRemoved(indexOfGame)
@@ -106,7 +100,8 @@ class MygamelistFragment : Fragment() {
             game?.let {
                 this.findNavController().navigate(
                     MygamelistFragmentDirections
-                        .actionNavigationGameslistToGamelistDetail(game.id))
+                        .actionNavigationGameslistToGamelistDetail(game.id)
+                )
                 viewModel.onGamelistDetailNavigated()
             }
         })
@@ -148,16 +143,29 @@ class MygamelistFragment : Fragment() {
                 .make(
                     it.findViewById(R.id.mygame_list),
                     "${viewModel.currentgame.value?.title} deleted from your list",
-                    Snackbar.LENGTH_LONG)
+                    Snackbar.LENGTH_LONG
+                )
                 .setAction(
                     "UNDO",
                     View.OnClickListener {
                         viewModel.undoRemoveGame(position)
-                        adapter.notifyDataSetChanged()
+                        adapter.notifyItemInserted(position)
+                        restoreScrollPositionAfterAdAdded()
                     }
                 )
         }
         val params: FrameLayout.LayoutParams = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
         params.bottomMargin = 100
         snackbar.show()
-    }}
+    }
+
+    // Scroll the view up if an element is added at index 0
+    private fun restoreScrollPositionAfterAdAdded() {
+        val recyclerView = this.activity?.mygame_list
+        val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
+        val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+        if (firstVisibleItemPosition == 0) {
+            layoutManager.scrollToPosition(0)
+        }
+    }
+}
