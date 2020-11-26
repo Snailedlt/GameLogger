@@ -14,6 +14,9 @@ import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.marginLeft
+import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamelistBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 
@@ -85,6 +89,7 @@ class MygamelistFragment : Fragment() {
                     TODO("Not yet implemented")
                 }
 
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     if (direction == ItemTouchHelper.RIGHT || direction == ItemTouchHelper.LEFT) {
                         val indexOfGame = viewHolder.adapterPosition
@@ -165,7 +170,7 @@ class MygamelistFragment : Fragment() {
         val snackbar = view?.let {
             Snackbar
                 .make(
-                    it.findViewById(R.id.mygame_list),
+                    it.findViewById(R.id.mygamelistLayout),
                     "${viewModel.currentgame.value?.title} deleted from your list",
                     Snackbar.LENGTH_LONG
                 )
@@ -179,14 +184,9 @@ class MygamelistFragment : Fragment() {
                 )
         }
         val bottomNavigationView = this.view?.rootView?.findViewById<BottomNavigationView>(R.id.nav_view)
-        val params = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
-        if (bottomNavigationView != null) {
-            params.bottomMargin = bottomNavigationView.height
-        }
-        snackbar.view.layoutParams = params
-        snackbar.anchorView = bottomNavigationView
-        Log.i("snackbar elevation:", snackbar.view.elevation.toString())
-        snackbar.show()
+        snackbar?.anchorView = bottomNavigationView
+        snackbar?.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+        snackbar?.show()
     }
 
     // Scroll the view up if an element is added at index 0

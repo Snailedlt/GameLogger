@@ -35,7 +35,6 @@
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
     </style>
-
     <style name="TextWithShadow">
         <item name="android:paddingLeft">4px</item>
         <item name="android:paddingBottom">4px</item>
