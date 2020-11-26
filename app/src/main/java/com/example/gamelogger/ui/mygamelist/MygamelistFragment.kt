@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Spinner
 import androidx.databinding.DataBindingUtil
@@ -17,8 +18,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
+import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamelistBinding
+import com.example.gamelogger.services.addSavedGame
 import com.example.gamelogger.services.deleteSavedGame
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 
 
@@ -82,12 +86,14 @@ class MygamelistFragment : Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     if(direction == ItemTouchHelper.RIGHT || direction == ItemTouchHelper.LEFT){
-                        deleteSavedGame(viewModel._games.value?.get(viewHolder.adapterPosition)?.id.toString())
-                        viewModel._games.value?.removeAt(viewHolder.adapterPosition)
-                        adapter.notifyItemRemoved(viewHolder.adapterPosition)
+                        val indexOfGame = viewHolder.adapterPosition
+                        viewModel.removeGame(indexOfGame)
+                        adapter.notifyItemRemoved(indexOfGame)
+                        if (viewModel.currentgame.value != null) {
+                            showSnackBar(adapter, indexOfGame)
+                        }
                     }
                 }
-
             }
         )
         helper.attachToRecyclerView(recyclerView.findViewById(R.id.mygame_list))
@@ -134,4 +140,24 @@ class MygamelistFragment : Fragment() {
 
         return binding.root
     }
-}
+
+    // Show snackbar when deleting a game
+    private fun showSnackBar(adapter: GamelistAdapter, position: Int) {
+        val snackbar = view?.let {
+            Snackbar
+                .make(
+                    it.findViewById(R.id.mygame_list),
+                    "${viewModel.currentgame.value?.title} deleted from your list",
+                    Snackbar.LENGTH_LONG)
+                .setAction(
+                    "UNDO",
+                    View.OnClickListener {
+                        viewModel.undoRemoveGame(position)
+                        adapter.notifyDataSetChanged()
+                    }
+                )
+        }
+        val params: FrameLayout.LayoutParams = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
+        params.bottomMargin = 100
+        snackbar.show()
+    }}

@@ -10,16 +10,15 @@ import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
 import com.example.gamelogger.helpers.bindGameStateButtons1
-import com.example.gamelogger.services.changeDatabaseGameState
-import com.example.gamelogger.services.getUserGameState
-import com.example.gamelogger.services.getUserGames
+import com.example.gamelogger.services.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.text.FieldPosition
 
 class MygamelistViewModel : ViewModel() {
 
     // The LiveData list of games to be presented
-    val _games = MutableLiveData<MutableList<Game>>()
+    private val _games = MutableLiveData<MutableList<Game>>()
     val games: LiveData<MutableList<Game>>
         get() = _games
 
@@ -111,6 +110,23 @@ class MygamelistViewModel : ViewModel() {
             game.state = state
             changeDatabaseGameState(game.id.toString(), state.toString())
         }
+    }
+
+    fun removeGame(position: Int) {
+        val game = games.value?.get(position)
+        _currentgame.value = game?.copy()
+        _currentgame.value?.state = game?.state
+        deleteSavedGame(game?.id.toString())
+        _games.value?.removeAt(position)
+    }
+
+    fun undoRemoveGame(position: Int) {
+        val game = currentgame.value
+        game?.chosenPlatform?.let { it1 ->
+            addSavedGame(game.id.toString(), game.state.toString(), it1)
+        }
+        game?.let { _games.value?.add(position, it) }
+        _currentgame.value = null
     }
 
     fun onGamelistDetailNavigated() {

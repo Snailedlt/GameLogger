@@ -127,8 +127,6 @@ class GamesearchFragment : Fragment() {
                     "UNDO",
                     View.OnClickListener {
                         deleteSavedGame(game.id.toString())
-                        Log.i(game.title, "deleted")
-                        // viewModel.deleteGame(game.id)
                     }
                 )
         }
