@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Spinner
@@ -129,10 +130,27 @@ class MygamelistFragment : Fragment() {
         }
 
         // assigns listener to sortSpinner in fragment_gamelist.xml
-        spinner = binding.root.findViewById(R.id.sortSpinner)
+
         spinner.onItemSelectedListener = listener;
 */
-
+        spinner = binding.root.findViewById(R.id.sortSpinner)
+        spinner.setSelection(0, false);
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                viewModel._games.observe(viewLifecycleOwner, { gamelost ->
+                    viewModel.sortMyGamesList(spinner, gamelost)
+                    viewModel._games.removeObservers(viewLifecycleOwner);
+                })
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
         return binding.root
     }
 

@@ -309,7 +309,7 @@ fun getOneGameSavedPlatforms(spillid: String, myCallback: (String) -> Unit) {
     }
 }
 
-fun deleteAllSavedGames(myCallback: (String) -> Unit) {
+fun deleteAllSavedGames() {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
