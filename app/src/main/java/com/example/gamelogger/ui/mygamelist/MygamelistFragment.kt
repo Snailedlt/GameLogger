@@ -148,7 +148,7 @@ class MygamelistFragment : Fragment() {
                 id: Long
             ) {
                 viewModel.games.observe(viewLifecycleOwner, { gamelost ->
-                    //viewModel.sortMyGamesList(spinner, gamelost)
+                    viewModel.sortMyGamesList(spinner, gamelost)
                     viewModel.games.removeObservers(viewLifecycleOwner);
                 })
             }

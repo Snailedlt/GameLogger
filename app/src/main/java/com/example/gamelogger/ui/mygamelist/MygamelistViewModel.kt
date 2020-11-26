@@ -2,6 +2,7 @@ package com.example.gamelogger.ui.mygamelist
 
 import android.util.Log
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -170,21 +171,30 @@ class MygamelistViewModel : ViewModel() {
     fun onGamelistDetailClicked(game: Game) {
         _navigateToGameListDetail.value = game
     }
+
     fun sortMyGamesList(sortSpinner: Spinner, gamelist:MutableList<Game>){
-        var sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
-        when(sortSpinner.selectedItem.toString()) {
-            "Name" -> {
-                sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
-                Log.i("getUserGames", sortedList.toString())
-            }
-            "Release date" -> {
-                sortedList = gamelist.sortedWith(compareBy { it.released }) as MutableList<Game>
-            }
-            "Date added" -> {
-                sortedList = gamelist.sortedWith(compareBy { it.metacritic }) as MutableList<Game>
+        val game = games.value
+        if (game != null) {
+            if (game.isNotEmpty()) {
+                var sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
+                when(sortSpinner.selectedItem.toString()) {
+                    "Name" -> {
+                        sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
+                        Log.i("getUserGames", sortedList.toString())
+                    }
+                    "Release date" -> {
+                        sortedList = gamelist.sortedWith(compareBy { it.released }) as MutableList<Game>
+                    }
+                    "Date added" -> {
+                        sortedList = gamelist.sortedWith(compareBy { it.metacritic }) as MutableList<Game>
+                    }
+                }
+                game?.let { _games.value?.removeAll(sortedList) }
+                game?.let { _games.value?.addAll(sortedList) }
             }
         }
-        _games.value = sortedList
+
+
     }
 
 }
