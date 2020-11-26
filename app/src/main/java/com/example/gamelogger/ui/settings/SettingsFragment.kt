@@ -34,7 +34,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 true
 
             }
-/*
+
         val clearSavedGamesButton: Preference = findPreference("clearSavedGames")!!
         clearSavedGamesButton.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
@@ -42,16 +42,14 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     .setMessage("Do you really want to delete all your games?")
                     .setPositiveButton(android.R.string.yes
                     ) { _, _ ->
-                        deleteAllSavedGames {
-                            Log.e("Delete", "All user games deleted")
-                        }
+                        deleteAllSavedGames()
                     }
                     .setNegativeButton(android.R.string.no, null).show()
 
                 true
             }
 
- */
+
     }
 
 
