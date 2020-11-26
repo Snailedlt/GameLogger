@@ -1,7 +1,9 @@
 package com.example.gamelogger.ui.mygamelist
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +11,9 @@ import android.widget.AdapterView
 import android.widget.FrameLayout
 import android.widget.SearchView
 import android.widget.Spinner
+import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.databinding.FragmentGamelistBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 
@@ -141,9 +147,9 @@ class MygamelistFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                viewModel._games.observe(viewLifecycleOwner, { gamelost ->
+                viewModel.games.observe(viewLifecycleOwner, { gamelost ->
                     //viewModel.sortMyGamesList(spinner, gamelost)
-                    viewModel._games.removeObservers(viewLifecycleOwner);
+                    viewModel.games.removeObservers(viewLifecycleOwner);
                 })
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -154,6 +160,7 @@ class MygamelistFragment : Fragment() {
     }
 
     // Show snackbar when deleting a game
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun showSnackBar(adapter: GamelistAdapter, position: Int) {
         val snackbar = view?.let {
             Snackbar
@@ -171,8 +178,14 @@ class MygamelistFragment : Fragment() {
                     }
                 )
         }
-        val params: FrameLayout.LayoutParams = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
-        params.bottomMargin = 100
+        val bottomNavigationView = this.view?.rootView?.findViewById<BottomNavigationView>(R.id.nav_view)
+        val params = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
+        if (bottomNavigationView != null) {
+            params.bottomMargin = bottomNavigationView.height
+        }
+        snackbar.view.layoutParams = params
+        snackbar.anchorView = bottomNavigationView
+        Log.i("snackbar elevation:", snackbar.view.elevation.toString())
         snackbar.show()
     }
 

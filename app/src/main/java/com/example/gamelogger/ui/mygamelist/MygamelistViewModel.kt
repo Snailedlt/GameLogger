@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
 class MygamelistViewModel : ViewModel() {
 
     // The LiveData list of games to be presented
-    val _games = MutableLiveData<MutableList<Game>>()
+    private val _games = MutableLiveData<MutableList<Game>>()
     val games: LiveData<MutableList<Game>>
         get() = _games
 
@@ -135,6 +135,7 @@ class MygamelistViewModel : ViewModel() {
         val game = games.value?.get(position)
         _currentgame.value = game?.copy()
         _currentgame.value?.state = game?.state // ensures that the correct state is restored if the user undos the deletion
+        _currentgame.value?.dateAdded = game?.dateAdded
         viewModelScope.launch {
             deleteSavedGame(game?.id.toString())
         }
