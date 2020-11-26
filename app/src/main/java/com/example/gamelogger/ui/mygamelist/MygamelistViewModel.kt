@@ -179,18 +179,18 @@ class MygamelistViewModel : ViewModel() {
                 var sortedList: MutableList<Game>
                 when(sortSpinner.selectedItem.toString()) {
                     "Name" -> {
-                        sortedList = gamelist.sortedWith(compareByDescending { it.title }) as MutableList<Game>
+                        sortedList = gamelist.sortedBy{ it.title } as MutableList<Game>
                         _games.value?.removeAll(sortedList)
                         _games.value?.addAll(sortedList)
                     }
                     "Release date" -> {
-                        sortedList = gamelist.sortedWith(compareBy { it.released }) as MutableList<Game>
+                        sortedList = gamelist.sortedBy{ it.released } as MutableList<Game>
                         _games.value?.removeAll(sortedList)
                         _games.value?.addAll(sortedList)
 
                     }
                     "Date added" -> {
-                        sortedList = gamelist.sortedWith(compareByDescending { it.dateAdded }) as MutableList<Game>
+                        sortedList = gamelist.sortedByDescending{ it.dateAdded } as MutableList<Game>
                         _games.value?.removeAll(sortedList)
                         _games.value?.addAll(sortedList)
                     }
