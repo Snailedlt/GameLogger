@@ -75,7 +75,7 @@ class MygamelistViewModel : ViewModel() {
                                 gamelist[count].chosenPlatform = chosenPlatform
                                 gamelist[count].dateAdded = dateAdded
                                 count++
-                            } else if (id.endsWith("*am$") || id.endsWith("*pm$")) {
+                            } else if (id.endsWith("am") || id.endsWith("pm")) {
                                 dateAdded = id
                             }
                                 else {
