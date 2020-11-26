@@ -11,6 +11,9 @@ import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
 import com.example.gamelogger.services.addSavedGame
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GamesearchViewModel : ViewModel() {
 
@@ -110,7 +113,12 @@ class GamesearchViewModel : ViewModel() {
     fun saveGame(game: Game) {
         game.state = GameState.BACKLOG
         Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}, platform is ${game.chosenPlatform.toString()}")
-        addSavedGame(game.id.toString(), game.state.toString(), game.chosenPlatform.toString())
+        var date = Date()
+        val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK)
+        val datoLagtTil: String = formatter.format(date)
+        addSavedGame(game.id.toString(), game.state.toString(), game.chosenPlatform.toString(),
+            datoLagtTil
+        )
     }
 
     /**

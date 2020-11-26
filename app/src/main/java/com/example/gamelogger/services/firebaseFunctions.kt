@@ -4,12 +4,13 @@ import android.util.Log
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.collections.ArrayList
 
 /**
  * Legger til spill i Firestore databasen
  * addSavedGame(Spillid, spillstate)
  * */
-fun addSavedGame(spillid: String, spillstate: String, spillPlat: String) {
+fun addSavedGame(spillid: String, spillstate: String, spillPlat: String, spillDatoAdded: String) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
@@ -21,7 +22,8 @@ fun addSavedGame(spillid: String, spillstate: String, spillPlat: String) {
         val nestedData = hashMapOf(
             "spill id" to spillid,
             "spill state" to spillstate,
-            "spill platform" to spillPlat
+            "spill platform" to spillPlat,
+            "spill lagt til" to spillDatoAdded
         )
 
         docRef.get()
@@ -94,10 +96,11 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
                         val id = document.data["spill id"].toString()
                         val state = document.data["spill state"].toString()
                         val platform = document.data["spill platform"].toString()
+                        val dateAdded = document.data["spill lagt til"].toString()
                         list.add(state)
                         list.add(platform)
+                        list.add(dateAdded)
                         list.add(id)
-
                     }
                     myCallback(list)
                 } else {

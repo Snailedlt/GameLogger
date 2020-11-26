@@ -134,7 +134,6 @@ class MygamelistFragment : Fragment() {
         spinner.onItemSelectedListener = listener;
 */
         spinner = binding.root.findViewById(R.id.sortSpinner)
-        spinner.setSelection(0, false);
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -143,7 +142,7 @@ class MygamelistFragment : Fragment() {
                 id: Long
             ) {
                 viewModel._games.observe(viewLifecycleOwner, { gamelost ->
-                    viewModel.sortMyGamesList(spinner, gamelost)
+                    //viewModel.sortMyGamesList(spinner, gamelost)
                     viewModel._games.removeObservers(viewLifecycleOwner);
                 })
             }

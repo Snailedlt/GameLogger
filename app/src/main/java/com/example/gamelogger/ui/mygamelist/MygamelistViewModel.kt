@@ -15,6 +15,9 @@ import com.example.gamelogger.services.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.FieldPosition
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * ViewModel class for the user's list of games
@@ -140,9 +143,13 @@ class MygamelistViewModel : ViewModel() {
      */
     fun undoRemoveGame(position: Int) {
         val game = currentgame.value
+        var date = Date()
+        val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK)
+        val datoLagtTil: String = formatter.format(date)
         viewModelScope.launch {
             game?.chosenPlatform?.let { it1 ->
-                addSavedGame(game.id.toString(), game.state.toString(), it1)
+                addSavedGame(game.id.toString(), game.state.toString(), it1,
+                    datoLagtTil)
             }
         }
         game?.let { _games.value?.add(position, it) }
