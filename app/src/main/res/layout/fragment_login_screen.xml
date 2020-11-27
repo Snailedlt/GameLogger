@@ -28,10 +28,10 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="40dp"
-                android:text="Game Logger"
+                android:text="@string/game_logger"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -46,10 +46,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:padding="15dp"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,10 +66,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="15dp"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,11 +86,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:hint="Username"
+                    android:hint="@string/username"
                     android:maxLength="10"
                     android:inputType="textPersonName"
                     android:padding="15dp"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:visibility="gone"
                     />
             </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +104,7 @@
                 android:gravity="right|center_vertical"
                 android:layoutDirection="rtl"
                 android:orientation="vertical"
-                android:text="Remember me"
+                android:text="@string/remember_me"
                 android:textDirection="ltr"
                 android:textSize="18sp"
                 android:buttonTint="@color/colorPrimary" />
@@ -119,7 +119,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:textColor="@color/colorWhite"
-                android:text="Log in"
+                android:text="@string/log_in"
                 android:textSize="16sp"
                 app:backgroundTint="@color/colorPrimary" />
 
@@ -133,7 +133,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
                 android:textColor="@color/colorWhite"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textSize="16sp"
                 app:backgroundTint="@color/colorPrimaryLighter"/>
 

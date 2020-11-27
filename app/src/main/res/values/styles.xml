@@ -34,6 +34,11 @@
 
     <style name="SpinnerTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:popupBackground">@color/colorBlack</item>
+    </style>
+    <style name="SpinnerColors">
+
+
     </style>
     <style name="TextWithShadow">
         <item name="android:paddingLeft">4px</item>

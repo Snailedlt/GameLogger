@@ -118,25 +118,7 @@ class MygamelistFragment : Fragment() {
         searchView = binding.root.findViewById(R.id.searchBar)
         searchView.setOnClickListener { searchView.isIconified = false }
 
-/*
-        // Creates an OnItemSelectedListener, which will later be used to change the color of spinner
-        val listener: OnItemSelectedListener = object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {
-                (parent.getChildAt(0) as TextView).setTextColor(Color.WHITE)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-        // assigns listener to sortSpinner in fragment_gamelist.xml
-
-        spinner.onItemSelectedListener = listener;
-*/
+        // Spinner that lets you sort the list
         spinner = binding.root.findViewById(R.id.sortSpinner)
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -145,7 +127,9 @@ class MygamelistFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
+                // observes the gamelist in the viewmodel and sends it in a function
                 viewModel.games.observe(viewLifecycleOwner, { gamelost ->
+                    // Function that sort and adds the list
                     viewModel.sortMyGamesList(spinner, gamelost)
                     viewModel.games.removeObservers(viewLifecycleOwner);
                     adapter.notifyDataSetChanged();

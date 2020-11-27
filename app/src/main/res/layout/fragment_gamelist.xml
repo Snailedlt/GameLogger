@@ -39,11 +39,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sortLabel">
             <Spinner
+                android:theme="@style/SpinnerColors"
                 android:id="@+id/sortSpinner"
-                style="@style/SpinnerTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorSecondary"
+                style="@style/SpinnerTheme"
                 android:entries="@array/sorting_options" />
         </RelativeLayout>
 

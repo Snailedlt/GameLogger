@@ -113,7 +113,8 @@ class GamesearchViewModel : ViewModel() {
     fun saveGame(game: Game) {
         game.state = GameState.BACKLOG
         Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}, platform is ${game.chosenPlatform.toString()}")
-        var date = Date()
+        // Gets the current date
+        val date = Date()
         val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK)
         val datoLagtTil: String = formatter.format(date)
         addSavedGame(game.id.toString(), game.state.toString(), game.chosenPlatform.toString(),

@@ -22,20 +22,4 @@
     <color name="colorXbox">#48D12F</color>
     <color name="colorNintendo">#FF3737</color>
 
-
-    <!--GREEN
-    <color name="colorSecondary">#00c853</color>
-    <color name="colorSecondaryDark">#009423</color>
-    <color name="colorSecondaryLight">#5efa81</color>-->
-
-    <!--RED
-    <color name="colorSecondary">#d32f2f</color>
-    <color name="colorSecondaryDark">#9a0007</color>
-    <color name="colorSecondaryLight">#ff6659</color>-->
-
-
-    <!--CYAN
-    <color name="colorSecondary">#18ffff</color>
-    <color name="colorSecondaryDark">#00cbcc</color>
-    <color name="colorSecondaryLight">#76ffff</color>-->
 </resources>

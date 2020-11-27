@@ -2,7 +2,6 @@ package com.example.gamelogger.ui.mygamelist
 
 import android.util.Log
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,13 +10,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
-import com.example.gamelogger.helpers.bindGameStateButtons1
 import com.example.gamelogger.services.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.text.FieldPosition
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -60,26 +55,34 @@ class MygamelistViewModel : ViewModel() {
     private fun getGamesList() {
         viewModelScope.launch {
             try {
+                // Gets users stored games in a MutableList that contains game id, state,
+                // chosen platform and date added
                 getUserGames { savedGames ->
                     CoroutineScope(viewModelScope.coroutineContext).launch {
                         val gamelist = ArrayList<Game>()
                         var count = 0
                         var state = GameState.BACKLOG
-                        var chosenPlatform = "HELPIMSTUCKINTHISPHONE"
-                        var dateAdded = "SDdd"
+                        var chosenPlatform = "_"
+                        var dateAdded = "_"
                         _status.value = ListStatus.LOADING
+                        // Loops all info from getUserGames function
                         for (id in savedGames) {
+                            // Only picks up numbers which is id
                             if (id.isDigitsOnly()){
-
+                                //
                                 gamelist.add(GameApi.retrofitService.getMyGames(id))
+                                // Adds data into correct Game object
                                 gamelist[count].state = state
                                 gamelist[count].chosenPlatform = chosenPlatform
                                 gamelist[count].dateAdded = dateAdded
                                 count++
-                            } else if (id.endsWith("am") || id.endsWith("pm")) {
+                            }
+                            // Only picks up data with am and pm endings which are dates
+                            else if (id.endsWith("am") || id.endsWith("pm")) {
                                 dateAdded = id
                             }
-                                else {
+                            else {
+                                // Only picks up gamestates
                                 when (id) {
                                     "BACKLOG" -> {
                                         state = GameState.BACKLOG
@@ -90,6 +93,7 @@ class MygamelistViewModel : ViewModel() {
                                     "DONE" -> {
                                         state = GameState.DONE
                                     }
+                                    // Rest are platforms
                                     else -> {
                                         chosenPlatform = id
                                     }
@@ -150,13 +154,10 @@ class MygamelistViewModel : ViewModel() {
      */
     fun undoRemoveGame(position: Int) {
         val game = currentgame.value
-        var date = Date()
-        val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK)
-        val datoLagtTil: String = formatter.format(date)
         viewModelScope.launch {
             game?.chosenPlatform?.let { it1 ->
                 addSavedGame(game.id.toString(), game.state.toString(), it1,
-                    datoLagtTil)
+                    game.dateAdded.toString())
             }
         }
         game?.let { _games.value?.add(position, it) }
@@ -172,11 +173,16 @@ class MygamelistViewModel : ViewModel() {
         _navigateToGameListDetail.value = game
     }
 
+    /**
+     *   Funksjon som sorterer My List gjennom valg fra en spinner,
+     *   Kan sortere ved navn, utgivelse dato eller dato spillet ble lagt til i databasen,
+     *   Sorterer listen og deretter sletter den usorterte og setter inn den sorterte
+     */
     fun sortMyGamesList(sortSpinner: Spinner, gamelist:MutableList<Game>){
         val game = games.value
         if (game != null) {
             if (game.isNotEmpty()) {
-                var sortedList: MutableList<Game>
+                val sortedList: MutableList<Game>
                 when(sortSpinner.selectedItem.toString()) {
                     "Name" -> {
                         sortedList = gamelist.sortedBy{ it.title } as MutableList<Game>
@@ -187,7 +193,6 @@ class MygamelistViewModel : ViewModel() {
                         sortedList = gamelist.sortedBy{ it.released } as MutableList<Game>
                         _games.value?.removeAll(sortedList)
                         _games.value?.addAll(sortedList)
-
                     }
                     "Date added" -> {
                         sortedList = gamelist.sortedByDescending{ it.dateAdded } as MutableList<Game>

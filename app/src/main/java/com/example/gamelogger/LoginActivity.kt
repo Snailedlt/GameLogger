@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
     private lateinit var pref: SharedPreferences
+    // Variabel som brukes til å sjekke hvilken form(login eller registrering) brukeren er på
     private var form = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,25 +30,32 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+        // Fjerner bar i toppen
         supportActionBar?.hide()
 
+        // Henter login og registrering knappene og legger dem i variabel
         val loginbutton = findViewById<Button>(R.id.login_knapp)
         val signupButton = findViewById<Button>(R.id.signup_knapp)
 
-        // Sjekker om remember me var krysset av
+        // Sjekker om remember me checkbox var krysset av
         rememberMeCheckboxCheck()
 
+        // Dette skjer om log in knappen trykkes
         loginbutton.setOnClickListener {
+
+            // Fjerner alle gamle feilmeldinger
             clearAllErrors()
+            // Felt for brukernavn fjernes siden det ikke er nødvendig ved innlogging
             usernameTextField.isVisible = false
             usernameText.isVisible = false
+            // Funksjon som endrer farger på knappene
             buttonColorChange("#79878F", "#263238")
 
-
+            // Hvis login feltene ikke er tomme
             if (emailTextField.editText?.text.toString()
                     .isNotEmpty() && passwordTextField.editText?.text.toString().isNotEmpty()
             ) {
-                // Firebase Authentication
+                // Login funksjon
                 logIn(
                     emailTextField.editText?.text.toString(),
                     passwordTextField.editText?.text.toString()
@@ -56,23 +64,30 @@ class LoginActivity : AppCompatActivity() {
             } else if (form) {
                 form = false
             } else {
+                //
                 passwordTextField.isPasswordVisibilityToggleEnabled = false;
                 emptyFormFieldsCheck()
 
             }
         }
 
+        // Dette skjer om sign up knappen trykkes
         signupButton.setOnClickListener {
+
+            // Fjerner alle gamle feilmeldinger
             clearAllErrors()
+            // Felt for brukernavn dukker opp
             usernameTextField.isVisible = true
             usernameText.isVisible = true
+            // Funksjon som endrer farger på knappene
             buttonColorChange("#263238", "#79878F")
 
+            // Hvis alle feltene ikke er tomme
             if (passwordTextField.editText?.text.toString()
                     .isNotEmpty() && emailTextField.editText?.text.toString()
                     .isNotEmpty() && usernameText.editText?.text.toString().isNotEmpty()
             ) {
-                // Firebase Authentication
+                // funksjon som lager bruker
                 createUser(
                     emailTextField.editText?.text.toString(),
                     passwordTextField.editText?.text.toString(),
@@ -90,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     *   registrering funksjon som blir kalt ved sign in knappen og registrerer bruker i firebase og logger inn
+     *   registrering funksjon som blir kalt ved sign in knappen, registrerer bruker i firebase og logger inn
      */
     private fun createUser(email: String, password: String, username: String) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -100,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
 
-                    // Firestore database
+                    // Lagrer ekstra data i Firestore database
                     val bruker = hashMapOf(
                         "email" to emailTextField.editText?.text.toString(),
                         "username" to usernameText.editText?.text.toString()
@@ -109,11 +124,15 @@ class LoginActivity : AppCompatActivity() {
                         .set(bruker)
                 } else {
                     Log.e("Opprettelse av bruker", "Feilet" + task.exception)
+                    // Viser feilmelding i UI
                     formErrorMessages(task)
                 }
     }
     }
 
+    /**
+     *   Error meldinger hvis bruker skriver feil ved innlogging og registrering
+     */
     private fun formErrorMessages(task: Task<AuthResult?>) {
         //Hvis authentication feiler
         if (!task.isSuccessful) {
@@ -135,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     *   Innlogging funksjon som blir kalt ved log in knappen og sjekker firebase om autentisering
+     *   Innlogging funksjon som blir kalt ved log in knappen, sjekker firebase om autentisering og logger inn
      */
     private fun logIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -151,7 +170,7 @@ class LoginActivity : AppCompatActivity() {
             }
     }
     /**
-     *   Endrer knappene login og signup ved trykk for å enklere vise hvilken form man er på
+     *   Endrer knappene login og signup ved trykk for å enklere vise om man er på log in eller sign in
      */
     private fun buttonColorChange(signUpColor: String, loginColor: String) {
         val loginbutton = findViewById<Button>(R.id.login_knapp)
@@ -176,6 +195,9 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     *   Funksjon som fjerner alle error meldinger på LoginActivity
+     */
     private fun clearAllErrors() {
         emailText.error = null
         passwordText.error = null
@@ -183,6 +205,9 @@ class LoginActivity : AppCompatActivity() {
         passwordTextField.isPasswordVisibilityToggleEnabled = true;
     }
 
+    /**
+     *   Funksjon som sjekker om alle registrering/login feltene er fylt inn
+     */
     private fun emptyFormFieldsCheck() {
         if(passwordTextField.editText?.text.toString().isEmpty()) {
             passwordText.error = "You need to enter an password"
@@ -196,7 +221,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     /**
-     *   Sjekker om bruker er logget inn allerede ved oppstart
+     *   Sjekker om bruker er logget inn ved oppstart
      */
     override fun onStart() {
         super.onStart()
@@ -205,9 +230,6 @@ class LoginActivity : AppCompatActivity() {
         if (bruker != null && test == "true") {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
         }
     }
-
-
 }
