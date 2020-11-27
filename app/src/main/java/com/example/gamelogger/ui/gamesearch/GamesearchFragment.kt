@@ -20,6 +20,8 @@ import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
 import com.example.gamelogger.services.deleteSavedGame
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -130,9 +132,10 @@ class GamesearchFragment : Fragment() {
                     }
                 )
         }
-        val params: FrameLayout.LayoutParams = snackbar?.view?.layoutParams as FrameLayout.LayoutParams
-        params.bottomMargin = 100
-        snackbar.show()
+        val bottomNavigationView = this.view?.rootView?.findViewById<BottomNavigationView>(R.id.nav_view)
+        snackbar?.anchorView = bottomNavigationView
+        snackbar?.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+        snackbar?.show()
     }
 
 }

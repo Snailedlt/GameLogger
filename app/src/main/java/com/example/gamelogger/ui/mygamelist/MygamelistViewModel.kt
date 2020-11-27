@@ -176,21 +176,25 @@ class MygamelistViewModel : ViewModel() {
         val game = games.value
         if (game != null) {
             if (game.isNotEmpty()) {
-                var sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
+                var sortedList: MutableList<Game>
                 when(sortSpinner.selectedItem.toString()) {
                     "Name" -> {
-                        sortedList = gamelist.sortedWith(compareBy { it.title }) as MutableList<Game>
-                        Log.i("getUserGames", sortedList.toString())
+                        sortedList = gamelist.sortedBy{ it.title } as MutableList<Game>
+                        _games.value?.removeAll(sortedList)
+                        _games.value?.addAll(sortedList)
                     }
                     "Release date" -> {
-                        sortedList = gamelist.sortedWith(compareBy { it.released }) as MutableList<Game>
+                        sortedList = gamelist.sortedBy{ it.released } as MutableList<Game>
+                        _games.value?.removeAll(sortedList)
+                        _games.value?.addAll(sortedList)
+
                     }
                     "Date added" -> {
-                        sortedList = gamelist.sortedWith(compareBy { it.metacritic }) as MutableList<Game>
+                        sortedList = gamelist.sortedByDescending{ it.dateAdded } as MutableList<Game>
+                        _games.value?.removeAll(sortedList)
+                        _games.value?.addAll(sortedList)
                     }
                 }
-                game?.let { _games.value?.removeAll(sortedList) }
-                game?.let { _games.value?.addAll(sortedList) }
             }
         }
 
