@@ -1,5 +1,6 @@
 package com.example.gamelogger.ui.profile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.example.gamelogger.R
 import com.example.gamelogger.helpers.intToRGB
@@ -45,7 +48,8 @@ class ProfilePlatformsFragment : Fragment() {
             var textView3: View // texview to the Right
 
             var count = 1
-            /* Iterates through the hashMap provided by getUserGamePlatform, and puts the keys and
+
+            /** Iterates through the hashMap provided by getUserGamePlatform, and puts the keys and
              * values into two seperate ArrayLists. The key corresponds to the platform name,
              * and the value corresponds to the number of games the user owns, that is of a certain platform
              */
@@ -59,7 +63,10 @@ class ProfilePlatformsFragment : Fragment() {
                 platformCountsArrayList.add(value) // adds value to the end of the platformCountsArrayList
                 colorClassArrayList.add(color) //adds color to the end of the colorClassArrayList
 
-                // imageview to the left
+                // sets an imageview to the left in parent
+                val unwrappedDrawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_circle_black)
+                val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+                DrawableCompat.setTint(wrappedDrawable, color)
                 imageView = ImageView(context)
                 imageView.id =  View.generateViewId()
                 imageView.setBackgroundResource(R.drawable.ic_circle_black);
@@ -69,7 +76,11 @@ class ProfilePlatformsFragment : Fragment() {
                 imageView.setLayoutParams(params)
                 layout.addView(imageView)
 
-                //textview to the right of imageView
+
+                /* sets a textview(textView2) to the end of imageView, textView2 gets a generated id,
+                 * the text gets set to the platformname , and the layout is placed beneath
+                 * the previous textView2
+                 */
                 textView2 = TextView(context)
                 textView2.id =  View.generateViewId()
                 textView2.text = key
@@ -80,29 +91,39 @@ class ProfilePlatformsFragment : Fragment() {
                 textView2.setLayoutParams(params3)
                 layout.addView(textView2)
 
-                //textview to the right
+                /* sets a textview(textView3) to the right in parent, textView3 gets a generated id,
+                 * the text gets set to the value of the platform. If it's not the first iteration
+                 * of the loop, then the layout is placed beneath the previous textView3.
+                 */
                 textView3 = TextView(context)
                 textView3.id =  View.generateViewId()
                 textView3.text = value.toInt().toString()
                 val params2 = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                if(count>1) params2.addRule(RelativeLayout.BELOW, prevID2)
+                if(count>1) params2.addRule(RelativeLayout.BELOW, prevID2) //Checks if it's the first iteration of the loop, and places layout below the previous textView3 if it isn't.
                 params2.addRule(RelativeLayout.ALIGN_PARENT_END)
                 textView3.setLayoutParams(params2)
                 layout.addView(textView3)
 
+                //Sets the prevID variables to the current ID
                 prevID1 = imageView.id
                 prevID2 = textView2.id
                 prevID3 = textView3.id
 
+                //increments the count by one
                 count++
             }
+
+            //puts the data from platformCountsArrayList into an array called platformCountsArray
             val platformCountsArray = FloatArray(platformCountsArrayList.size)
             var index = 0
             for (value in platformCountsArrayList) {
                 platformCountsArray[index++] = value
             }
+
+            //Plots the platformCountsArray into the barDataSet, which makes out the chart data
             val barDataSet = BarDataSet(dataValuesPlatforms(platformCountsArray), "Bar Set")
             val barData = BarData(barDataSet)
+
 
             barDataSet.setDrawValues(false)
             barDataSet.colors = colorClassArrayList

@@ -19,14 +19,14 @@ fun <T> listToPresentableString(list: List<T>?) : String {
  * Uses the context, and a pixel value, to convert into a Density-independent Pixel(dp) value
  */
 fun dpFromPx(context: Context, px: Float): Float {
-    return px / context.getResources().getDisplayMetrics().density
+    return px / context.resources.displayMetrics.density
 }
 
 /**
  * Uses the context, and a Density-independent Pixel(dp) value, to convert into a pixel value
  */
 fun pxFromDp(context: Context, dp: Float): Float {
-    return dp * context.getResources().getDisplayMetrics().density
+    return dp * context.resources.displayMetrics.density
 }
 
 /**
