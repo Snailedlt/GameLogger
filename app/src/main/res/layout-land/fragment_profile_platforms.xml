@@ -41,185 +41,19 @@
 
     </RelativeLayout>
 
+
     <ScrollView
-        android:id="@+id/ScrollView01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:scrollbars="none"
+        android:id="@+id/scrollView_profile_platforms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/stacked_HorizontalBarChartParent_platforms">
-
         <RelativeLayout
+            android:id="@+id/wrapper"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:id="@+id/firstView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toLeftOf="@+id/secondView">
-
-                <ImageView
-                    android:id="@+id/iV_android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle_green"
-                    android:layout_marginTop="@dimen/stats_circle_spacing_diff"
-                    android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-                <TextView
-                    android:id="@+id/tV_android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/iV_android"
-                    android:text="Android"
-                    android:textColor="#26448F" />
-
-                <TextView
-                    android:id="@+id/tV_num_android"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/default_num_platforms"
-                    android:textColor="#26448F" />
-
-                <!-- Playstation 4 -->
-                <ImageView
-                    android:id="@+id/iV_playstation_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle_blue"
-                    android:layout_below="@+id/iV_android"
-                    android:layout_marginTop="@dimen/stats_circle_spacing"
-                    android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-                <TextView
-                    android:id="@+id/tV_playstation_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_android"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_toRightOf="@+id/iV_playstation_4"
-                    android:text="Playstation 4"
-                    android:textColor="#26448F" />
-
-                <TextView
-                    android:id="@+id/tV_num_playstation_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_android"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/default_num_platforms"
-                    android:textColor="#26448F" />
-
-                <!-- Xbox One -->
-                <ImageView
-                    android:id="@+id/iV_xbox_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle_yellow"
-                    android:layout_below="@+id/iV_playstation_4"
-                    android:layout_marginTop="@dimen/stats_circle_spacing"
-                    android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-                <TextView
-                    android:id="@+id/tV_xbox_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_playstation_4"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:text="Xbox One"
-                    android:textColor="#26448F"
-                    android:layout_toRightOf="@+id/iV_xbox_one"/>
-
-                <TextView
-                    android:id="@+id/tV_num_xbox_one"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_playstation_4"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/default_num_platforms"
-                    android:textColor="#26448F" />
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/secondView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerHorizontal="true" />
-
-            <RelativeLayout
-                android:id="@+id/thirdView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/secondView">
-
-                <!-- Nintendo Switch -->
-                <ImageView
-                    android:id="@+id/iV_nintendo_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle_red"
-                    android:layout_marginTop="@dimen/stats_circle_spacing_diff"
-                    android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-                <TextView
-                    android:id="@+id/tV_nintendo_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nintendo Switch"
-                    android:textColor="#26448F"
-                    android:layout_toRightOf="@+id/iV_nintendo_switch"/>
-
-                <TextView
-                    android:id="@+id/tV_num_nintendo_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/default_num_platforms"
-                    android:textColor="#26448F" />
-
-                <!-- PC -->
-                <ImageView
-                    android:id="@+id/iV_pc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_circle_magenta"
-                    android:layout_below="@+id/iV_nintendo_switch"
-                    android:layout_marginTop="@dimen/stats_circle_spacing"
-                    android:layout_marginHorizontal="@dimen/stats_circle_spacing"/>
-
-                <TextView
-                    android:id="@+id/tV_pc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_nintendo_switch"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:text="PC"
-                    android:textColor="#26448F"
-                    android:layout_toRightOf="@+id/iV_pc"/>
-
-                <TextView
-                    android:id="@+id/tV_num_pc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iV_nintendo_switch"
-                    android:layout_marginTop="@dimen/stats_text_spacing"
-                    android:layout_marginRight="15dp"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/default_num_platforms"
-                    android:textColor="#26448F" />
-
-            </RelativeLayout>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
         </RelativeLayout>
-
     </ScrollView>
 
 </RelativeLayout>
