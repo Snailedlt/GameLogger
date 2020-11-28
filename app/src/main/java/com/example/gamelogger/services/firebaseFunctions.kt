@@ -1,6 +1,7 @@
 package com.example.gamelogger.services
 
 import android.util.Log
+import com.example.gamelogger.classes.Game
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -9,7 +10,11 @@ import kotlin.collections.ArrayList
 /**
  *   Legger til ett spill i Firestore databasen
  **/
-fun addSavedGame(spillid: String, spillstate: String, spillPlat: String, spillDatoAdded: String) {
+fun addSavedGame(game: Game) {
+    val spillid = game.id.toString()
+    val spillstate = game.state.toString()
+    val spillPlat = game.chosenPlatform
+    val spillDatoAdded = game.dateAdded
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()

@@ -1,11 +1,12 @@
 package com.example.gamelogger.classes
 
 import android.util.Log
-import com.example.gamelogger.helpers.listToPresentableString
-import com.example.gamelogger.services.addSavedGame
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * Class for the Game object to be used throughout the app
+ */
 @JsonClass(generateAdapter = true)
 data class Game(
     //id is now required, because Int? doesn't work for safeargs from MygamelistFragment.kt to GamelistDetailFragment.kt
@@ -33,11 +34,14 @@ data class Game(
         this.platformsList = this.platformsToStringArray()
         Log.i("GameInfoPlatformsList", "List: " + platformsList.toString())
         this.state = GameState.BACKLOG
-        this.released = this.releasedYear()
+        this.released = this.releaseDateToYear()
         this.genresList = this.genresToPlatformArray()
     }
 
-    private fun releasedYear(): String? {
+    /**
+     * Converts the game's release date to just hold the year
+     */
+    private fun releaseDateToYear(): String? {
         return if (!this.released.equals(null))
             this.released?.split("-")?.get(0)
         else
@@ -70,11 +74,43 @@ data class Game(
         return null
     }
 
+    /**
+     * Saves a specific platform to a Game object
+     */
     fun setPlatform(platform: String?) {
         this.chosenPlatform = platform
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Game
+
+        if (platforms != null) {
+            if (other.platforms == null) return false
+            if (!platforms.contentEquals(other.platforms)) return false
+        } else if (other.platforms != null) return false
+        if (genres != null) {
+            if (other.genres == null) return false
+            if (!genres.contentEquals(other.genres)) return false
+        } else if (other.genres != null) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = platforms?.contentHashCode() ?: 0
+        result = 31 * result + (genres?.contentHashCode() ?: 0)
+        return result
+    }
 }
 
+/**
+ * Object for the search results retrieved when doing searches to
+ * the game database api. The results attribute stores a list of the
+ * Game objects to be used for display.
+ */
 data class GameSearchResults(
     val count: Int?,
     val next: String?,
@@ -82,10 +118,16 @@ data class GameSearchResults(
     val results: List<Game>
 )
 
+/**
+ * The Genre class
+ */
 data class Genre(
     var name: String?,
 )
 
+/**
+ * The Platforms class
+ */
 data class Platforms(
     @Json(name = "platform")
     var platform: Platform?,
@@ -93,6 +135,9 @@ data class Platforms(
     var released: String?,
 )
 
+/**
+ * The Platform class
+ */
 data class Platform(
     var name: String?,
 )

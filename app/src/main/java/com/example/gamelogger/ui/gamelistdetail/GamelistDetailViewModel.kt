@@ -31,7 +31,7 @@ class GamelistDetailViewModel(gameId: Int) : ViewModel() {
         try {
             getUserGames { currentGame ->
                 CoroutineScope(viewModelScope.coroutineContext).launch {
-                    val gameObject:Game = GameApi.retrofitService.getMyGames(gameId.toString())
+                    val gameObject:Game = GameApi.retrofitService.getGame(gameId.toString())
                     Log.i("GameInfo:", "Game: $gameObject")
                     _game.value = gameObject
                 }

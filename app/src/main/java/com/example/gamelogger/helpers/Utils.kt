@@ -2,6 +2,11 @@ package com.example.gamelogger.helpers
 
 import android.content.Context
 
+/**
+ * Converts a List to a string
+ * To be used when displaying Game attribute fields such as
+ * platformsList or genresList
+ */
 fun <T> listToPresentableString(list: List<T>?) : String {
     var string = ""
     if (list.isNullOrEmpty())

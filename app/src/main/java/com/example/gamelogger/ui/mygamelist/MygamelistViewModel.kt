@@ -70,7 +70,7 @@ class MygamelistViewModel : ViewModel() {
                             // Only picks up numbers which is id
                             if (id.isDigitsOnly()){
                                 //
-                                gamelist.add(GameApi.retrofitService.getMyGames(id))
+                                gamelist.add(GameApi.retrofitService.getGame(id))
                                 // Adds data into correct Game object
                                 gamelist[count].state = state
                                 gamelist[count].chosenPlatform = chosenPlatform
@@ -156,8 +156,7 @@ class MygamelistViewModel : ViewModel() {
         val game = currentgame.value
         viewModelScope.launch {
             game?.chosenPlatform?.let { it1 ->
-                addSavedGame(game.id.toString(), game.state.toString(), it1,
-                    game.dateAdded.toString())
+                addSavedGame(game)
             }
         }
         game?.let { _games.value?.add(position, it) }

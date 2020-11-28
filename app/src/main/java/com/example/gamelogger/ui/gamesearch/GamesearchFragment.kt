@@ -2,18 +2,13 @@ package com.example.gamelogger.ui.gamesearch
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.SearchView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
@@ -25,6 +20,9 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 
+/**
+ * The Fragment class for the Game search interface
+ */
 class GamesearchFragment : Fragment() {
 
     /**
@@ -48,30 +46,30 @@ class GamesearchFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        // Gets the adapter for the recyclerview, as well as defines the
+        // onclick methods for the recyclerview items
         binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
-            //viewModel.saveGame(it)
-            if (it.platformsList?.size!! > 1)
+            // The following code in this block is for when the user clicks on the
+            // add button on a game in the search list
+            if (it.platformsList?.size!! > 1) // if the game is available on more than a single platform, call platFormChoiceDialogue
                 platformChoiceDialogue(requireView(), it)
             else if (it.platformsList!![0].isNullOrEmpty())
                 viewModel.saveGame(it)
-            else {
+            else { // if the game only has one platform, save it directly
                 it.setPlatform(it.platformsList!![0])
                 viewModel.saveGame(it)
                 showSnackBar(it)
-                it.setPlatform(null)
+                it.setPlatform(null) // removes the saved game from the game object, as the relevant data has been saved to the database and "it" doesn't need the value
             }
         })
 
-        /**
-         * Search bar listener
-         */
+        // Search bar listener
         searchView = binding.root.findViewById(R.id.searchBar)
         searchView.setOnClickListener { searchView.isIconified = false }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(arg0: String?): Boolean {
                 val query = searchView.query.toString()
                 viewModel.searchGame(query)
-                Log.i("test1", "text submitted")
                 return true
             }
 
@@ -97,18 +95,22 @@ class GamesearchFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Function to show an alert dialogue with a game's
+     * available platforms, prompting the user to pick the platform
+     * they want to save
+     */
     private fun platformChoiceDialogue(view: View, game: Game) {
-        val platforms = game.platformsList?.toTypedArray()
-        Log.i("dialoguefunction", "clicked")
-        Log.i("gameclicked: ", game.platforms.toString())
-        // Log.i("gameclicked: ", game.platforms.platform)
+        val platforms = game.platformsList?.toTypedArray() // converts the List of platforms to an Array
 
+        // Builds an AlertDialog
         val builder = this.context?.let { AlertDialog.Builder(it) }
         with(builder)
         {
-            Log.i("dialoguefunction", "inside with")
             this?.setTitle("Pick a platform for ${game.title}")
             this?.setItems(platforms) { dialog, which ->
+                // Populates the dialogue's list of choices,
+                // as well as defining what to do when clicking them
                 platforms?.get(which)?.let { game.setPlatform(it) }
                 viewModel.saveGame(game)
                 showSnackBar(game)
@@ -117,7 +119,9 @@ class GamesearchFragment : Fragment() {
         }
     }
 
-    // Show snackbar when adding a game
+    /**
+     * Shows snackbar when a game is added
+     */
     private fun showSnackBar(game: Game) {
         val snackbar = view?.let {
             Snackbar
@@ -127,14 +131,18 @@ class GamesearchFragment : Fragment() {
                     Snackbar.LENGTH_LONG)
                 .setAction(
                     "UNDO",
+                    // UNDO button to allow user to undo adding a game
                     View.OnClickListener {
                         deleteSavedGame(game.id.toString())
                     }
                 )
         }
+        // Code to make the snackbar not overlap the navigation bar
         val bottomNavigationView = this.view?.rootView?.findViewById<BottomNavigationView>(R.id.nav_view)
         snackbar?.anchorView = bottomNavigationView
+        // Animates the snackbar with a fade in instead of sliding in from the bottom
         snackbar?.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+
         snackbar?.show()
     }
 

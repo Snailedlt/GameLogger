@@ -27,17 +27,16 @@ private val retrofit = Retrofit.Builder()
 
 // Queries to the game API
 interface GameApiService {
+    // Retrieve a list of games when typing in search queries
+    // This uses the api's own built-in search implementation
     @GET("games")
     suspend fun getGameList(@Query("search") type: String):
             GameSearchResults
 
+    // Retrieve a specific game using the game's database id
     @GET("games/{id}")
-    suspend fun getMyGames(@Path("id") type: String):
+    suspend fun getGame(@Path("id") type: String):
             Game
-
-    @GET
-    suspend fun getNextPage(@Url type: String):
-            GameSearchResults
 }
 
 object GameApi {

@@ -15,48 +15,39 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+/**
+ * The ViewModel class for the Game search interface
+ */
 class GamesearchViewModel : ViewModel() {
 
-    /**
-     * The Mutable LiveData that contains the search result as an object [GameSearchResults]
-     */
+    // The GameSearchResults object retrieved from the api call
     private val _gamesearchresult = MutableLiveData<GameSearchResults>()
     val gamesearchresult: LiveData<GameSearchResults>
         get() = _gamesearchresult
 
-    /**
-     * The Mutable LiveData that contains the list of [Game]s the search returns
-     */
+    // The Mutable LiveData that contains the list of [Game]s the search returns
     private val _gameresultlist = MutableLiveData<List<Game>>()
     val gameresultlist: LiveData<List<Game>>
         get() = _gameresultlist
 
-    /**
-     * An arraylist that is added to whenever the function [saveGame] is called.
-     * Should be reworked to add the game to an users list dynamically.
-     */
+    // An arraylist that is added to whenever the function [saveGame] is called.
+    // Should be reworked to add the game to an users list dynamically.
     private val _savedgames = MutableLiveData<ArrayList<Game>>()
     val savedgames: LiveData<ArrayList<Game>>
         get() = _savedgames
 
-    /**
-     * [_status] tells if the data in the fragment is loading, done loading
-     * or if there was an error
-     */
+    // status to tell the bindingadapters methods if the data is loading, done loading or had an error
     private val _status = MutableLiveData<SearchStatus>()
     val status: LiveData<SearchStatus>
         get() = _status
 
-    /**
-     * The SearchString that is used when searching for games in [getGamesList]
-     */
+    // The SearchString that is used when searching for games in [getGamesList]
     private val _searchString = MutableLiveData<String>()
     val searchString: LiveData<String>
         get() = _searchString
 
     init {
         _status.value = SearchStatus.EMPTY
-        //getGamesList(searchstring)
     }
 
     /**
@@ -87,39 +78,17 @@ class GamesearchViewModel : ViewModel() {
         }
     }
 
-    /*private fun getNextGamesList() {
-        viewModelScope.launch {
-            _status.value = SearchStatus.LOADING
-            try {
-                _gamesearchresults.value = GameApi.retrofitService
-                    .getGameList(getNextPageURL(searchString.value.toString())).results
-                if (searchString.value.toString().equals("")) {
-                    _status.value = SearchStatus.EMPTY
-                    _gamesearchresults.value = ArrayList()
-                } else _status.value = SearchStatus.DONE
-            } catch (e: Exception) {
-                Log.i("Exception: ", e.toString())
-                _status.value = SearchStatus.ERROR
-                _gamesearchresults.value = ArrayList()
-            }
-        }
-    }*/
-
     /**
-     * Adds the selected game to the [_savedgames] arraylist.
-     * Should add the game's id along with the chosen platform to a user file that is uploaded
-     * to a server instead of this method.
+     * Method called when saving a game to your list
      */
     fun saveGame(game: Game) {
-        game.state = GameState.BACKLOG
-        Log.i("Saved game: ", "${game.title} with id ${game.id}, state is ${game.state.toString()}, platform is ${game.chosenPlatform.toString()}")
-        // Gets the current date
-        val date = Date()
-        val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK)
-        val datoLagtTil: String = formatter.format(date)
-        addSavedGame(game.id.toString(), game.state.toString(), game.chosenPlatform.toString(),
-            datoLagtTil
-        )
+        game.state = GameState.BACKLOG // by default sets the game's state to BACKLOG (equivalent to "planning to play")
+        val date = Date() // Gets the current date
+        val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK) // Formats the date
+        val dateAdded: String = formatter.format(date)
+        game.dateAdded = dateAdded
+        addSavedGame(game)
+        game.dateAdded = null
     }
 
     /**
