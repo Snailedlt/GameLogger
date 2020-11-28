@@ -1,6 +1,5 @@
 package com.example.gamelogger.ui.profile
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -132,7 +131,7 @@ class ProfilePlatformsFragment : Fragment() {
         }
 
 
-        //Remove gridlines and labels
+        //Removes gridlines and labels from the stacked bar chart
         stackedChart?.xAxis!!.isEnabled = false
         stackedChart?.axisLeft!!.isEnabled = false
         stackedChart?.axisRight!!.isEnabled = false

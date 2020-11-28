@@ -44,7 +44,9 @@ class GamelistDetail : Fragment() {
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
 
-        /** Setting up LiveData observation relationship between the clicked game object, and the views in fragment_gamelist_detail.xml**/
+        /**
+         * Setting up LiveData observation relationship between the clicked game object, and the views in fragment_gamelist_detail.xml
+         */
         viewModel.game.observe(viewLifecycleOwner, { newGame ->
             //Kode for å bruke HTML tekst i et textview, hentet fra følgende stackoverflow svar: https://stackoverflow.com/a/2116191/12206312
             when {

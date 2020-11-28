@@ -26,6 +26,10 @@ class GamelistDetailViewModel(gameId: Int) : ViewModel() {
         Log.i("GameViewModel", "GameViewModel destroyed!")
     }
 
+    /**
+     * Takes the gameId as an input, and assigns the gameObject to the private _game variable,
+     * which can be accessed from the val game by external classes
+     */
     fun getGame(gameId: Int) {
 
         try {

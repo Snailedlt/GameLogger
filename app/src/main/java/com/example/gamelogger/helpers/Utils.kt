@@ -22,17 +22,23 @@ fun <T> listToPresentableString(list: List<T>?) : String {
 
 /**
  * Uses the context, and a pixel value, to convert into a Density-independent Pixel(dp) value
+ * Code from: https://stackoverflow.com/a/12147550/12206312
+ *
+ * Not used anywhere in the current app, but it was used during testing for some fragments
  */
-fun dpFromPx(context: Context, px: Float): Float {
-    return px / context.resources.displayMetrics.density
-}
+//fun dpFromPx(context: Context, px: Float): Float {
+//    return px / context.resources.displayMetrics.density
+//}
 
 /**
  * Uses the context, and a Density-independent Pixel(dp) value, to convert into a pixel value
+ * Code from: https://stackoverflow.com/a/12147550/12206312
+ *
+ * Not used anywhere in the current app, but it was used during testing for some fragments
  */
-fun pxFromDp(context: Context, dp: Float): Float {
-    return dp * context.resources.displayMetrics.density
-}
+//fun pxFromDp(context: Context, dp: Float): Float {
+//    return dp * context.resources.displayMetrics.density
+//}
 
 /**
  * Takes a hashcode: Int as parameter,
