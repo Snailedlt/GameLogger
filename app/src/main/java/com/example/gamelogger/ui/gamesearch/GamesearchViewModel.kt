@@ -54,7 +54,7 @@ class GamesearchViewModel : ViewModel() {
      * Function that makes a connection to the API and populates the [_gameresultlist]
      * mutable live data
      */
-    private fun getGamesList() {
+    private fun getGameSearchResults() {
         viewModelScope.launch {
             _status.value = SearchStatus.LOADING
             try {
@@ -93,13 +93,13 @@ class GamesearchViewModel : ViewModel() {
 
     /**
      * Function that gets the search string from a search bar, updates the [_searchString]
-     * value and then runs the [getGamesList] function
+     * value and then runs the [getGameSearchResults] function
      */
     fun searchGame(searchstring: String) {
         val string = searchstring
         string.replace(" ", "-")
         _searchString.value = string
-        getGamesList()
+        getGameSearchResults()
     }
 
 }

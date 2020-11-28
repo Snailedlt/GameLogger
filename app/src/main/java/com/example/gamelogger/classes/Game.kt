@@ -30,9 +30,7 @@ data class Game(
 ) {
 
     init {
-        Log.i("GameInfoPlatformsArray", platforms.toString() + "")
         this.platformsList = this.platformsToStringArray()
-        Log.i("GameInfoPlatformsList", "List: " + platformsList.toString())
         this.state = GameState.BACKLOG
         this.released = this.releaseDateToYear()
         this.genresList = this.genresToPlatformArray()

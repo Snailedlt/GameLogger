@@ -30,13 +30,11 @@ interface GameApiService {
     // Retrieve a list of games when typing in search queries
     // This uses the api's own built-in search implementation
     @GET("games")
-    suspend fun getGameList(@Query("search") type: String):
-            GameSearchResults
+    suspend fun getGameList(@Query("search") type: String) : GameSearchResults
 
     // Retrieve a specific game using the game's database id
     @GET("games/{id}")
-    suspend fun getGame(@Path("id") type: String):
-            Game
+    suspend fun getGame(@Path("id") type: String) : Game
 }
 
 object GameApi {
