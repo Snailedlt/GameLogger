@@ -154,7 +154,7 @@ class MygamelistFragment : Fragment() {
                     View.OnClickListener {
                         viewModel.undoRemoveGame(position)
                         adapter.notifyItemInserted(position)
-                        restoreScrollPositionAfterAdAdded()
+                        restoreScrollPositionAfterAdded()
                     }
                 )
         }
@@ -168,7 +168,7 @@ class MygamelistFragment : Fragment() {
     }
 
     // Scroll the view up if an element is added at index 0
-    private fun restoreScrollPositionAfterAdAdded() {
+    private fun restoreScrollPositionAfterAdded() {
         val recyclerView = this.activity?.mygame_list
         val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
         val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
