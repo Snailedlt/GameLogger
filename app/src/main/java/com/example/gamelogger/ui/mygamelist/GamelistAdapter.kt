@@ -9,29 +9,16 @@ import com.example.gamelogger.databinding.GamelistItemCardBinding
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 
+/**
+ * Adapter class for the My Games list interface's recyclerview
+ */
 class GamelistAdapter(
-    val buttonClickListener: GameButtonListener,
-    val cardClickListener: GameCardListener
+    private val buttonClickListener: GameButtonListener,
+    private val cardClickListener: GameCardListener
 ):
     ListAdapter<Game, GamelistAdapter.GameViewHolder>(DiffCallback) {
 
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-
-        // clicklisteners for game card buttons, for changing game state
-        //val game = getItem(position)
-//        val doneButton = holder.itemView.findViewById<Button>(R.id.button_done)
-//        val playingButton = holder.itemView.findViewById<Button>(R.id.button_playing)
-//        val backlogButton = holder.itemView.findViewById<Button>(R.id.button_planning)
-//
-//        doneButton.setOnClickListener {
-//            onClickListener.onClick(game)
-//        }
-//        playingButton.setOnClickListener {
-//            onClickListener.onClick(game)
-//        }
-//        backlogButton.setOnClickListener {
-//            onClickListener.onClick(game)
-//        }
         holder.bind(getItem(position)!!, buttonClickListener, cardClickListener)
     }
 
@@ -63,10 +50,16 @@ class GamelistAdapter(
     }
 }
 
+/**
+ * Clicklistener for the buttons to change a game's state
+ */
 class GameButtonListener(val clickListener: (game: Game, state: GameState) -> Unit) {
     fun myOnClick(game: Game, state: GameState) = clickListener(game, state)
 }
 
+/**
+ * Clicklistener for the cards containing game information
+ */
 class GameCardListener(val clickListener: (game: Game) -> Unit) {
     fun cardOnClick(game: Game) = clickListener(game)
 }

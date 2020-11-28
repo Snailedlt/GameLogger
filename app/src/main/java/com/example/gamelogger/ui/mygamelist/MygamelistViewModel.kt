@@ -26,9 +26,9 @@ class MygamelistViewModel : ViewModel() {
         get() = _games
 
     // The game most recently being interacted with, primarily used to restore a deleted game
-    private val _currentgame = MutableLiveData<Game>()
-    val currentgame: LiveData<Game>
-        get() = _currentgame
+    private val _lastInteractedGame = MutableLiveData<Game>()
+    val lastInteractedGame: LiveData<Game>
+        get() = _lastInteractedGame
 
     // status to keep track of if the app data is empty, loading or encountered an error
     private val _status = MutableLiveData<ListStatus>()
@@ -112,8 +112,9 @@ class MygamelistViewModel : ViewModel() {
                         }
                     }
                 }
-            } catch (e: Exception) { Log.i("h", "h")}
-            Log.i("status: ", status.value.toString())
+            } catch (e: Exception) {
+                _status.value = ListStatus.ERROR
+            }
         }
     }
 
@@ -124,7 +125,6 @@ class MygamelistViewModel : ViewModel() {
      * a game.
      */
     fun changeGameState(game: Game, state: GameState) {
-        _currentgame.value = game
         viewModelScope.launch {
             game.state = state
             changeDatabaseGameState(game.id.toString(), state.toString())
@@ -133,14 +133,14 @@ class MygamelistViewModel : ViewModel() {
 
     /**
      * Removes the game at the specified position, as well as from the database
-     * It also copies that game to [_currentgame] so it can easily be restored again
+     * It also copies that game to [_lastInteractedGame] so it can easily be restored again
      * when the user wants to undo deletion
      */
     fun removeGame(position: Int) {
         val game = games.value?.get(position)
-        _currentgame.value = game?.copy()
-        _currentgame.value?.state = game?.state // ensures that the correct state is restored if the user undos the deletion
-        _currentgame.value?.dateAdded = game?.dateAdded
+        _lastInteractedGame.value = game?.copy() // copies the game to lastInteractedGame so that action can be undone
+        _lastInteractedGame.value?.state = game?.state // ensures that the correct state is restored if the user undos the deletion
+        _lastInteractedGame.value?.dateAdded = game?.dateAdded // ensures that the correct date is restored if the user undos the deletion
         viewModelScope.launch {
             deleteSavedGame(game?.id.toString())
         }
@@ -153,15 +153,18 @@ class MygamelistViewModel : ViewModel() {
      * Undos deletion of a game
      */
     fun undoRemoveGame(position: Int) {
-        val game = currentgame.value
+        val game = lastInteractedGame.value // gets the game to be readded
         viewModelScope.launch {
-            game?.chosenPlatform?.let { it1 ->
-                addSavedGame(game)
-            }
+            game?.chosenPlatform?.let { addSavedGame(game) }
         }
         game?.let { _games.value?.add(position, it) }
+
+        // If you only have one game in your list and you remove it, status will be set to EMPTY.
+        // This code will make sure that when undoing this (removing the last game), status will
+        // be DONE again to not display the EMPTY message to the user
         _status.value = ListStatus.DONE
-        _currentgame.value = null
+
+        _lastInteractedGame.value = null // cleans up the value
     }
 
     fun onGamelistDetailNavigated() {
@@ -208,8 +211,6 @@ class MygamelistViewModel : ViewModel() {
                 }
             }
         }
-
-
     }
 
 }

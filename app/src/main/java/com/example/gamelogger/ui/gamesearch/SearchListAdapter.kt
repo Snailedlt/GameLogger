@@ -10,12 +10,12 @@ import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentSearchItemCardBinding
 
+/**
+ * Adapter class for the Game search interface's recyclerview
+ */
 class SearchListAdapter(private val onClickListener: OnClickListener)
     : ListAdapter<Game, SearchListAdapter.GamesearchViewHolder>(DiffCallback) {
 
-    /**
-     * Sørger for at fragmentet sitt view blir opprettet (inflated)
-     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GamesearchViewHolder {
         return GamesearchViewHolder(FragmentSearchItemCardBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -43,9 +43,6 @@ class SearchListAdapter(private val onClickListener: OnClickListener)
         }
     }
 
-    /**
-     *
-     */
     class GamesearchViewHolder(private var binding: FragmentSearchItemCardBinding):
         RecyclerView.ViewHolder(binding.root) {
         fun bind(game: Game) {

@@ -1,15 +1,12 @@
 package com.example.gamelogger.ui.mygamelist
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.SearchView
 import android.widget.Spinner
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,15 +21,14 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_gamelist.*
 
-
+/**
+ * Fragment class for My game list
+ */
 class MygamelistFragment : Fragment() {
 
     private lateinit var searchView: SearchView
     private lateinit var spinner: Spinner
 
-    /**
-     * Initializes the [MygamelistViewModel]
-     */
     val viewModel: MygamelistViewModel by lazy {
         ViewModelProvider(this).get(MygamelistViewModel::class.java)
     }
@@ -58,19 +54,20 @@ class MygamelistFragment : Fragment() {
         // Gives binding access to the MygamelistViewModel
         binding.viewModel = viewModel
 
+        // gives instructions to the clicklisteners handled by the recyclerview's adapter
         val adapter = GamelistAdapter(
             GameButtonListener { game, state ->
-                viewModel.changeGameState(game, state)
-                binding.mygameList.adapter?.notifyDataSetChanged()
+                viewModel.changeGameState(game, state) // changes the clicked game's curent state
+                binding.mygameList.adapter?.notifyDataSetChanged() // ensures that the interface is updated to reflect any changes
             },
             GameCardListener { game ->
-                Log.i("GameCardListener ", "Game clicked!: $game")
                 viewModel.onGamelistDetailClicked(game)
             }
         )
 
         val recyclerView = binding.mygameList
 
+        // initializes an ItemTouchHelper object to enable swiping cards to delete objects
         val helper = ItemTouchHelper(
             object :
                 ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT or ItemTouchHelper.LEFT) {
@@ -79,16 +76,17 @@ class MygamelistFragment : Fragment() {
                     viewHolder: RecyclerView.ViewHolder,
                     target: RecyclerView.ViewHolder
                 ): Boolean {
-                    TODO("Not yet implemented")
+                    TODO("Not implemented but method override is required")
                 }
 
-                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     if (direction == ItemTouchHelper.RIGHT || direction == ItemTouchHelper.LEFT) {
                         val indexOfGame = viewHolder.adapterPosition
                         viewModel.removeGame(indexOfGame)
+                        // notifies adapter when and where a game is removed to
+                        // let the interface reflect the changes
                         adapter.notifyItemRemoved(indexOfGame)
-                        if (viewModel.currentgame.value != null) {
+                        if (viewModel.lastInteractedGame.value != null) {
                             showSnackBar(adapter, indexOfGame)
                         }
                     }
@@ -143,13 +141,12 @@ class MygamelistFragment : Fragment() {
     }
 
     // Show snackbar when deleting a game
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun showSnackBar(adapter: GamelistAdapter, position: Int) {
         val snackbar = view?.let {
             Snackbar
                 .make(
                     it.findViewById(R.id.mygamelistLayout),
-                    "${viewModel.currentgame.value?.title} deleted from your list",
+                    "${viewModel.lastInteractedGame.value?.title} deleted from your list",
                     Snackbar.LENGTH_LONG
                 )
                 .setAction(
@@ -161,9 +158,12 @@ class MygamelistFragment : Fragment() {
                     }
                 )
         }
+        // Code to make the snackbar not overlap the navigation bar
         val bottomNavigationView = this.view?.rootView?.findViewById<BottomNavigationView>(R.id.nav_view)
         snackbar?.anchorView = bottomNavigationView
+        // Animates the snackbar with a fade in instead of sliding in from the bottom
         snackbar?.animationMode = BaseTransientBottomBar.ANIMATION_MODE_FADE
+
         snackbar?.show()
     }
 

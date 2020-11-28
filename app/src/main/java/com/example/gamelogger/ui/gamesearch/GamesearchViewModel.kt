@@ -87,7 +87,7 @@ class GamesearchViewModel : ViewModel() {
         val formatter = SimpleDateFormat("dd MMM yyyy HH:mma", Locale.UK) // Formats the date
         val dateAdded: String = formatter.format(date)
         game.dateAdded = dateAdded
-        addSavedGame(game)
+        addSavedGame(game) // saves game to the app's firebase db
         game.dateAdded = null
     }
 
@@ -96,20 +96,12 @@ class GamesearchViewModel : ViewModel() {
      * value and then runs the [getGamesList] function
      */
     fun searchGame(searchstring: String) {
-        Log.i("Searched: ", searchstring)
         val string = searchstring
         string.replace(" ", "-")
         _searchString.value = string
         getGamesList()
     }
 
-    /*fun searchNextGame() {
-        _gamesearchresult.value = GameApi.retrofitService.getNextPage(gamesearchresult.value?.next.toString())
-    }*/
-
-    private fun getNextPageURL(url: String): String {
-        return url.substring(29)
-    }
 }
 
 enum class SearchStatus { LOADING, ERROR, EMPTY, DONE }
