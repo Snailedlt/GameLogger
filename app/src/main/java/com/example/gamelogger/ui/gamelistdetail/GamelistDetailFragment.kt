@@ -89,12 +89,9 @@ class GamelistDetail : Fragment() {
         //Shows a toast of the gameId belonging to the game the user clicked
         //Toast.makeText(context, "Game Id: ${gameId}", Toast.LENGTH_LONG).show()
         //Logs the gamId to console
-        Log.i("GamelistDetail","Game Id: $gameId")
+        //Log.i("GamelistDetail","Game Id: $gameId")
 
-        //Sets the text of aboutTitle to the gameId retrieved from GamelistDetailArgs
-        //binding.aboutTitle.text = args.gameId.toString()
-
-        Log.i("GamelistDetailsFragment", "Called ViewModelProvider.get")
+        //Log.i("GamelistDetailsFragment", "Called ViewModelProvider.get")
 
         return binding.root
     }

@@ -17,13 +17,13 @@ class GamelistDetailViewModel(gameId: Int) : ViewModel() {
         get() = _game
 
     init {
-        Log.i("GamelistDetailViewModel", "GamelistDetailViewModel created!")
+        //Log.i("GamelistDetailViewModel", "GamelistDetailViewModel created!")
         getGame(gameId)
     }
 
     override fun onCleared() {
         super.onCleared()
-        Log.i("GameViewModel", "GameViewModel destroyed!")
+        //Log.i("GameViewModel", "GameViewModel destroyed!")
     }
 
     /**
@@ -36,7 +36,7 @@ class GamelistDetailViewModel(gameId: Int) : ViewModel() {
             getUserGames { currentGame ->
                 CoroutineScope(viewModelScope.coroutineContext).launch {
                     val gameObject:Game = GameApi.retrofitService.getGame(gameId.toString())
-                    Log.i("GameInfo:", "Game: $gameObject")
+                    //Log.i("GameInfo:", "Game: $gameObject")
                     _game.value = gameObject
                 }
             }

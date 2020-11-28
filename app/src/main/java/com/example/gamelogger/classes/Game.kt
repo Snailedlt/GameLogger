@@ -60,7 +60,7 @@ data class Game(
         return if (!this.platforms.isNullOrEmpty()){
             val list = mutableListOf<String?>()
             for (i in this.platforms!!.indices) {
-                this.platforms!![i].platform?.name?.let { Log.i("PlatformstoString${i}", it) }
+                //this.platforms!![i].platform?.name?.let { Log.i("PlatformstoString${i}", it) }
                 list.add(this.platforms!![i].platform?.name)
             }
             list.toList()
