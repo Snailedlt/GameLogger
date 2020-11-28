@@ -18,7 +18,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        // Innstilling der man kan endre brukernavn
+        // Setting where you can change username
         val usernamePref: Preference = findPreference("Change_username")!!
         usernamePref.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _, newValue ->
@@ -27,7 +27,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             }
 
-        // Innstilling der man kan endre passord
+        // Setting where you can change password
         val passwordPref: Preference = findPreference("Change_password")!!
         passwordPref.onPreferenceChangeListener =
             Preference.OnPreferenceChangeListener { _, newValue ->
@@ -36,21 +36,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             }
 
-        // Innstilling der man kan slette alle spill brukeren har lagret
+        // Setting where you can delete all games current user has saved
         val clearSavedGamesButton: Preference = findPreference("clearSavedGames")!!
         clearSavedGamesButton.onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
-                // Lager en popup
+                // Creates a popup
                 AlertDialog.Builder(context)
-                    // Hva popup skal inneholde
+                    // What popup contains
                     .setMessage("Do you really want to delete all your games?")
-                    // Setter inn knapp ja
+                    // Adds a yes button
                     .setPositiveButton(android.R.string.yes
                     ) { _, _ ->
-                        // Funksjon som sletter alle brukerens spill ved ja
+                        // Function that deletes all of users games
                         deleteAllSavedGames()
                     }
-                    // Setter inn knapp Nei som sender bruker tilbake
+                    // Adds a no button that sends user back
                     .setNegativeButton(android.R.string.no, null).show()
                 true
             }

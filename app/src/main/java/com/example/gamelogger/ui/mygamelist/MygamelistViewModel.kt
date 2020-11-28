@@ -69,7 +69,7 @@ class MygamelistViewModel : ViewModel() {
                         for (id in savedGames) {
                             // Only picks up numbers which is id
                             if (id.isDigitsOnly()){
-                                //
+                                // Uses the id to get the game from the api and adds it to the list
                                 gamelist.add(GameApi.retrofitService.getGame(id))
                                 // Adds data into correct Game object
                                 gamelist[count].state = state
@@ -173,9 +173,7 @@ class MygamelistViewModel : ViewModel() {
     }
 
     /**
-     *   Funksjon som sorterer My List gjennom valg fra en spinner,
-     *   Kan sortere ved navn, utgivelse dato eller dato spillet ble lagt til i databasen,
-     *   Sorterer listen og deretter sletter den usorterte og setter inn den sorterte
+     *   Function that sorts My List
      */
     fun sortMyGamesList(sortSpinner: Spinner, gamelist:MutableList<Game>){
         val game = games.value
@@ -184,18 +182,27 @@ class MygamelistViewModel : ViewModel() {
                 val sortedList: MutableList<Game>
                 when(sortSpinner.selectedItem.toString()) {
                     "Name" -> {
+                        // Sorts the list by name alphabetically
                         sortedList = gamelist.sortedBy{ it.title } as MutableList<Game>
+                        // Removes the the old list
                         _games.value?.removeAll(sortedList)
+                        // Adds the new sorted list
                         _games.value?.addAll(sortedList)
                     }
                     "Release date" -> {
+                        // Sorts the list by release date
                         sortedList = gamelist.sortedBy{ it.released } as MutableList<Game>
+                        // Removes the the old list
                         _games.value?.removeAll(sortedList)
+                        // Adds the new sorted list
                         _games.value?.addAll(sortedList)
                     }
                     "Date added" -> {
+                        // Sorts the list by name date added to list
                         sortedList = gamelist.sortedByDescending{ it.dateAdded } as MutableList<Game>
+                        // Removes the the old list
                         _games.value?.removeAll(sortedList)
+                        // Adds the new sorted list
                         _games.value?.addAll(sortedList)
                     }
                 }

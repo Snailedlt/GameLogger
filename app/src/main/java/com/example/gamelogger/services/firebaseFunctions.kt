@@ -8,36 +8,35 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.collections.ArrayList
 
 /**
- *   Legger til ett spill i Firestore databasen
+ *   Adds a new game to the firestore database
  **/
 fun addSavedGame(game: Game) {
-    val spillid = game.id.toString()
-    val spillstate = game.state.toString()
-    val spillPlat = game.chosenPlatform
-    val spillDatoAdded = game.dateAdded
     try {
+        val spillid = game.id.toString()
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser!!.uid // Gets the user id
 
-        val uid = auth.currentUser!!.uid
-
+        // Creates a document reference to the database
         val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
 
+        // Creates a hashmap of data to send to database
         val nestedData = hashMapOf(
-            "spill id" to spillid,
-            "spill state" to spillstate,
-            "spill platform" to spillPlat,
-            "spill lagt til" to spillDatoAdded
+            "spill id" to game.id.toString(),
+            "spill state" to game.state.toString(),
+            "spill platform" to game.chosenPlatform,
+            "spill lagt til" to game.dateAdded
         )
 
+        // Gets document reference and updates or sets the data into the database
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     db.collection("savedGames").document(uid).collection("Games").document(spillid)
-                        .update(nestedData as Map<String, Any>)
+                        .update(nestedData as Map<String, String?>)
                 } else {
                     db.collection("savedGames").document(uid).collection("Games").document(spillid)
-                        .set(nestedData as Map<String, Any>)
+                        .set(nestedData as Map<String, String?>)
                 }
             }
             .addOnFailureListener { exception ->
@@ -49,17 +48,19 @@ fun addSavedGame(game: Game) {
 }
 
 /**
- *   Får tak i pålogget bruker og sender brukernavn i callback
+ *   Gets the current users username and sends it back in a callback
  * */
 fun getUser(myCallback: (String) -> Unit) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
+        // Creates a document reference to the database
         val docRef = db.collection("users").document(uid)
 
+        // Gets document reference and updates or sets the data into the database
         docRef.get()
             .addOnSuccessListener { document ->
                 val brukernavn: String = document.get("username") as String
@@ -74,30 +75,30 @@ fun getUser(myCallback: (String) -> Unit) {
 }
 
 /**
- *   Henter Spill som er lagret på brukeren sin database, legger dem i en string med
- *   all informasjon som trengs og sender den i en callback
+ *   Gets all games in a users database, puts them in a string with all information needed
+ *   and then sends it back in a callback
  * */
 fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
+        // Gets document reference and updates or sets the data into the database
         db.collection("savedGames").document(uid).collection("Games").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    // Initialises the list
                     val list = ArrayList<String>()
                     for (document in task.result!!) {
-                        val id = document.data["spill id"].toString()
-                        val state = document.data["spill state"].toString()
-                        val platform = document.data["spill platform"].toString()
-                        val dateAdded = document.data["spill lagt til"].toString()
-                        list.add(state)
-                        list.add(platform)
-                        list.add(dateAdded)
-                        list.add(id)
+                        // add content to the list
+                        list.add(document.data["spill state"].toString())
+                        list.add(document.data["spill platform"].toString())
+                        list.add(document.data["spill lagt til"].toString())
+                        list.add(document.data["spill id"].toString())
                     }
+                    // Sends list back
                     myCallback(list)
                 } else {
                     Log.e("MError: ", "Error getting games from firebase")
@@ -110,15 +111,15 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
 }
 
 /**
- *   Henter og sorterer hvilken statuser spillene brukeren har lagret i databasen, legger dem i en
- *   floatarray og sender dem i en callback
+ *   Gets ands sorts what states the users games have stored in the database,
+ *   adds them to a floatarray and sends them back
  */
 fun getUserGameState(myCallback: (FloatArray) -> Unit) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
         val stateArray = FloatArray(3)
 
         db.collection("savedGames").document(uid).collection("Games").get()
@@ -127,7 +128,9 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
                     var backlog = 0F
                     var done = 0F
                     var playing = 0F
+                    // Loops through all the users game documents
                     for (document in task.result!!) {
+                        // Checks what state game is in and adds it
                         when (document.data["spill state"].toString()) {
                             "BACKLOG" -> {
                                 backlog++
@@ -154,24 +157,26 @@ fun getUserGameState(myCallback: (FloatArray) -> Unit) {
 }
 
 /**
- *   Henter hvilken plattformer spillene brukeren har lagret i databasen
+ *   Gets what platforms the users games have been stored as in the database and counts the quantity
  */
 fun getUserGamePlatform(myCallback: (HashMap<String, Float>) -> Unit) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
         db.collection("savedGames").document(uid).collection("Games").get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var hMap: HashMap<String, Float> = hashMapOf<String, Float>()
+                    val hMap: HashMap<String, Float> = hashMapOf<String, Float>()
+                    // Loops through all the users game documents
                     for (document in task.result!!) {
-                        var platformName = document.data["spill platform"].toString()
+                        val platformName = document.data["spill platform"].toString()
+                        // if the hashmap doesn't contain platform then put it in with value of 1
                         if (!hMap.containsKey(platformName)) {
                             hMap[platformName] = 1F
-                        } else {
+                        } else { // if the hashmap does contain platform then add 1 value
                             hMap.put(platformName, hMap.get(platformName)!! + 1)
                         }
 
@@ -187,17 +192,18 @@ fun getUserGamePlatform(myCallback: (HashMap<String, Float>) -> Unit) {
 }
 
 /**
- *   Endrer statusen til ett spill i firestore databasen
+ *   Changes the state of one game in the database
  */
 fun changeDatabaseGameState(spillid: String, spillstate: String) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
         val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
 
+        // Gets document reference and updates or sets the data into the database
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
@@ -217,15 +223,16 @@ fun changeDatabaseGameState(spillid: String, spillstate: String) {
 }
 
 /**
- *   Bytter brukerens brukernavn i firestore databasen
+ *   Changes the current users username in the firestore database
  */
 fun changeUsername(username: String) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
         val docRef = db.collection("users").document(uid)
 
+        // Gets document reference and updates or sets the data into the database
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
@@ -245,13 +252,14 @@ fun changeUsername(username: String) {
 }
 
 /**
- *   Endrer brukerens passord i firebase authentication
+ *   Changes the current users password in the firestore database
  */
 fun changePassword(newPassword: String) {
     try {
-        val user = FirebaseAuth.getInstance().currentUser
+        val user = FirebaseAuth.getInstance().currentUser // Gets the current user
         val credential = EmailAuthProvider
             .getCredential(" ", " ")
+        // Updates the password in Firebase Authentication
         user?.reauthenticate(credential)?.addOnCompleteListener {
             user.updatePassword(newPassword)
         }
@@ -262,34 +270,14 @@ fun changePassword(newPassword: String) {
 }
 
 /**
- *   Henter ett spill i brukerens database som henter lagret state(BACKLOG, DONE, PLAYING)
- */
-fun getOneGameSavedPlatforms(spillid: String, myCallback: (String) -> Unit) {
-    try {
-        val db = FirebaseFirestore.getInstance()
-        val auth = FirebaseAuth.getInstance()
-
-        val uid = auth.currentUser!!.uid
-
-        db.collection("savedGames").document(uid).collection("Games").document(spillid).get()
-            .addOnSuccessListener { document ->
-                val savedPlatforms: String = document.get("spill platform") as String
-                myCallback(savedPlatforms)
-            }
-    } catch (e: Exception) {
-        Log.d("get", "getOneGameSavedPlatforms failed with ", e)
-    }
-}
-
-/**
- *   Sletter alle spill lagret på en bruker i firestore
+ *   Deletes all games stored on a user in firestore database
  */
 fun deleteAllSavedGames() {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
         db.collection("savedGames").document(uid).collection("Games").get()
             .addOnCompleteListener { task ->
@@ -311,14 +299,14 @@ fun deleteAllSavedGames() {
 }
 
 /**
- *   Tar imot en spill id og sletter spillet i firestore databasen hvis den finner det
+ *   Deletes one game
  */
 fun deleteSavedGame(spillid: String) {
     try {
         val db = FirebaseFirestore.getInstance()
         val auth = FirebaseAuth.getInstance()
 
-        val uid = auth.currentUser!!.uid
+        val uid = auth.currentUser!!.uid // Gets the user id
 
         val docRef = db.collection("savedGames").document(uid).collection("Games").document(spillid)
 
