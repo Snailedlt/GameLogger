@@ -46,6 +46,9 @@ data class Game(
             null
     }
 
+    /**
+     * Converts the game's genres into a List<String?>
+     */
     private fun genresToPlatformArray(): List<String?>? {
         return if (!this.genres.isNullOrEmpty()) {
             val list = mutableListOf<String?>()
@@ -56,6 +59,9 @@ data class Game(
         } else null
     }
 
+    /**
+     * Converts the game's platforms into a List<String?>
+     */
     private fun platformsToStringArray(): List<String?>? {
         return if (!this.platforms.isNullOrEmpty()){
             val list = mutableListOf<String?>()
