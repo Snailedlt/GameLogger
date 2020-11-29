@@ -1,5 +1,6 @@
 package com.example.gamelogger.ui.profile
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -115,9 +116,9 @@ class ProfilePlatformsFragment : Fragment() {
             //puts the data from platformCountsArrayList into an array called platformCountsArray
             val platformCountsArray = FloatArray(platformCountsArrayList.size)
             var index = 0
-            for (value in platformCountsArrayList) {
+
+            for (value in platformCountsArrayList)
                 platformCountsArray[index++] = value
-            }
 
             //Plots the platformCountsArray into the barDataSet, which makes out the chart data
             val barDataSet = BarDataSet(dataValuesPlatforms(platformCountsArray), "Bar Set")
@@ -125,6 +126,13 @@ class ProfilePlatformsFragment : Fragment() {
 
 
             barDataSet.setDrawValues(false)
+
+            /*
+             * Checks if colorClassArrayList is null or empty, and adds Color.GRAY if it is
+             */
+            if(colorClassArrayList.isNullOrEmpty())
+                colorClassArrayList.add(Color.GRAY)
+
             barDataSet.colors = colorClassArrayList
             stackedChart?.setData(barData)!!
             stackedChart?.invalidate()
