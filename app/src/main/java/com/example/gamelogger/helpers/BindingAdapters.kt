@@ -109,21 +109,32 @@ fun bindGameListStatusText(statusTextView: TextView, status: ListStatus?) {
     } else statusTextView.visibility = View.GONE
 }
 
+/**
+ * Binding function that will change the appearance and behavior of the state changing-buttons
+ * depending on certain properties. The other two following functions are near identical to this one
+ * but handle different buttons, so I will not comment them as what applies to this function
+ * will apply to them as well.
+ */
 @BindingAdapter("gameDone")
-fun bindGameStateButtons1(button: Button, game: Game?) {
+fun bindGameStateButtonsDone(button: Button, game: Game?) {
     if (game != null) {
-        if (game.state == GameState.DONE) {
+        if (game.state == GameState.DONE) { // if the game's state corresponds with this button
+
+            // Each parameter for setCompoundDrawableWithIntrinsicBounds corresponds to a drawable
+            // either left, above, right or bottom of the button
             button.setCompoundDrawablesWithIntrinsicBounds(
                 null,
+                // sets a colored icon to represent it as the active state
                 getDrawable(button.context, R.drawable.gamestate_done),
                 null,
                 null
             )
             button.setTextColor(ContextCompat.getColor(button.context, R.color.colorAccent))
             button.typeface = Typeface.DEFAULT_BOLD
-        } else {
+        } else { // if the game's current state does not correspond with this button
             button.setCompoundDrawablesWithIntrinsicBounds(
                 null,
+                // sets a grey button to represent it as the inactive state
                 getDrawable(button.context, R.drawable.gamestate_done_grey),
                 null,
                 null
@@ -135,7 +146,7 @@ fun bindGameStateButtons1(button: Button, game: Game?) {
 }
 
 @BindingAdapter("gamePlaying")
-fun bindGameStateButtons2(button: Button, game: Game?) {
+fun bindGameStateButtonsPlaying(button: Button, game: Game?) {
     if (game != null) {
         if (game.state == GameState.PLAYING) {
             button.setCompoundDrawablesWithIntrinsicBounds(
@@ -161,7 +172,7 @@ fun bindGameStateButtons2(button: Button, game: Game?) {
 }
 
 @BindingAdapter("gameBacklog")
-fun bindGameStateButtons3(button: Button, game: Game?) {
+fun bindGameStateButtonsBacklog(button: Button, game: Game?) {
     if (game != null) {
         if (game.state == GameState.BACKLOG) {
             button.setCompoundDrawablesWithIntrinsicBounds(

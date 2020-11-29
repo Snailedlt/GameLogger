@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gamelogger.R
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.databinding.FragmentGamesearchBinding
-import com.example.gamelogger.services.deleteSavedGame
+import com.example.gamelogger.firebase.deleteSavedGame
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -26,9 +26,7 @@ import com.google.android.material.snackbar.Snackbar
  */
 class GamesearchFragment : Fragment() {
 
-    /**
-     * Initializes the [GamesearchFragment]
-     */
+    // Initializes the [GamesearchFragment]
     private val viewModel: GamesearchViewModel by lazy {
         ViewModelProvider(this).get(GamesearchViewModel::class.java)
     }
@@ -36,7 +34,6 @@ class GamesearchFragment : Fragment() {
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -88,18 +85,6 @@ class GamesearchFragment : Fragment() {
             }
         })
 
-        recyclerView = binding.root.findViewById(R.id.gamesearchlist) as RecyclerView
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                val query = searchView.query.toString()
-                if (!recyclerView.canScrollVertically(1)) {
-                    //Toast.makeText(getActivity()?.getApplicationContext(), "Getting More Results", Toast.LENGTH_SHORT).show()
-                    /*viewModel.searchNextGame(query)*/
-                }
-            }
-        })
-
         return binding.root
     }
 
@@ -109,7 +94,7 @@ class GamesearchFragment : Fragment() {
      * they want to save
      */
     private fun platformChoiceDialogue(view: View, game: Game) {
-        val platforms = game.platformsList?.toTypedArray() // converts the List of platforms to an Array
+        val platforms = game.platformsList?.toTypedArray() // converts the List of platforms to an Array the AlertDialogue class can use to set items
 
         // Builds an AlertDialog
         val builder = this.context?.let { AlertDialog.Builder(it) }

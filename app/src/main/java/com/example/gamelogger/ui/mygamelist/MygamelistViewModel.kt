@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
-import com.example.gamelogger.services.*
+import com.example.gamelogger.firebase.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
@@ -35,7 +35,6 @@ class MygamelistViewModel : ViewModel() {
     val status: LiveData<ListStatus>
         get() = _status
 
-    //
     private val _navigateToGameListDetail = MutableLiveData<Game>()
     val navigateToGameListDetail
         get() = _navigateToGameListDetail

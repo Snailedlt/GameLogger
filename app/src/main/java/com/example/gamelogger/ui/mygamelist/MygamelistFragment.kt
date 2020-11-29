@@ -168,6 +168,7 @@ class MygamelistFragment : Fragment() {
     }
 
     // Scroll the view up if an element is added at index 0
+    // https://stackoverflow.com/questions/43114837/notifyiteminserted-not-working-when-inserting-first-item-at-zero-index
     private fun restoreScrollPositionAfterAdded() {
         val recyclerView = this.activity?.mygame_list
         val layoutManager = recyclerView?.layoutManager as LinearLayoutManager

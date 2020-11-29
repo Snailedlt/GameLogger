@@ -9,7 +9,7 @@ import com.example.gamelogger.classes.Game
 import com.example.gamelogger.classes.GameSearchResults
 import com.example.gamelogger.classes.GameState
 import com.example.gamelogger.Data.GameApi
-import com.example.gamelogger.services.addSavedGame
+import com.example.gamelogger.firebase.addSavedGame
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*

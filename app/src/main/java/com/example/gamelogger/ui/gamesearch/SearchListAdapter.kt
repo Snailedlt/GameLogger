@@ -52,7 +52,7 @@ class SearchListAdapter(private val onClickListener: OnClickListener)
     }
 
     /**
-     * onclick-objekt for add game-button
+     * onclick-object for add game-button
      */
     class OnClickListener(val clickListener: (game: Game) -> Unit) {
         fun onClick(game: Game) = clickListener(game)

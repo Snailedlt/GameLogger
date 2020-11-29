@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.gamelogger.R
-import com.example.gamelogger.services.getUser
+import com.example.gamelogger.firebase.getUser
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import me.relex.circleindicator.CircleIndicator
 

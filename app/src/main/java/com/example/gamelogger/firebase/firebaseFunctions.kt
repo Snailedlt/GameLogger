@@ -1,4 +1,4 @@
-package com.example.gamelogger.services
+package com.example.gamelogger.firebase
 
 import android.util.Log
 import com.example.gamelogger.classes.Game
