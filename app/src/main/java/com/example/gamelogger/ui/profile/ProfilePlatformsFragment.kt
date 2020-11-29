@@ -49,9 +49,17 @@ class ProfilePlatformsFragment : Fragment() {
 
             var count = 1
 
-            /** Iterates through the hashMap provided by getUserGamePlatform, and puts the keys and
-             * values into two seperate ArrayLists. The key corresponds to the platform name,
-             * and the value corresponds to the number of games the user owns, that is of a certain platform
+            /** Iterates through the hashMap provided by getUserGamePlatform, and puts the keys into
+             * platformNamesMutableList and the values into platformCountsArrayList. The key is also
+             * used as input to generate a color, which is added to the colorClassArrayList variable
+             * The key corresponds to the platform name,and the value corresponds to the number of
+             * games the user owns, that is of a certain platform.
+             *
+             * The loop also creates a new ImageView and two new TextViews for each key-value pair. The
+             * ImageView is then filled with the generated color, and the two textviews are filled with
+             * the value and the key.
+             *
+             * For each iteration the count variable is also incremented by 1.
              */
             for((key, value) in it) {
                 /* Takes the key (which is a String) as input and converts it into a hashCode: Int.
