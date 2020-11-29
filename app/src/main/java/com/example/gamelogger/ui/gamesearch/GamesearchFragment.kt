@@ -56,6 +56,7 @@ class GamesearchFragment : Fragment() {
             if(it.platformsList.isNullOrEmpty()) {
                 Log.i("GameSearchClick", "if")
                 it.setPlatform("Unknown")
+                viewModel.saveGame(it)
             }
             else if (it.platformsList?.size!! > 1) {// if the game is available on more than a single platform, call platFormChoiceDialogue
                 Log.i("GameSearchClick", "else if")
@@ -64,8 +65,8 @@ class GamesearchFragment : Fragment() {
             else { // if the game has one or zero platforms, save it directly
                 Log.i("GameSearchClick", "else")
                 it.setPlatform(it.platformsList!![0])
+                viewModel.saveGame(it)
             }
-            viewModel.saveGame(it)
             showSnackBar(it)
             it.setPlatform(null) // removes the saved game from the game object, as the relevant data has been saved to the database and "it" doesn't need the value
         })
@@ -119,6 +120,7 @@ class GamesearchFragment : Fragment() {
                 // Populates the dialogue's list of choices,
                 // as well as defining what to do when clicking them
                 platforms?.get(which)?.let { game.setPlatform(it) }
+                viewModel.saveGame(game)
             }
             this?.show()
         }
