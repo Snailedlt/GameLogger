@@ -52,18 +52,18 @@ class GamesearchFragment : Fragment() {
         binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
             // The following code in this block is for when the user clicks on the
             // add button on a game in the search list
-            Log.i("GameSearchClick", "before if")
+            //Log.i("GameSearchClick", "before if")
             if(it.platformsList.isNullOrEmpty()) {
-                Log.i("GameSearchClick", "if")
+                //Log.i("GameSearchClick", "if")
                 it.setPlatform("Unknown")
                 viewModel.saveGame(it)
             }
             else if (it.platformsList?.size!! > 1) {// if the game is available on more than a single platform, call platFormChoiceDialogue
-                Log.i("GameSearchClick", "else if")
+                //Log.i("GameSearchClick", "else if")
                 platformChoiceDialogue(requireView(), it)
             }
             else { // if the game has one or zero platforms, save it directly
-                Log.i("GameSearchClick", "else")
+                //Log.i("GameSearchClick", "else")
                 it.setPlatform(it.platformsList!![0])
                 viewModel.saveGame(it)
             }
