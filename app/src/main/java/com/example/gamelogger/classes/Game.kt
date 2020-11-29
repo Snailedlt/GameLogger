@@ -1,6 +1,5 @@
 package com.example.gamelogger.classes
 
-import android.util.Log
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -30,10 +29,10 @@ data class Game(
 ) {
 
     init {
-        this.platformsList = this.platformsToStringArray()
+        this.platformsList = this.platformsToStringList()
         this.state = GameState.BACKLOG
         this.released = this.releaseDateToYear()
-        this.genresList = this.genresToPlatformArray()
+        this.genresList = this.genresToStringList()
     }
 
     /**
@@ -49,7 +48,10 @@ data class Game(
     /**
      * Converts the game's genres into a List<String?>
      */
-    private fun genresToPlatformArray(): List<String?>? {
+    /**
+     * Returns a list of the game's genres
+     */
+    private fun genresToStringList(): List<String?>? {
         return if (!this.genres.isNullOrEmpty()) {
             val list = mutableListOf<String?>()
             for (i in this.genres!!.indices) {
@@ -62,7 +64,10 @@ data class Game(
     /**
      * Converts the game's platforms into a List<String?>
      */
-    private fun platformsToStringArray(): List<String?>? {
+    /**
+     * Returns a list of the game's platform
+     */
+    private fun platformsToStringList(): List<String?>? {
         return if (!this.platforms.isNullOrEmpty()){
             val list = mutableListOf<String?>()
             for (i in this.platforms!!.indices) {
@@ -71,11 +76,6 @@ data class Game(
             }
             list.toList()
         } else null
-    }
-
-   private fun compareFirebasePlatformToAPIPlatform(): String? {
-        //return platforms that are in Firebase and the API call for a single game
-        return null
     }
 
     /**
