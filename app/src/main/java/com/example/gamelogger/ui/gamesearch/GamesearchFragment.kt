@@ -2,6 +2,7 @@ package com.example.gamelogger.ui.gamesearch
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,16 +52,22 @@ class GamesearchFragment : Fragment() {
         binding.gamesearchlist.adapter = SearchListAdapter(SearchListAdapter.OnClickListener {
             // The following code in this block is for when the user clicks on the
             // add button on a game in the search list
-            if (it.platformsList?.size!! > 1) // if the game is available on more than a single platform, call platFormChoiceDialogue
-                platformChoiceDialogue(requireView(), it)
-            else if (it.platformsList!![0].isNullOrEmpty())
-                viewModel.saveGame(it)
-            else { // if the game only has one platform, save it directly
-                it.setPlatform(it.platformsList!![0])
-                viewModel.saveGame(it)
-                showSnackBar(it)
-                it.setPlatform(null) // removes the saved game from the game object, as the relevant data has been saved to the database and "it" doesn't need the value
+            Log.i("GameSearchClick", "before if")
+            if(it.platformsList.isNullOrEmpty()) {
+                Log.i("GameSearchClick", "if")
+                it.setPlatform("Unknown")
             }
+            else if (it.platformsList?.size!! > 1) {// if the game is available on more than a single platform, call platFormChoiceDialogue
+                Log.i("GameSearchClick", "else if")
+                platformChoiceDialogue(requireView(), it)
+            }
+            else { // if the game has one or zero platforms, save it directly
+                Log.i("GameSearchClick", "else")
+                it.setPlatform(it.platformsList!![0])
+            }
+            viewModel.saveGame(it)
+            showSnackBar(it)
+            it.setPlatform(null) // removes the saved game from the game object, as the relevant data has been saved to the database and "it" doesn't need the value
         })
 
         // Search bar listener
@@ -112,8 +119,6 @@ class GamesearchFragment : Fragment() {
                 // Populates the dialogue's list of choices,
                 // as well as defining what to do when clicking them
                 platforms?.get(which)?.let { game.setPlatform(it) }
-                viewModel.saveGame(game)
-                showSnackBar(game)
             }
             this?.show()
         }
