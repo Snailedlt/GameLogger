@@ -118,6 +118,8 @@ class MygamelistFragment : Fragment() {
 
         // Spinner that lets you sort the list
         spinner = binding.root.findViewById(R.id.sortSpinner)
+        // Hentet mya av spinner listener fra denne nettsiden
+        // https://stackoverflow.com/questions/56589311/kotlin-for-android-onitemselected-listener
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
