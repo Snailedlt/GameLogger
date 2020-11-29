@@ -13,7 +13,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.example.gamelogger.R
 import com.example.gamelogger.helpers.intToRGB
-import com.example.gamelogger.services.getUserGamePlatform
+import com.example.gamelogger.firebase.getUserGamePlatform
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet

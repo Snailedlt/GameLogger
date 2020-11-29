@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gamelogger.Data.GameApi
 import com.example.gamelogger.classes.Game
-import com.example.gamelogger.services.getUserGames
+import com.example.gamelogger.firebase.getUserGames
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

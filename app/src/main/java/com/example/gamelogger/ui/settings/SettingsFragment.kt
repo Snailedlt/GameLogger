@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.gamelogger.R
-import com.example.gamelogger.services.changePassword
-import com.example.gamelogger.services.changeUsername
-import com.example.gamelogger.services.deleteAllSavedGames
+import com.example.gamelogger.firebase.changePassword
+import com.example.gamelogger.firebase.changeUsername
+import com.example.gamelogger.firebase.deleteAllSavedGames
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
