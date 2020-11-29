@@ -22,6 +22,7 @@ fun <T> listToPresentableString(list: List<T>?) : String {
 /**
  * Takes a hashcode: Int as parameter,
  * and turns it into an Hexcode: String with the format RRGGBB
+ * Code gotten from: https://stackoverflow.com/a/2464821/12206312
  */
 fun intToRGB(i: Int): String? {
     return Integer.toHexString(i shr 16 and 0xFF) +
