@@ -37,8 +37,7 @@
         <item name="android:popupBackground">@color/colorBlack</item>
     </style>
     <style name="SpinnerColors">
-
-
+        <item name="android:popupBackground">@color/colorBlack</item>
     </style>
     <style name="TextWithShadow">
         <item name="android:paddingLeft">4px</item>

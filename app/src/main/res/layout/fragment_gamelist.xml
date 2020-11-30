@@ -16,46 +16,58 @@
         android:layout_marginBottom="?attr/actionBarSize"
         tools:context=".ui.mygamelist.MygamelistFragment">
 
-        <TextView
-            android:id="@+id/sortLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Sort by: "
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorSecondary"
-            android:background="@color/colorPrimary"
-            android:paddingStart="5dp"
-            app:layout_constraintBottom_toTopOf="@id/rL_sortSpinner"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/extended_toolbar2"
+            style="@style/ExtendedToolbar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/searchBar"/>
+            android:elevation="10dp">
 
+        </androidx.appcompat.widget.Toolbar>
         <RelativeLayout
             android:id="@+id/rL_sortSpinner"
-            android:layout_width="150dp"
-            android:layout_height="0dp"
-            android:background="@color/colorPrimary"
-            app:layout_constraintBottom_toTopOf="@id/mygame_list"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sortLabel">
-            <Spinner
-                android:theme="@style/SpinnerColors"
-                android:id="@+id/sortSpinner"
+            android:layout_marginHorizontal="50dp"
+            android:layout_width="100pt"
+            android:layout_height="38dp"
+            android:background="@drawable/rounded_corner_white"
+            app:layout_constraintTop_toTopOf="@id/extended_toolbar2"
+            app:layout_constraintStart_toStartOf="@id/extended_toolbar2"
+            app:layout_constraintEnd_toEndOf="@id/extended_toolbar2"
+            app:layout_constraintBottom_toBottomOf="@id/extended_toolbar2"
+            android:elevation="15dp"
+            >
+            <TextView
+                android:id="@+id/sortLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Sort by: "
+                android:layout_marginLeft="15dp"
+                android:textAlignment="viewStart"
+                android:layout_centerInParent="true"
+                android:elevation="20dp"
+                />
+            <Spinner
+                android:id="@+id/sortSpinner"
                 style="@style/SpinnerTheme"
-                android:entries="@array/sorting_options" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:entries="@array/sorting_options"
+                android:theme="@style/SpinnerColors"
+                android:paddingLeft="60dp"
+                android:layout_centerInParent="true"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/spinner_button_black"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                />
         </RelativeLayout>
 
-        <SearchView
-            android:id="@+id/searchBar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_bar_background"
-            android:searchIcon="@drawable/ic_search_white"
-            app:layout_constraintEnd_toStartOf="@id/rL_sortSpinner"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+
+
+
 
         <ImageView
             android:id="@+id/status_image"
@@ -67,28 +79,30 @@
             app:layout_constraintRight_toRightOf="parent"
             tools:src="@drawable/ic_baseline_error_24"
             app:listStatusImage="@{viewModel.status}"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/status_image"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:visibility="visible"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:visibility="visible"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            tools:text="Listen er tom\nHallo, listen er tom"
-            app:listStatusText="@{viewModel.status}"/>
+            app:layout_constraintTop_toBottomOf="@+id/status_image"
+            app:listStatusText="@{viewModel.status}"
+            tools:text="Listen er tom\nHallo, listen er tom" />
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mygame_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:gameListData="@{viewModel.games}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchBar" />
+            app:layout_constraintTop_toBottomOf="@id/extended_toolbar2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

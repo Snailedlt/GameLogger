@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.fragment_gamelist.*
  */
 class MygamelistFragment : Fragment() {
 
-    private lateinit var searchView: SearchView
     private lateinit var spinner: Spinner
 
     val viewModel: MygamelistViewModel by lazy {
@@ -112,13 +111,10 @@ class MygamelistFragment : Fragment() {
         // Sets the layoutmanager for the fragment
         binding.mygameList.layoutManager = LinearLayoutManager(context)
 
-        // Make the whole searchview clickable, instead of just the icon
-        searchView = binding.root.findViewById(R.id.searchBar)
-        searchView.setOnClickListener { searchView.isIconified = false }
-
         // Spinner that lets you sort the list
         spinner = binding.root.findViewById(R.id.sortSpinner)
-        // Hentet mya av spinner listener fra denne nettsiden
+        
+        // Got most of the spinner code from this web page
         // https://stackoverflow.com/questions/56589311/kotlin-for-android-onitemselected-listener
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
