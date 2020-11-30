@@ -69,12 +69,18 @@ class MygamelistViewModel : ViewModel() {
                             // Only picks up numbers which is id
                             if (id.isDigitsOnly()){
                                 // Uses the id to get the game from the api and adds it to the list
-                                gamelist.add(GameApi.retrofitService.getGame(id))
-                                // Adds data into correct Game object
-                                gamelist[count].state = state
-                                gamelist[count].chosenPlatform = chosenPlatform
-                                gamelist[count].dateAdded = dateAdded
-                                count++
+                                try {
+                                    gamelist.add(GameApi.retrofitService.getGame(id))
+                                    // Adds data into correct Game object
+                                    gamelist[count].state = state
+                                    gamelist[count].chosenPlatform = chosenPlatform
+                                    gamelist[count].dateAdded = dateAdded
+                                    count++
+                                } catch (e: Exception) {
+                                    _status.value = ListStatus.ERROR
+                                    return@launch
+                                }
+
                             }
                             // Only picks up data with am and pm endings which are dates
                             else if (id.endsWith("am") || id.endsWith("pm")) {

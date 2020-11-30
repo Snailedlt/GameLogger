@@ -88,7 +88,9 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
         // Gets document reference and updates or sets the data into the database
         db.collection("savedGames").document(uid).collection("Games").get()
             .addOnCompleteListener { task ->
+
                 if (task.isSuccessful) {
+
                     // Initialises the list
                     val list = ArrayList<String>()
                     for (document in task.result!!) {
@@ -104,7 +106,9 @@ fun getUserGames(myCallback: (MutableList<String>) -> Unit) {
                     Log.e("MError: ", "Error getting games from firebase")
                 }
             }
+
     } catch (e: Exception) {
+
         Log.d("get", "getUserGames failed with ", e)
     }
 
