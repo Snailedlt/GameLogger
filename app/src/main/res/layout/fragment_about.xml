@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:text="- Kristian Ødegård\n- Mikael Kviteberg Larssen\n- Tommy Tran\n- Jørgen Kalsnes Hagen"
+            android:text="- Kristian Ødegård\n- Mikael Kviteberg Larssen\n- Jørgen Kalsnes Hagen"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
